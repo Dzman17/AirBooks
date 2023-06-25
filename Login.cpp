@@ -19,6 +19,7 @@ public:
 	string getPassword();
 	bool authenticate(string username, string password);
 	char getRole();
+	void createAccount(string username, string password);
 };
 
 Account::Account(string username1, string password1) {
@@ -53,6 +54,13 @@ char Account::getRole()
 	return 0;
 }
 
+void Account::createAccount(string username, string password)
+{
+	ofstream fout;
+	fout.open("usernames.txt", ios_base::app);
+	fout << username << "," << password << endl;
+}
+
 int main() {
 
 	string usernameInput;
@@ -82,6 +90,8 @@ int main() {
 		cin >> usernameInput;
 		cout << "Enter password" << endl;
 		cin >> passwordInput;
+		Account user(usernameInput, passwordInput);
+		user.createAccount(usernameInput, passwordInput);
 	}
 	
 
