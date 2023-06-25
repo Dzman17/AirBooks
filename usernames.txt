@@ -1,0 +1,3 @@
+user,password
+customer,customer
+employee,employee
