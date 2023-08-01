@@ -1,4 +1,4 @@
-#include "Login.h"
+#include "Main.h"
 
 #include <iostream>
 
@@ -11,7 +11,7 @@ int main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	AirBooks::Login form;
+	AirBooks::Main form;
 
 	Application::Run(% form);
 }

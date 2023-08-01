@@ -13,14 +13,14 @@ namespace AirBooks {
 	using namespace msclr::interop;
 
 
-	public ref class Login : public System::Windows::Forms::Form {
+	public ref class Main : public System::Windows::Forms::Form {
 	public:
-		Login(void) {
+		Main(void) {
 			InitializeComponent();
 		}
 
 	protected:
-		~Login() {
+		~Main() {
 			if (components) {
 				delete components;
 			}
@@ -294,7 +294,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->switchToCreate->TabStop = true;
 			this->switchToCreate->Text = L"I don\'t have an account";
 			this->switchToCreate->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			this->switchToCreate->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Login::switchToCreate_LinkClicked);
+			this->switchToCreate->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::switchToCreate_LinkClicked);
 			// 
 			// loginButton
 			// 
@@ -306,7 +306,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->loginButton->TabIndex = 2;
 			this->loginButton->Text = L"Login";
 			this->loginButton->UseVisualStyleBackColor = true;
-			this->loginButton->Click += gcnew System::EventHandler(this, &Login::loginButton_Click);
+			this->loginButton->Click += gcnew System::EventHandler(this, &Main::loginButton_Click);
 			// 
 			// ln_passwordField
 			// 
@@ -403,7 +403,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->switchToLogin->TabStop = true;
 			this->switchToLogin->Text = L"I already have an account";
 			this->switchToLogin->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			this->switchToLogin->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Login::switchToLogin_LinkClicked);
+			this->switchToLogin->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::switchToLogin_LinkClicked);
 			// 
 			// createAccountButton
 			// 
@@ -415,7 +415,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->createAccountButton->TabIndex = 3;
 			this->createAccountButton->Text = L"Create Account";
 			this->createAccountButton->UseVisualStyleBackColor = true;
-			this->createAccountButton->Click += gcnew System::EventHandler(this, &Login::createAccountButton_Click);
+			this->createAccountButton->Click += gcnew System::EventHandler(this, &Main::createAccountButton_Click);
 			// 
 			// ca_passwordField
 			// 
@@ -566,7 +566,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->lastNameUpdate->TabIndex = 15;
 			this->lastNameUpdate->Text = L"Update";
 			this->lastNameUpdate->UseVisualStyleBackColor = true;
-			this->lastNameUpdate->Click += gcnew System::EventHandler(this, &Login::lastNameUpdate_Click);
+			this->lastNameUpdate->Click += gcnew System::EventHandler(this, &Main::lastNameUpdate_Click);
 			// 
 			// emailNew
 			// 
@@ -599,7 +599,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->emailUpdate->TabIndex = 2;
 			this->emailUpdate->Text = L"Update";
 			this->emailUpdate->UseVisualStyleBackColor = true;
-			this->emailUpdate->Click += gcnew System::EventHandler(this, &Login::emailUpdate_Click);
+			this->emailUpdate->Click += gcnew System::EventHandler(this, &Main::emailUpdate_Click);
 			// 
 			// lastNameCurrent
 			// 
@@ -635,7 +635,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->firstNameUpdate->TabIndex = 11;
 			this->firstNameUpdate->Text = L"Update";
 			this->firstNameUpdate->UseVisualStyleBackColor = true;
-			this->firstNameUpdate->Click += gcnew System::EventHandler(this, &Login::firstNameUpdate_Click);
+			this->firstNameUpdate->Click += gcnew System::EventHandler(this, &Main::firstNameUpdate_Click);
 			// 
 			// passwordNew
 			// 
@@ -669,7 +669,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->passwordUpdate->TabIndex = 6;
 			this->passwordUpdate->Text = L"Update";
 			this->passwordUpdate->UseVisualStyleBackColor = true;
-			this->passwordUpdate->Click += gcnew System::EventHandler(this, &Login::passwordUpdate_Click);
+			this->passwordUpdate->Click += gcnew System::EventHandler(this, &Main::passwordUpdate_Click);
 			// 
 			// logoutButtonAux
 			// 
@@ -681,7 +681,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->logoutButtonAux->TabIndex = 8;
 			this->logoutButtonAux->Text = L"Logout";
 			this->logoutButtonAux->UseVisualStyleBackColor = true;
-			this->logoutButtonAux->Click += gcnew System::EventHandler(this, &Login::logoutButtonAux_Click);
+			this->logoutButtonAux->Click += gcnew System::EventHandler(this, &Main::logoutButtonAux_Click);
 			// 
 			// flightsTab
 			// 
@@ -810,7 +810,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->searchFlightsButton->TabIndex = 8;
 			this->searchFlightsButton->Text = L"Search";
 			this->searchFlightsButton->UseVisualStyleBackColor = true;
-			this->searchFlightsButton->Click += gcnew System::EventHandler(this, &Login::searchFlightsButton_Click);
+			this->searchFlightsButton->Click += gcnew System::EventHandler(this, &Main::searchFlightsButton_Click);
 			// 
 			// destinationLabel
 			// 
@@ -918,7 +918,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->f_returnToAccount->TabStop = true;
 			this->f_returnToAccount->Text = L"Login";
 			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Login::f_returnToAccount_LinkClicked);
+			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
 			// 
 			// f_accountWarning
 			// 
@@ -956,7 +956,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->t_returnToAccount->TabStop = true;
 			this->t_returnToAccount->Text = L"Login";
 			this->t_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->t_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Login::t_returnToAccount_LinkClicked);
+			this->t_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::t_returnToAccount_LinkClicked);
 			// 
 			// t_accountWarning
 			// 
@@ -1056,7 +1056,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->logoutButton->TabIndex = 9;
 			this->logoutButton->Text = L"Logout";
 			this->logoutButton->UseVisualStyleBackColor = true;
-			this->logoutButton->Click += gcnew System::EventHandler(this, &Login::logoutButton_Click);
+			this->logoutButton->Click += gcnew System::EventHandler(this, &Main::logoutButton_Click);
 			// 
 			// mainview
 			// 
