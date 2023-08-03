@@ -166,6 +166,9 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->passwordUpdate = (gcnew System::Windows::Forms::Button());
 			this->logoutButtonAux = (gcnew System::Windows::Forms::Button());
 			this->flightsTab = (gcnew System::Windows::Forms::TabPage());
+			this->f_noAccount = (gcnew System::Windows::Forms::Panel());
+			this->f_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
+			this->f_accountWarning = (gcnew System::Windows::Forms::Label());
 			this->f_divider = (gcnew System::Windows::Forms::Label());
 			this->f_idHeader = (gcnew System::Windows::Forms::Label());
 			this->f_departureHeader = (gcnew System::Windows::Forms::Label());
@@ -182,22 +185,19 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->minTimeField = (gcnew System::Windows::Forms::DateTimePicker());
 			this->maxTimeField = (gcnew System::Windows::Forms::DateTimePicker());
 			this->ticketsTab = (gcnew System::Windows::Forms::TabPage());
-			this->f_noAccount = (gcnew System::Windows::Forms::Panel());
-			this->f_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
-			this->f_accountWarning = (gcnew System::Windows::Forms::Label());
 			this->t_noAccount = (gcnew System::Windows::Forms::Panel());
 			this->t_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
 			this->t_accountWarning = (gcnew System::Windows::Forms::Label());
-			this->ticketList = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->t_seatHeader = (gcnew System::Windows::Forms::Label());
+			this->t_divider = (gcnew System::Windows::Forms::Label());
 			this->t_departureHeader = (gcnew System::Windows::Forms::Label());
+			this->t_seatHeader = (gcnew System::Windows::Forms::Label());
 			this->t_destinationHeader = (gcnew System::Windows::Forms::Label());
+			this->ticketList = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->t_idHeader = (gcnew System::Windows::Forms::Label());
 			this->companyLogo = (gcnew System::Windows::Forms::Label());
 			this->logoutButton = (gcnew System::Windows::Forms::Button());
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
-			this->t_divider = (gcnew System::Windows::Forms::Label());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->loginPanel->SuspendLayout();
@@ -207,8 +207,8 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->accountPanel->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->flightsTab->SuspendLayout();
-			this->ticketsTab->SuspendLayout();
 			this->f_noAccount->SuspendLayout();
+			this->ticketsTab->SuspendLayout();
 			this->t_noAccount->SuspendLayout();
 			this->mainview->SuspendLayout();
 			this->bottomBar->SuspendLayout();
@@ -710,6 +710,44 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->flightsTab->Text = L"Flights";
 			this->flightsTab->UseVisualStyleBackColor = true;
 			// 
+			// f_noAccount
+			// 
+			this->f_noAccount->Controls->Add(this->f_returnToAccount);
+			this->f_noAccount->Controls->Add(this->f_accountWarning);
+			this->f_noAccount->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->f_noAccount->Location = System::Drawing::Point(4, 4);
+			this->f_noAccount->Margin = System::Windows::Forms::Padding(0);
+			this->f_noAccount->Name = L"f_noAccount";
+			this->f_noAccount->Size = System::Drawing::Size(1238, 877);
+			this->f_noAccount->TabIndex = 11;
+			// 
+			// f_returnToAccount
+			// 
+			this->f_returnToAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->f_returnToAccount->BackColor = System::Drawing::Color::Transparent;
+			this->f_returnToAccount->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->f_returnToAccount->Location = System::Drawing::Point(268, 472);
+			this->f_returnToAccount->Name = L"f_returnToAccount";
+			this->f_returnToAccount->Size = System::Drawing::Size(691, 75);
+			this->f_returnToAccount->TabIndex = 1;
+			this->f_returnToAccount->TabStop = true;
+			this->f_returnToAccount->Text = L"Login";
+			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
+			// 
+			// f_accountWarning
+			// 
+			this->f_accountWarning->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->f_accountWarning->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->f_accountWarning->Location = System::Drawing::Point(0, 0);
+			this->f_accountWarning->Name = L"f_accountWarning";
+			this->f_accountWarning->Size = System::Drawing::Size(1238, 877);
+			this->f_accountWarning->TabIndex = 0;
+			this->f_accountWarning->Text = L"You must login to view this page.";
+			this->f_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
 			// f_divider
 			// 
 			this->f_divider->Anchor = System::Windows::Forms::AnchorStyles::Top;
@@ -796,7 +834,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->flightsList->MinimumSize = System::Drawing::Size(1200, 282);
 			this->flightsList->Name = L"flightsList";
 			this->flightsList->RowCount = 1;
-			this->flightsList->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 0)));
+			this->flightsList->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 642)));
 			this->flightsList->Size = System::Drawing::Size(1200, 642);
 			this->flightsList->TabIndex = 9;
 			// 
@@ -893,44 +931,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->ticketsTab->TabIndex = 2;
 			this->ticketsTab->Text = L"Tickets";
 			this->ticketsTab->UseVisualStyleBackColor = true;
-			// 
-			// f_noAccount
-			// 
-			this->f_noAccount->Controls->Add(this->f_returnToAccount);
-			this->f_noAccount->Controls->Add(this->f_accountWarning);
-			this->f_noAccount->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->f_noAccount->Location = System::Drawing::Point(4, 4);
-			this->f_noAccount->Margin = System::Windows::Forms::Padding(0);
-			this->f_noAccount->Name = L"f_noAccount";
-			this->f_noAccount->Size = System::Drawing::Size(1238, 877);
-			this->f_noAccount->TabIndex = 11;
-			// 
-			// f_returnToAccount
-			// 
-			this->f_returnToAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->f_returnToAccount->BackColor = System::Drawing::Color::Transparent;
-			this->f_returnToAccount->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->f_returnToAccount->Location = System::Drawing::Point(268, 472);
-			this->f_returnToAccount->Name = L"f_returnToAccount";
-			this->f_returnToAccount->Size = System::Drawing::Size(691, 75);
-			this->f_returnToAccount->TabIndex = 1;
-			this->f_returnToAccount->TabStop = true;
-			this->f_returnToAccount->Text = L"Login";
-			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
-			// 
-			// f_accountWarning
-			// 
-			this->f_accountWarning->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->f_accountWarning->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->f_accountWarning->Location = System::Drawing::Point(0, 0);
-			this->f_accountWarning->Name = L"f_accountWarning";
-			this->f_accountWarning->Size = System::Drawing::Size(1238, 877);
-			this->f_accountWarning->TabIndex = 0;
-			this->f_accountWarning->Text = L"You must login to view this page.";
-			this->f_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->ticketsTab->Enter += gcnew System::EventHandler(this, &Main::ticketsTab_Enter);
 			// 
 			// t_noAccount
 			// 
@@ -970,6 +971,46 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->t_accountWarning->Text = L"You must login to view this page.";
 			this->t_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
+			// t_divider
+			// 
+			this->t_divider->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->t_divider->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->t_divider->Location = System::Drawing::Point(23, 53);
+			this->t_divider->MaximumSize = System::Drawing::Size(4000, 2);
+			this->t_divider->Name = L"t_divider";
+			this->t_divider->Size = System::Drawing::Size(1200, 2);
+			this->t_divider->TabIndex = 12;
+			// 
+			// t_departureHeader
+			// 
+			this->t_departureHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->t_departureHeader->Location = System::Drawing::Point(802, 9);
+			this->t_departureHeader->Margin = System::Windows::Forms::Padding(0);
+			this->t_departureHeader->Name = L"t_departureHeader";
+			this->t_departureHeader->Size = System::Drawing::Size(421, 46);
+			this->t_departureHeader->TabIndex = 2;
+			this->t_departureHeader->Text = L"Departure Time";
+			// 
+			// t_seatHeader
+			// 
+			this->t_seatHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->t_seatHeader->Location = System::Drawing::Point(205, 9);
+			this->t_seatHeader->Margin = System::Windows::Forms::Padding(0);
+			this->t_seatHeader->Name = L"t_seatHeader";
+			this->t_seatHeader->Size = System::Drawing::Size(182, 46);
+			this->t_seatHeader->TabIndex = 3;
+			this->t_seatHeader->Text = L"Seat";
+			// 
+			// t_destinationHeader
+			// 
+			this->t_destinationHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->t_destinationHeader->Location = System::Drawing::Point(386, 9);
+			this->t_destinationHeader->Margin = System::Windows::Forms::Padding(0);
+			this->t_destinationHeader->Name = L"t_destinationHeader";
+			this->t_destinationHeader->Size = System::Drawing::Size(416, 46);
+			this->t_destinationHeader->TabIndex = 1;
+			this->t_destinationHeader->Text = L"Destination";
+			// 
 			// ticketList
 			// 
 			this->ticketList->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom));
@@ -990,36 +1031,6 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->ticketList->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->ticketList->Size = System::Drawing::Size(1200, 800);
 			this->ticketList->TabIndex = 10;
-			// 
-			// t_seatHeader
-			// 
-			this->t_seatHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->t_seatHeader->Location = System::Drawing::Point(205, 9);
-			this->t_seatHeader->Margin = System::Windows::Forms::Padding(0);
-			this->t_seatHeader->Name = L"t_seatHeader";
-			this->t_seatHeader->Size = System::Drawing::Size(182, 46);
-			this->t_seatHeader->TabIndex = 3;
-			this->t_seatHeader->Text = L"Seat";
-			// 
-			// t_departureHeader
-			// 
-			this->t_departureHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->t_departureHeader->Location = System::Drawing::Point(802, 9);
-			this->t_departureHeader->Margin = System::Windows::Forms::Padding(0);
-			this->t_departureHeader->Name = L"t_departureHeader";
-			this->t_departureHeader->Size = System::Drawing::Size(421, 46);
-			this->t_departureHeader->TabIndex = 2;
-			this->t_departureHeader->Text = L"Departure Time";
-			// 
-			// t_destinationHeader
-			// 
-			this->t_destinationHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->t_destinationHeader->Location = System::Drawing::Point(386, 9);
-			this->t_destinationHeader->Margin = System::Windows::Forms::Padding(0);
-			this->t_destinationHeader->Name = L"t_destinationHeader";
-			this->t_destinationHeader->Size = System::Drawing::Size(416, 46);
-			this->t_destinationHeader->TabIndex = 1;
-			this->t_destinationHeader->Text = L"Destination";
 			// 
 			// t_idHeader
 			// 
@@ -1079,17 +1090,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->bottomBar->Size = System::Drawing::Size(1254, 100);
 			this->bottomBar->TabIndex = 8;
 			// 
-			// t_divider
-			// 
-			this->t_divider->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->t_divider->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->t_divider->Location = System::Drawing::Point(23, 53);
-			this->t_divider->MaximumSize = System::Drawing::Size(4000, 2);
-			this->t_divider->Name = L"t_divider";
-			this->t_divider->Size = System::Drawing::Size(1200, 2);
-			this->t_divider->TabIndex = 12;
-			// 
-			// Login
+			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -1098,7 +1099,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->Controls->Add(this->mainview);
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->MinimumSize = System::Drawing::Size(1280, 1080);
-			this->Name = L"Login";
+			this->Name = L"Main";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->Text = L"Login";
 			this->tabControl->ResumeLayout(false);
@@ -1114,9 +1115,9 @@ private: System::Windows::Forms::Label^ t_divider;
 			this->panel1->PerformLayout();
 			this->flightsTab->ResumeLayout(false);
 			this->flightsTab->PerformLayout();
+			this->f_noAccount->ResumeLayout(false);
 			this->ticketsTab->ResumeLayout(false);
 			this->ticketsTab->PerformLayout();
-			this->f_noAccount->ResumeLayout(false);
 			this->t_noAccount->ResumeLayout(false);
 			this->mainview->ResumeLayout(false);
 			this->bottomBar->ResumeLayout(false);
@@ -1143,7 +1144,10 @@ private: System::Windows::Forms::Label^ t_divider;
 			clearFlights();
 		}
 		
-
+		//
+		// Account navigators
+		//
+		// login navigation
 		private: System::Void showLogin() {
 			createAccountPanel->Hide();
 			accountPanel->Hide();
@@ -1153,7 +1157,8 @@ private: System::Windows::Forms::Label^ t_divider;
 			loginStatus->Text = "";
 			loginPanel->Show();
 		}
-
+		
+		// create navigation
 		private: System::Void showCreate() {
 			loginPanel->Hide();
 			accountPanel->Hide();
@@ -1165,6 +1170,7 @@ private: System::Windows::Forms::Label^ t_divider;
 			createAccountPanel->Show();
 		}
 		
+		// account navigation
 		private: System::Void showAccount() {
 			loginPanel->Hide();
 			createAccountPanel->Hide();
@@ -1257,6 +1263,10 @@ private: System::Windows::Forms::Label^ t_divider;
 		}
 		
 
+		//
+		// Flights Page
+		//
+
 		private: System::Void postFlight(System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
 			System::Windows::Forms::Label^ idLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
@@ -1266,7 +1276,7 @@ private: System::Windows::Forms::Label^ t_divider;
 
 			std::stringstream stream;
 			stream.precision(4);
-			stream << price;			
+			stream << price;
 
 			idLabel->Text = flightId;
 			dsLabel->Text = destination;
@@ -1282,10 +1292,10 @@ private: System::Windows::Forms::Label^ t_divider;
 
 			flightsList->RowCount++;
 			flightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
-			flightsList->Controls->Add(idLabel, 0, flightsList->RowCount-1);
-			flightsList->Controls->Add(dsLabel, 1, flightsList->RowCount-1);
-			flightsList->Controls->Add(dpLabel, 2, flightsList->RowCount-1);
-			flightsList->Controls->Add(ocLabel, 3, flightsList->RowCount-1);
+			flightsList->Controls->Add(idLabel, 0, flightsList->RowCount - 1);
+			flightsList->Controls->Add(dsLabel, 1, flightsList->RowCount - 1);
+			flightsList->Controls->Add(dpLabel, 2, flightsList->RowCount - 1);
+			flightsList->Controls->Add(ocLabel, 3, flightsList->RowCount - 1);
 			flightsList->Controls->Add(prLabel, 4, flightsList->RowCount - 1);
 		}
 
@@ -1294,9 +1304,6 @@ private: System::Windows::Forms::Label^ t_divider;
 			flightsList->RowCount = 1;
 		}
 
-		//
-		// Flights Page
-		//
 		// user clicks search button
 		private: System::Void searchFlightsButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			// wipes the list first
@@ -1333,9 +1340,55 @@ private: System::Windows::Forms::Label^ t_divider;
 		//
 		// Tickets Page
 		//
+
+		private: System::Void postTicket(System::String^ ticketId, System::String^ seat, System::String^ destination, System::String^ departure) {
+			System::Windows::Forms::Label^ idLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ stLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ dpLabel = gcnew System::Windows::Forms::Label();
+			
+
+			idLabel->Text = ticketId;
+			stLabel->Text = seat;
+			dsLabel->Text = destination;
+			dpLabel->Text = departure;
+			
+
+			idLabel->Dock = DockStyle::Top;
+			stLabel->Dock = DockStyle::Top;
+			dsLabel->Dock = DockStyle::Top;
+			dpLabel->Dock = DockStyle::Top;
+
+			ticketList->RowCount++;
+			ticketList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
+			ticketList->Controls->Add(idLabel, 0, ticketList->RowCount - 1);
+			ticketList->Controls->Add(stLabel, 1, ticketList->RowCount - 1);
+			ticketList->Controls->Add(dsLabel, 2, ticketList->RowCount - 1);
+			ticketList->Controls->Add(dpLabel, 3, ticketList->RowCount - 1);
+		}
+
+		private: System::Void clearTickets() {
+			ticketList->Controls->Clear();
+			ticketList->RowCount = 1;
+		}
+
+		// user enters tickets page
+		private: System::Void ticketsTab_Enter(System::Object^ sender, System::EventArgs^ e) {
+			clearTickets();
+
+			// !!! TODO !!!:
+			// query the database and retrieve all user tickets
+			// 
+			// for each ticket, call the postTicket() function-
+			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
+			// The order of these parameters is ticketId, seat, destination, departureTime
+			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
+		}
+
 		// user returns to login screen
 		private: System::Void t_returnToAccount_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 			logout();
 		}
+		
 };
 }
