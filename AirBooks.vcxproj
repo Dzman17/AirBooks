@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
+    <ClCompile Include="FlightManager.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
+    <ClInclude Include="FlightManager.h" />
     <ClInclude Include="Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -177,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="credentials.txt" />
+    <Text Include="flightList.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
