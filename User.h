@@ -23,5 +23,5 @@ public:
 	bool authenticate();
 	bool validateEmail();
 	char getRole();
-	void createAccount();
+	void createUser();
 };

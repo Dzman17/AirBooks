@@ -1,6 +1,7 @@
+#include "Flight.h"
 #include "FlightManager.h"
 
-#include <vector>
+#include <array>
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -9,38 +10,21 @@
 using namespace std;
 using namespace System;
 
-struct Flight
-{
-public:
-	int flightID;
-	System::String^ location;
-	System::DateTime flightTime;
-	int rows;
-	int cols;
-	float price;
-};
-
+/*
 // constructor
 FlightManager::FlightManager() {
 
 }
 
 // retrieves all flights from the database using the search parameters
-vector<Flight> FlightManager::getFlights(std::string destination, System::DateTime minTime, System::DateTime maxTime) {
-	vector<Flight> flights;
-
-	// query the database using the three search parameters to fill the flights vector
-
-	return flights;
+std::array<Flight, 100> FlightManager::getFlights(System::String^ destination, System::DateTime minTime, System::DateTime maxTime) {
+	std::array<Flight, 100> flightArray;
 }
 
 // adds a flight
-void FlightManager::addFlight(std::string destination, System::DateTime departureTime, int rows, int cols, float price) {
+void FlightManager::addFlight(System::String^ destination, System::DateTime departureTime, int rows, int cols, float price) {
 	//Create flight object
-	Flight newFlight;
-
-	newFlight.location = destination;
-	newFlight.flightTime = departureTime;
+	Flight^ newFlight = gcnew Flight(destination, departureTime, rows, cols, price);
 
 	
 
@@ -245,3 +229,4 @@ void FlightManager::changeFlightTime() {
 
 	return;
 };
+*/

@@ -154,6 +154,14 @@ private: System::Windows::Forms::Label^ expDateLabel;
 private: System::Windows::Forms::Label^ cardNumberLabel;
 private: System::Windows::Forms::MaskedTextBox^ expDateField;
 private: System::Windows::Forms::Button^ submitPayment;
+private: System::Windows::Forms::Label^ ticketQuantityLabel;
+private: System::Windows::Forms::Label^ ticketPriceLabel;
+private: System::Windows::Forms::Label^ discountLabel;
+private: System::Windows::Forms::Label^ totalPriceLabel;
+
+
+
+
 
 
 
@@ -233,6 +241,10 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->destinationField = (gcnew System::Windows::Forms::ComboBox());
 			this->flightsList = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->purchaseTicket = (gcnew System::Windows::Forms::Panel());
+			this->totalPriceLabel = (gcnew System::Windows::Forms::Label());
+			this->discountLabel = (gcnew System::Windows::Forms::Label());
+			this->ticketQuantityLabel = (gcnew System::Windows::Forms::Label());
+			this->ticketPriceLabel = (gcnew System::Windows::Forms::Label());
 			this->submitPayment = (gcnew System::Windows::Forms::Button());
 			this->cvvLabel = (gcnew System::Windows::Forms::Label());
 			this->cvvField = (gcnew System::Windows::Forms::MaskedTextBox());
@@ -279,7 +291,6 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// 
 			// accountTab
 			// 
-			this->accountTab->Controls->Add(this->noAccount);
 			this->accountTab->Controls->Add(this->loginPanel);
 			this->accountTab->Controls->Add(this->createAccountPanel);
 			this->accountTab->Controls->Add(this->accountPanel);
@@ -866,6 +877,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// 
 			// flightsTab
 			// 
+			this->flightsTab->Controls->Add(this->noAccount);
 			this->flightsTab->Controls->Add(this->flights);
 			this->flightsTab->Controls->Add(this->purchaseTicket);
 			this->flightsTab->Location = System::Drawing::Point(4, 43);
@@ -1081,6 +1093,10 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// 
 			// purchaseTicket
 			// 
+			this->purchaseTicket->Controls->Add(this->totalPriceLabel);
+			this->purchaseTicket->Controls->Add(this->discountLabel);
+			this->purchaseTicket->Controls->Add(this->ticketQuantityLabel);
+			this->purchaseTicket->Controls->Add(this->ticketPriceLabel);
 			this->purchaseTicket->Controls->Add(this->submitPayment);
 			this->purchaseTicket->Controls->Add(this->cvvLabel);
 			this->purchaseTicket->Controls->Add(this->cvvField);
@@ -1093,6 +1109,42 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->purchaseTicket->Name = L"purchaseTicket";
 			this->purchaseTicket->Size = System::Drawing::Size(1264, 1225);
 			this->purchaseTicket->TabIndex = 13;
+			// 
+			// totalPriceLabel
+			// 
+			this->totalPriceLabel->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->totalPriceLabel->Location = System::Drawing::Point(781, 423);
+			this->totalPriceLabel->Name = L"totalPriceLabel";
+			this->totalPriceLabel->Size = System::Drawing::Size(402, 37);
+			this->totalPriceLabel->TabIndex = 11;
+			this->totalPriceLabel->Text = L"Total Price:";
+			// 
+			// discountLabel
+			// 
+			this->discountLabel->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->discountLabel->Location = System::Drawing::Point(781, 366);
+			this->discountLabel->Name = L"discountLabel";
+			this->discountLabel->Size = System::Drawing::Size(402, 37);
+			this->discountLabel->TabIndex = 10;
+			this->discountLabel->Text = L"Discount:";
+			// 
+			// ticketQuantityLabel
+			// 
+			this->ticketQuantityLabel->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->ticketQuantityLabel->Location = System::Drawing::Point(781, 312);
+			this->ticketQuantityLabel->Name = L"ticketQuantityLabel";
+			this->ticketQuantityLabel->Size = System::Drawing::Size(402, 37);
+			this->ticketQuantityLabel->TabIndex = 9;
+			this->ticketQuantityLabel->Text = L"Tickets:";
+			// 
+			// ticketPriceLabel
+			// 
+			this->ticketPriceLabel->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->ticketPriceLabel->Location = System::Drawing::Point(781, 258);
+			this->ticketPriceLabel->Name = L"ticketPriceLabel";
+			this->ticketPriceLabel->Size = System::Drawing::Size(402, 37);
+			this->ticketPriceLabel->TabIndex = 8;
+			this->ticketPriceLabel->Text = L"Ticket Price:";
 			// 
 			// submitPayment
 			// 
@@ -1366,7 +1418,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 		private: System::Void createAccountButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
 			if (user->validateEmail()) {
-				user->createAccount();
+				user->createUser();
 				showLogin();
 			}
 			else {
