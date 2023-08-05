@@ -1588,7 +1588,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// wipes the list first
 			clearFlights();
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
-			for each (RowStyle^ row in rows) {
+			for each (RowStyle ^ row in rows) {
 				row->Height = 0;
 			}
 
@@ -1604,11 +1604,29 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// postFlight() returns nothing and takes in four managed strings (System::String^), and one float as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
+	
+			for (int i = 0; i < 1000; i++) {
+				Ticket ticket;
+				Flight flight;
+				DBHandler handler;
+				System::String^ fID;
 
-			// in the event you need to convert an unmanaged string (std::string) into a managed string (System::String^)
-			// for use in the postFlight() function, here is how you would do so:
-			// System::String^ managed = marshal_as<System::String^>(unmanaged);
-			// where (unmanaged) is the std::string to be converted.
+				//TODO Query database for flight here
+
+				System::String^ fID = marshal_as<System::String^>(to_string(ticket.flightID));
+
+				//TODO Query database for number of tickets currently booked in flight
+
+				int booked = 0;
+				int seats = (flight.columns * flight.rows) - booked;
+
+				if (ticket.flightID == -1) {
+					return;
+				}
+				else {
+					postFlight(fID, flight.destination, flight.time.ToString(), flight., float(flight.price));
+				}
+			}
 		}
 
 		// user returns to login screen
