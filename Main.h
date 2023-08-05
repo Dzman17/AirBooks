@@ -1,5 +1,6 @@
 #pragma once
 #include "Account.h"
+#include "Flight.h"
 #include <sstream>
 #include <msclr\marshal_cppstd.h>
 
@@ -278,6 +279,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// 
 			// accountTab
 			// 
+			this->accountTab->Controls->Add(this->noAccount);
 			this->accountTab->Controls->Add(this->loginPanel);
 			this->accountTab->Controls->Add(this->createAccountPanel);
 			this->accountTab->Controls->Add(this->accountPanel);
@@ -824,7 +826,6 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// 
 			// flightsTab
 			// 
-			this->flightsTab->Controls->Add(this->noAccount);
 			this->flightsTab->Controls->Add(this->flights);
 			this->flightsTab->Controls->Add(this->purchaseTicket);
 			this->flightsTab->Location = System::Drawing::Point(4, 43);
@@ -1007,10 +1008,10 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// f_occupancyHeader
 			// 
 			this->f_occupancyHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->f_occupancyHeader->Location = System::Drawing::Point(866, 144);
+			this->f_occupancyHeader->Location = System::Drawing::Point(858, 144);
 			this->f_occupancyHeader->Margin = System::Windows::Forms::Padding(0);
 			this->f_occupancyHeader->Name = L"f_occupancyHeader";
-			this->f_occupancyHeader->Size = System::Drawing::Size(182, 46);
+			this->f_occupancyHeader->Size = System::Drawing::Size(152, 46);
 			this->f_occupancyHeader->TabIndex = 3;
 			this->f_occupancyHeader->Text = L"Occupancy";
 			// 
@@ -1028,10 +1029,10 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// f_priceHeader
 			// 
 			this->f_priceHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->f_priceHeader->Location = System::Drawing::Point(1050, 144);
+			this->f_priceHeader->Location = System::Drawing::Point(1025, 144);
 			this->f_priceHeader->Margin = System::Windows::Forms::Padding(0);
 			this->f_priceHeader->Name = L"f_priceHeader";
-			this->f_priceHeader->Size = System::Drawing::Size(180, 46);
+			this->f_priceHeader->Size = System::Drawing::Size(147, 46);
 			this->f_priceHeader->TabIndex = 4;
 			this->f_priceHeader->Text = L"Price";
 			// 
@@ -1062,12 +1063,13 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->flightsList->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->flightsList->AutoScroll = true;
 			this->flightsList->AutoSize = true;
-			this->flightsList->ColumnCount = 5;
+			this->flightsList->ColumnCount = 6;
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 35)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20)));
-			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15)));
-			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 5)));
 			this->flightsList->Location = System::Drawing::Point(30, 197);
 			this->flightsList->Margin = System::Windows::Forms::Padding(4);
 			this->flightsList->MinimumSize = System::Drawing::Size(1200, 283);
@@ -1449,13 +1451,19 @@ private: System::Windows::Forms::Button^ submitPayment;
 		//
 		// Flights Page
 		//
+		// user selects a flight
+		private: System::Void selectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		private: System::Void postFlight(System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+		}
+
+		private: System::Void postFlight(Flight flight, System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
 			System::Windows::Forms::Label^ idLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dpLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ ocLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ prLabel = gcnew System::Windows::Forms::Label();
+
+			System::Windows::Forms::Button^ selectButton = gcnew System::Windows::Forms::Button();
 
 			std::stringstream stream;
 			stream.precision(4);
@@ -1466,12 +1474,14 @@ private: System::Windows::Forms::Button^ submitPayment;
 			dpLabel->Text = departure;
 			ocLabel->Text = occupancy;
 			prLabel->Text = marshal_as<System::String^>('$' + stream.str());
+			selectButton->Text = "";
 
 			idLabel->Dock = DockStyle::Top;
 			dsLabel->Dock = DockStyle::Top;
 			dpLabel->Dock = DockStyle::Top;
 			ocLabel->Dock = DockStyle::Top;
 			prLabel->Dock = DockStyle::Top;
+			selectButton->Dock = DockStyle::Top;
 
 			flightsList->RowCount++;
 			flightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
@@ -1480,6 +1490,11 @@ private: System::Windows::Forms::Button^ submitPayment;
 			flightsList->Controls->Add(dpLabel, 2, flightsList->RowCount - 1);
 			flightsList->Controls->Add(ocLabel, 3, flightsList->RowCount - 1);
 			flightsList->Controls->Add(prLabel, 4, flightsList->RowCount - 1);
+			flightsList->Controls->Add(selectButton, 5, flightsList->RowCount - 1);
+
+			// assign the tag of the button to a structure containing the data necessary to reconstruct the flight object
+			//selectButton->Tag = ;
+			selectButton->Click += gcnew System::EventHandler(this, &Main::selectFlight_Click);
 		}
 
 		private: System::Void clearFlights() {
@@ -1505,7 +1520,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// use parameters declared above to query the database and retrieve all matching flights
 			// 
 			// for each flight, call the postFlight() function-
-			// postFlight() returns nothing and takes in four managed strings (System::String^) and one float as parameters.
+			// postFlight() returns nothing and takes in a Flight object (Flight), four managed strings (System::String^), and one float as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
 
