@@ -1,6 +1,6 @@
 #pragma once
 
-public ref class Account {
+public ref class User {
 protected:
 	System::String^ firstName;
 	System::String^ lastName;
@@ -11,8 +11,8 @@ protected:
 	char role;
 
 public:
-	Account(System::String^ email, System::String^ password);
-	Account(System::String^ first, System::String^ last, System::String^ email, System::String^ password);
+	User(System::String^ email, System::String^ password);
+	User(System::String^ first, System::String^ last, System::String^ email, System::String^ password);
 	void setFirstName(System::String^ name);
 	void setLastName(System::String^ name);
 	void setEmail(System::String^ email);

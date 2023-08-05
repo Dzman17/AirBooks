@@ -12,45 +12,37 @@ using namespace System;
 struct Flight
 {
 public:
-	string flightTime;
-	string location;
 	int flightID;
+	System::String^ location;
+	System::DateTime flightTime;
 	int rows;
 	int cols;
-	int price;
-	double luggageMax;
+	float price;
 };
 
-void FlightManager::addFlight() {
+// constructor
+FlightManager::FlightManager() {
 
+}
+
+// retrieves all flights from the database using the search parameters
+vector<Flight> FlightManager::getFlights(std::string destination, System::DateTime minTime, System::DateTime maxTime) {
+	vector<Flight> flights;
+
+	// query the database using the three search parameters to fill the flights vector
+
+	return flights;
+}
+
+// adds a flight
+void FlightManager::addFlight(std::string destination, System::DateTime departureTime, int rows, int cols, float price) {
 	//Create flight object
 	Flight newFlight;
 
-	string dateString;
+	newFlight.location = destination;
+	newFlight.flightTime = departureTime;
 
-	//input
-	string response;
-	cout << "Please enter flight time (\"5/1/2008 8:30 AM\")" << endl;
-	getline(cin, newFlight.flightTime);
-
-	cout << "Please enter flight location" << endl;
-	getline(cin, newFlight.location);
-
-	cout << "Please enter flight rows" << endl;
-	getline(cin, response);
-	newFlight.rows = stoi(response);
-
-	cout << "Please enter flight columns" << endl;
-	getline(cin, response);
-	newFlight.cols = stoi(response);
-
-	cout << "Please enter flight price" << endl;
-	getline(cin, response);
-	newFlight.price = stoi(response);
-
-	cout << "Please enter flight max luggage" << endl;
-	getline(cin, response);
-	newFlight.luggageMax = stod(response);
+	
 
 	//Open file
 	ofstream out;
@@ -72,7 +64,6 @@ void FlightManager::addFlight() {
 	addFlight.append("," + to_string(newFlight.rows));
 	addFlight.append("," + to_string(newFlight.cols));
 	addFlight.append("," + to_string(newFlight.price));
-	addFlight.append("," + to_string(newFlight.luggageMax));
 	
 	//Append string to file
 	out << addFlight << endl;
@@ -81,6 +72,7 @@ void FlightManager::addFlight() {
 	return;
 };
 
+// deletes a flight
 void FlightManager::cancelFlight() {
 	//REMOVE AFTER FINDING FIX
 	vector<Flight> flights;
@@ -113,8 +105,6 @@ void FlightManager::cancelFlight() {
 		flight.price = stoi(line.substr(0, line.find(",")));
 		line.erase(line.begin(), line.begin() + line.find(",") + 1);
 
-		flight.luggageMax = stod(line);
-
 		flights.push_back(flight);
 	}
 
@@ -122,8 +112,8 @@ void FlightManager::cancelFlight() {
 	int i = 0;
 	for (Flight flight : flights) {
 		i++;
-		cout << "\t" << "Flight" << "\t" << "Time" << "\t\t" << "Location" << "\t\t" << "ID" << "\t" << "Rows" << "\t" << "Columns" << "\t" << "Price" << "\t" << "Max Luggage" << endl;
-		cout << "\t" << i << "\t" << flight.flightTime << "\t\t" << flight.location << "\t\t\t" << flight.flightID << "\t" << flight.rows << "\t" << flight.cols << "\t" << flight.price << "\t" << flight.luggageMax << endl;
+		cout << "\t" << "Flight" << "\t" << "Time" << "\t\t" << "Location" << "\t\t" << "ID" << "\t" << "Rows" << "\t" << "Columns" << "\t" << "Price" << endl;
+		cout << "\t" << i << "\t" << flight.flightTime << "\t\t" << flight.location << "\t\t\t" << flight.flightID << "\t" << flight.rows << "\t" << flight.cols << "\t" << flight.price << endl;
 	}
 	
 	//select flight to cancel
@@ -152,7 +142,6 @@ void FlightManager::cancelFlight() {
 			addFlight.append("," + to_string(flight.rows));
 			addFlight.append("," + to_string(flight.cols));
 			addFlight.append("," + to_string(flight.price));
-			addFlight.append("," + to_string(flight.luggageMax));
 
 			//Append string to file
 			out << addFlight << endl;
@@ -165,6 +154,7 @@ void FlightManager::cancelFlight() {
 	return;
 };
 
+// changes the scheduled time on a flight
 void FlightManager::changeFlightTime() {
 	//REMOVE AFTER FINDING FIX
 	vector<Flight> flights;
@@ -252,21 +242,6 @@ void FlightManager::changeFlightTime() {
 		//Append string to file
 		out << addFlight << endl;
 	}
-
-	return;
-};
-
-void FlightManager::delayFlight() {
-	//Open file
-	ifstream fin("flightList.txt");
-
-	//Print flight to select
-
-	//select flight to delay
-
-	//input
-
-	//change time
 
 	return;
 };

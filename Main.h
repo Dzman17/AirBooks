@@ -1,6 +1,6 @@
 #pragma once
-#include "Account.h"
-#include "Flight.h"
+#include "User.h"
+#include "FlightManager.h"
 #include <sstream>
 #include <msclr\marshal_cppstd.h>
 
@@ -168,6 +168,9 @@ private: System::Windows::Forms::Button^ submitPayment;
 		void InitializeComponent(void) {
 			this->tabControl = (gcnew System::Windows::Forms::TabControl());
 			this->accountTab = (gcnew System::Windows::Forms::TabPage());
+			this->noAccount = (gcnew System::Windows::Forms::Panel());
+			this->f_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
+			this->f_accountWarning = (gcnew System::Windows::Forms::Label());
 			this->loginPanel = (gcnew System::Windows::Forms::Panel());
 			this->ln_emailField = (gcnew System::Windows::Forms::TextBox());
 			this->switchToCreate = (gcnew System::Windows::Forms::LinkLabel());
@@ -212,9 +215,6 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->t_divider = (gcnew System::Windows::Forms::Label());
 			this->ticketList = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->flightsTab = (gcnew System::Windows::Forms::TabPage());
-			this->noAccount = (gcnew System::Windows::Forms::Panel());
-			this->f_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
-			this->f_accountWarning = (gcnew System::Windows::Forms::Label());
 			this->flights = (gcnew System::Windows::Forms::Panel());
 			this->h_divider2 = (gcnew System::Windows::Forms::Label());
 			this->destinationLabel = (gcnew System::Windows::Forms::Label());
@@ -247,6 +247,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
+			this->noAccount->SuspendLayout();
 			this->loginPanel->SuspendLayout();
 			this->createAccountPanel->SuspendLayout();
 			this->accountPanel->SuspendLayout();
@@ -254,7 +255,6 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->panel2->SuspendLayout();
 			this->ticketsHeader->SuspendLayout();
 			this->flightsTab->SuspendLayout();
-			this->noAccount->SuspendLayout();
 			this->flights->SuspendLayout();
 			this->purchaseTicket->SuspendLayout();
 			this->mainview->SuspendLayout();
@@ -292,6 +292,46 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->accountTab->Text = L"Account";
 			this->accountTab->UseVisualStyleBackColor = true;
 			this->accountTab->Enter += gcnew System::EventHandler(this, &Main::accountTab_Enter);
+			// 
+			// noAccount
+			// 
+			this->noAccount->Controls->Add(this->f_returnToAccount);
+			this->noAccount->Controls->Add(this->f_accountWarning);
+			this->noAccount->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->noAccount->Location = System::Drawing::Point(0, 0);
+			this->noAccount->Margin = System::Windows::Forms::Padding(0);
+			this->noAccount->Name = L"noAccount";
+			this->noAccount->Size = System::Drawing::Size(2526, 1225);
+			this->noAccount->TabIndex = 11;
+			// 
+			// f_returnToAccount
+			// 
+			this->f_returnToAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->f_returnToAccount->BackColor = System::Drawing::Color::Transparent;
+			this->f_returnToAccount->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->f_returnToAccount->Location = System::Drawing::Point(913, 646);
+			this->f_returnToAccount->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->f_returnToAccount->Name = L"f_returnToAccount";
+			this->f_returnToAccount->Size = System::Drawing::Size(692, 75);
+			this->f_returnToAccount->TabIndex = 1;
+			this->f_returnToAccount->TabStop = true;
+			this->f_returnToAccount->Text = L"Login";
+			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
+			// 
+			// f_accountWarning
+			// 
+			this->f_accountWarning->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->f_accountWarning->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->f_accountWarning->Location = System::Drawing::Point(0, 0);
+			this->f_accountWarning->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->f_accountWarning->Name = L"f_accountWarning";
+			this->f_accountWarning->Size = System::Drawing::Size(2526, 1225);
+			this->f_accountWarning->TabIndex = 0;
+			this->f_accountWarning->Text = L"You must login to view this page.";
+			this->f_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// loginPanel
 			// 
@@ -837,46 +877,6 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->flightsTab->Text = L"Flights";
 			this->flightsTab->UseVisualStyleBackColor = true;
 			// 
-			// noAccount
-			// 
-			this->noAccount->Controls->Add(this->f_returnToAccount);
-			this->noAccount->Controls->Add(this->f_accountWarning);
-			this->noAccount->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->noAccount->Location = System::Drawing::Point(0, 0);
-			this->noAccount->Margin = System::Windows::Forms::Padding(0);
-			this->noAccount->Name = L"noAccount";
-			this->noAccount->Size = System::Drawing::Size(2526, 1225);
-			this->noAccount->TabIndex = 11;
-			// 
-			// f_returnToAccount
-			// 
-			this->f_returnToAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->f_returnToAccount->BackColor = System::Drawing::Color::Transparent;
-			this->f_returnToAccount->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->f_returnToAccount->Location = System::Drawing::Point(913, 646);
-			this->f_returnToAccount->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->f_returnToAccount->Name = L"f_returnToAccount";
-			this->f_returnToAccount->Size = System::Drawing::Size(692, 75);
-			this->f_returnToAccount->TabIndex = 1;
-			this->f_returnToAccount->TabStop = true;
-			this->f_returnToAccount->Text = L"Login";
-			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
-			// 
-			// f_accountWarning
-			// 
-			this->f_accountWarning->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->f_accountWarning->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->f_accountWarning->Location = System::Drawing::Point(0, 0);
-			this->f_accountWarning->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->f_accountWarning->Name = L"f_accountWarning";
-			this->f_accountWarning->Size = System::Drawing::Size(2526, 1225);
-			this->f_accountWarning->TabIndex = 0;
-			this->f_accountWarning->Text = L"You must login to view this page.";
-			this->f_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
 			// flights
 			// 
 			this->flights->Controls->Add(this->h_divider2);
@@ -983,7 +983,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->minTimeLabel->Name = L"minTimeLabel";
 			this->minTimeLabel->Size = System::Drawing::Size(260, 37);
 			this->minTimeLabel->TabIndex = 3;
-			this->minTimeLabel->Text = L"After Date:";
+			this->minTimeLabel->Text = L"Earliest Date:";
 			// 
 			// f_destinationHeader
 			// 
@@ -1003,7 +1003,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->maxTimeLabel->Name = L"maxTimeLabel";
 			this->maxTimeLabel->Size = System::Drawing::Size(260, 37);
 			this->maxTimeLabel->TabIndex = 4;
-			this->maxTimeLabel->Text = L"Before Date:";
+			this->maxTimeLabel->Text = L"Latest Date:";
 			// 
 			// f_occupancyHeader
 			// 
@@ -1246,6 +1246,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->Text = L"Login";
 			this->tabControl->ResumeLayout(false);
 			this->accountTab->ResumeLayout(false);
+			this->noAccount->ResumeLayout(false);
 			this->loginPanel->ResumeLayout(false);
 			this->loginPanel->PerformLayout();
 			this->createAccountPanel->ResumeLayout(false);
@@ -1257,7 +1258,6 @@ private: System::Windows::Forms::Button^ submitPayment;
 			this->ticketsHeader->ResumeLayout(false);
 			this->ticketsHeader->PerformLayout();
 			this->flightsTab->ResumeLayout(false);
-			this->noAccount->ResumeLayout(false);
 			this->flights->ResumeLayout(false);
 			this->flights->PerformLayout();
 			this->purchaseTicket->ResumeLayout(false);
@@ -1268,7 +1268,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 
 		}
 #pragma endregion
-		Account^ user;
+		User^ user;
 
 
 		private: System::Void logout() {
@@ -1339,7 +1339,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 		// 
 		// user clicks login button
 		private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			user = gcnew Account(ln_emailField->Text, ln_passwordField->Text);
+			user = gcnew User(ln_emailField->Text, ln_passwordField->Text);
 			if (user->authenticate()) {
 				// success, login and switch to account view
 				firstNameCurrent->Text = "First Name: " + user->getName(1);
@@ -1364,7 +1364,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 		//
 		// user clicks create account button
 		private: System::Void createAccountButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			user = gcnew Account(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
+			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
 			if (user->validateEmail()) {
 				user->createAccount();
 				showLogin();
@@ -1456,7 +1456,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 
 		}
 
-		private: System::Void postFlight(Flight flight, System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+		private: System::Void postFlight(System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
 			System::Windows::Forms::Label^ idLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dpLabel = gcnew System::Windows::Forms::Label();
@@ -1520,7 +1520,7 @@ private: System::Windows::Forms::Button^ submitPayment;
 			// use parameters declared above to query the database and retrieve all matching flights
 			// 
 			// for each flight, call the postFlight() function-
-			// postFlight() returns nothing and takes in a Flight object (Flight), four managed strings (System::String^), and one float as parameters.
+			// postFlight() returns nothing and takes in four managed strings (System::String^), and one float as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
 

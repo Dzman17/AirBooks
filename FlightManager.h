@@ -2,12 +2,13 @@
 
 #include <vector>
 
-class FlightManager
+public ref class FlightManager
 {
 public:
 	//vector<Flight> flights;
-	void addFlight();
+	FlightManager();
+	vector<Flight> getFlights(std::string, System::DateTime, System::DateTime);
+	void addFlight(std::string, System::DateTime, int, int, float);
 	void cancelFlight();
 	void changeFlightTime();
-	void delayFlight();
 };

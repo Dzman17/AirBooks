@@ -1,4 +1,4 @@
-#include "Account.h"
+#include "User.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -8,7 +8,7 @@ using namespace msclr::interop;
 using namespace std;
 
 // Account constructor
-Account::Account(System::String^ first, System::String^ last, System::String^ email, System::String^ password) {
+User::User(System::String^ first, System::String^ last, System::String^ email, System::String^ password) {
 	this->firstName = first;
 	this->lastName = last;
 	this->email = email;
@@ -16,7 +16,7 @@ Account::Account(System::String^ first, System::String^ last, System::String^ em
 }
 
 // Account constructor (email and password only)
-Account::Account(System::String^ email, System::String^ password) {
+User::User(System::String^ email, System::String^ password) {
 	firstName = "";
 	lastName = "";
 	this->email = email;
@@ -25,27 +25,27 @@ Account::Account(System::String^ email, System::String^ password) {
 
 // TODO: COMMIT SETTERS TO DATABASE
 // firstName setter
-void Account::setFirstName(System::String^ name) {
+void User::setFirstName(System::String^ name) {
 	firstName = name;
 }
 
 // lastName setter
-void Account::setLastName(System::String^ name) {
+void User::setLastName(System::String^ name) {
 	lastName = name;
 }
 
 // email setter
-void Account::setEmail(System::String^ newEmail) {
+void User::setEmail(System::String^ newEmail) {
 	email = newEmail;
 }
 
 // password setter
-void Account::setPassword(System::String^ newPassword) {
+void User::setPassword(System::String^ newPassword) {
 	password = newPassword;
 }
 
 // name getter (0 whole, 1 first, 2 last)
-System::String^ Account::getName(int mode) {
+System::String^ User::getName(int mode) {
 	switch (mode) {
 	case 0:
 		return firstName + " " + lastName;
@@ -60,17 +60,17 @@ System::String^ Account::getName(int mode) {
 }
 
 // email getter
-System::String^ Account::getEmail() {
+System::String^ User::getEmail() {
 	return email;
 }
 
 // password getter
-System::String^ Account::getPassword() {
+System::String^ User::getPassword() {
 	return password;
 }
 
-// Checks if account object fields match one in the system
-bool Account::authenticate() {
+// Checks if user object fields match one in the system
+bool User::authenticate() {
 	ifstream fin("credentials.txt");
 	string ffirst, flast, femail, fpassword;
 
@@ -89,7 +89,7 @@ bool Account::authenticate() {
 }
 
 // Checks if the email is already in use
-bool Account::validateEmail() {
+bool User::validateEmail() {
 	ifstream fin("credentials.txt");
 	string ffirst, flast, femail, fpassword;
 
@@ -105,13 +105,13 @@ bool Account::validateEmail() {
 	return true;
 }
 
-// account role getter (placeholder)
-char Account::getRole() {
+// user role getter (placeholder)
+char User::getRole() {
 	return 0;
 }
 
-// Commits account fields to system
-void Account::createAccount() {
+// Commits user fields to system
+void User::createUser() {
 	ofstream fout;
 	fout.open("credentials.txt", ios_base::app);
 	// helper vars for unstable marshal cast
