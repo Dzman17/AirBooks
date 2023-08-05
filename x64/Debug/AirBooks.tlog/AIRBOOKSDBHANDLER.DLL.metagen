@@ -43,9 +43,11 @@ Class AirBooksDBHandler.DBHandler: AutoLayout, AnsiClass, Class, Public, BeforeF
     getAccountInfo(String, String): PrivateScope, Public, HideBySig
     updateAccountInfo(Account): PrivateScope, Public, HideBySig
     getFlight(String, DateTime, DateTime, Int32): PrivateScope, Public, HideBySig
+    getFlight(Int32): PrivateScope, Public, HideBySig
     addFlight(Flight): PrivateScope, Public, HideBySig
     cancelFlight(Int32): PrivateScope, Public, HideBySig
     updateFlight(Flight): PrivateScope, Public, HideBySig
+    getOccupancy(Int32): PrivateScope, Public, HideBySig
     getTicket(String, Int32): PrivateScope, Public, HideBySig
     getTicket(Int32, Int32): PrivateScope, Public, HideBySig
     addTicket(Ticket): PrivateScope, Public, HideBySig

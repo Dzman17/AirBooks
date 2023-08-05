@@ -1487,49 +1487,19 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 
 		// user enters account page
 		private: System::Void accountTab_Enter(System::Object^ sender, System::EventArgs^ e) {
-			// no user logged in GC
-			if (!user) {
-				return;
-			}
-
 			// wipes the list first
 			clearTickets();
 
 			// !!! TODO !!!:
-			// 1. query the database and retrieve all user tickets
-			// 2. query the database using the tickets flightID to get destination and departureTime
-
+			// query the database and retrieve all user tickets
+			// 
 			// for each ticket, call the postTicket() function-
 			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
-
-			for (int i = 0; i < 1000; i++) {
-				Ticket ticket;
-				Flight flight;
-				DBHandler handler;
-				System::String^ fID;
-				System::String^ sID;
-
-				//Query database here
-
-				fID = marshal_as<System::String^>(to_string(ticket.flightID));
-				sID = marshal_as<System::String^>(to_string(ticket.seatID));
-
-				//TODO uncomment when overload is written
-				//flight = handler.getFlight(fID);
-
-				System::String^ fID = marshal_as<System::String^>(to_string(ticket.flightID));
-				System::String^ sID = marshal_as<System::String^>(to_string(ticket.seatID));
-				if (ticket.flightID == -1) {
-					return;
-				}
-				else {
-					postTicket(fID, sID, flight.destination, flight.time.ToString());
-				}
-			}
 		}
 
+		//
 		// Flights Page
 		//
 		// user selects a flight
@@ -1588,7 +1558,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// wipes the list first
 			clearFlights();
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
-			for each (RowStyle ^ row in rows) {
+			for each (RowStyle^ row in rows) {
 				row->Height = 0;
 			}
 
@@ -1604,29 +1574,11 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// postFlight() returns nothing and takes in four managed strings (System::String^), and one float as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
-	
-			for (int i = 0; i < 1000; i++) {
-				Ticket ticket;
-				Flight flight;
-				DBHandler handler;
-				System::String^ fID;
 
-				//TODO Query database for flight here
-
-				System::String^ fID = marshal_as<System::String^>(to_string(ticket.flightID));
-
-				//TODO Query database for number of tickets currently booked in flight
-
-				int booked = 0;
-				int seats = (flight.columns * flight.rows) - booked;
-
-				if (ticket.flightID == -1) {
-					return;
-				}
-				else {
-					postFlight(fID, flight.destination, flight.time.ToString(), flight., float(flight.price));
-				}
-			}
+			// in the event you need to convert an unmanaged string (std::string) into a managed string (System::String^)
+			// for use in the postFlight() function, here is how you would do so:
+			// System::String^ managed = marshal_as<System::String^>(unmanaged);
+			// where (unmanaged) is the std::string to be converted.
 		}
 
 		// user returns to login screen

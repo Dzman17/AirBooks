@@ -1,0 +1,343 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Numerics;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Security.Principal;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
+namespace AirBooksDBHandler
+{
+
+    public struct Account {
+        public Account(string email, string password, string firstName, string lastName) {
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            accountType = ' ';
+        }
+
+        public string email;
+        public string password;
+        public string firstName;
+        public string lastName;
+        public char accountType;
+    }
+
+    public struct Flight {
+        public Flight(int flightID, DateTime time, string destination, int rows, int columns, 
+                    int price, double luggageMax, double currentLuggage) { 
+            this.flightID = flightID;
+            this.time = time;
+            this.destination = destination;
+            this.rows = rows;
+            this.columns = columns;
+            this.price = price;
+            this.luggageMax = luggageMax;
+            this.currentLuggage = currentLuggage;
+        }
+
+        public int flightID;
+        public DateTime time;
+        public string destination;
+        public int rows;
+        public int columns;
+        public int price;
+        public double luggageMax;
+        public double currentLuggage;
+    }
+
+    public struct Ticket {
+        public Ticket(int flightID, int seatID, string ownerEmail) {
+            this.flightID = flightID;
+            this.seatID = seatID;
+            this.ownerEmail = ownerEmail;
+        }
+
+        public int flightID;
+        public int seatID;
+        public string ownerEmail;
+    }
+
+
+    public class DBHandler
+    {
+        /* Specifies the account type that all new accounts will be assigned.
+         * Must be changed during instalation to allow for the creation of other account types.
+         * 'c' = customer, 'e' = employee, 'm' = manager
+         */
+        const char defaultAccountType = 'c';
+
+        //these values will be used by multiple various operations, and should be, for the most part, constant
+        const string conString = "server=127.0.0.1;uid=AirBooksDBHandler;pwd=a1r-0-dYnam!cs;database=air-books";
+        const string numQuery = "select count(*) ", getQuery = "select * ",
+            insertQuery = "insert into ", deleteQuery = "delete from ";
+        MySqlConnection con = new MySqlConnection(conString);
+
+        //constructor for the database handler, opens a connection to the database
+        public DBHandler() {
+            try { con.Open(); }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        //destructor for the database handler, closes its connection to the database
+        ~DBHandler() {
+            try { con.Close(); }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        /* Returns a boolean result based on if the account already exists in the database
+         * false = email already has an account
+         * true = account does not exist and can be created
+         */
+
+        public bool createAccount(Account account) {
+            try {
+                if (account.accountType == ' ')
+                    account.accountType = defaultAccountType;
+
+                
+                string query = "account values('" + account.email + "', '" + account.password + "', '" +
+                       account.firstName + "', '" + account.lastName + "', '" + account.accountType + "')";
+                MySqlCommand command = new MySqlCommand(insertQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+        /* Returns a boolean result based on if the account already exists in the database
+         * false = there is no account with the specified email and password
+         * true = the account existed and is now deleted
+         */
+        public bool deleteAccount(Account account) {
+            try {
+                string query = "account where email='" + account.email + "' and password='" + account.password + "'";
+                MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+        public Account getAccountInfo(string email, string password) {
+            try {
+                Account user;
+                string query = "account where email='" + email + "' and password='" + password + "'";
+                MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                string firstName = (string)reader["firstName"];
+                string lastName = (string)reader["lastName"];
+                char accountType = (char)reader["accountType"];
+
+                user = new Account(email, password, firstName, lastName);
+                user.accountType = accountType;
+                reader.Close();
+                return user;
+            }
+            catch (Exception ex) { return new Account("none", "", "", ""); }
+        }
+
+        /* Updates the information stored in the account
+         * Should only be access when an account has been located
+         */
+        public void updateAccountInfo(Account updatedInfo) {
+            deleteAccount(updatedInfo);
+            createAccount(updatedInfo);
+        }
+
+        private String formatTime(DateTime time) {
+            return time.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        /* Returns a flight from a list
+         * Should be used in a for loop so that all flights in the list are returned,
+         * using position as an itorator starting at 0
+         */
+        public Flight getFlight(string destination, DateTime start, DateTime end, int position) {
+            try {
+                string earliest = formatTime(start);
+                string latest = formatTime(end);
+                string query = ("from flights where destination>='" + destination + "' and '" + earliest +
+                            "'<=time and time<='" + latest + "'");
+                MySqlCommand command = new MySqlCommand(getQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                for (int i = -1; i < position; i++)
+                    reader.Read();
+
+                Flight flight = new Flight((int)reader["flightID"], (DateTime)reader["time"], (string)reader["destination"],
+                                        (int)reader["rows"], (int)reader["columns"], (int)reader["price"],
+                                        (double)reader["luggageMax"], (double)reader["currentLuggage"]);
+                reader.Close();
+                return flight;
+            }
+            catch (Exception ex) { return new Flight(-1, new DateTime(), "", 0, 0, 0, 0, 0);  };
+        }
+
+        /* Returns one flight based on the searched flightID
+         * Used for tickets
+         */
+        public Flight getFlight(int flightID) {
+            try {
+                string query = ("from flights where flightID=" + flightID);
+                MySqlCommand command = new MySqlCommand(getQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+
+                Flight flight = new Flight((int)reader["flightID"], (DateTime)reader["time"], (string)reader["destination"],
+                                        (int)reader["rows"], (int)reader["columns"], (int)reader["price"],
+                                        (double)reader["luggageMax"], (double)reader["currentLuggage"]);
+                reader.Close();
+                return flight;
+            }
+            catch (Exception ex) { return new Flight(-1, new DateTime(), "", 0, 0, 0, 0, 0); };
+        }
+
+        /* Adds a flight to the database
+         */
+        public bool addFlight(Flight flight) {
+            try {
+                string query = "flights values(" + flight.flightID + ", '" + formatTime(flight.time) + "', '" + flight.destination + "', " +
+                        flight.rows + ", " + flight.columns + ", " + flight.price + ", " + flight.luggageMax + ", " +
+                        flight.currentLuggage + ")";
+                MySqlCommand command = new MySqlCommand(insertQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+        /* Cancels/delets a flight from the database
+         */
+        public bool cancelFlight(int flightID) {
+            try {
+                string query = "flights where flightID=" + flightID;
+                MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                cancelAllTickets(flightID);
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+
+        public void updateFlight(Flight flight) {
+            cancelFlight(flight.flightID);
+            addFlight(flight);
+        }
+
+        public int getOccupancy(int flightID) {
+            try
+            {
+                string query = "tickets where flightID=" + flightID;
+                MySqlCommand command = new MySqlCommand(numQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+
+                return reader.GetInt32(0);
+            }
+            catch (Exception ex) { return -1; }
+        }
+
+        /* Returns a ticket from a list
+         * Should be used in a for loop so that all flights in the list are returned,
+         * using position as an iterator starting at 0
+         * Searches using email as a key
+         */
+        public Ticket getTicket(string ownerEmail, int position) {
+            string query = ("from tickets where ownerEmail='" + ownerEmail + "'");
+            Ticket ticket = searchTicket(query, position);
+            return ticket;
+        }
+
+        /* Returns a ticket from a list
+         * Should be used in a for loop so that all flights in the list are returned,
+         * using position as an iterator starting at 0
+         * Searches using flightID as a key
+         */
+        public Ticket getTicket(int flightID, int position) {
+            string query = ("from tickets where flightID=" + flightID);
+            Ticket ticket = searchTicket(query, position);
+            return ticket;
+        }
+
+        /* Returns a flight from a list
+         * Should be used in a for loop so that all flights in the list are returned,
+         * using position as an iterator starting at 0
+         * Used internally for searching through the database
+         */
+        private Ticket searchTicket(string query, int position) {
+            try {
+                MySqlCommand command = new MySqlCommand(getQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                for (int i = -1; i < position; i++)
+                    reader.Read();
+
+                Ticket ticket = new Ticket((int)reader["flightID"], (int)reader["seatID"], (string)reader["ownerEmail"]);
+                reader.Close();
+                return ticket;
+            }
+            catch (Exception ex) { return new Ticket(-1, -1, ""); }
+        }
+
+        /* Adds a ticket to the database
+         */
+        public bool addTicket(Ticket ticket) {
+            try {
+                string query = "tickets values(" + ticket.seatID + ", " + ticket.flightID +
+                        ", '" + ticket.ownerEmail + "')";
+                MySqlCommand command = new MySqlCommand(insertQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+        /* Cancels/deletes a ticket from the database
+         */
+        public bool cancelTicket(Ticket ticket) {
+            try {
+                string query = "tickets where seatID=" + ticket.seatID + " and flightID=" + ticket.flightID +
+                        " and ownerEmail='" + ticket.ownerEmail + "'";
+                //delete from tickets where seatID=5 and flightID=10 and ownerEmail='email'
+                MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+        //Used by cancelFlight() method
+
+        private bool cancelAllTickets(int flightID) {
+            try {
+                string query = "tickets where flightID=" + flightID;
+                MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
+                MySqlDataReader reader = command.ExecuteReader();
+                reader.Close();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
+
+        public void emailOwner() {
+            //This is a placeholder method, as the program does not currently have the capabilities to send automatic emails
+        }
+    }
+}
