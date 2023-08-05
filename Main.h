@@ -1491,15 +1491,40 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			clearTickets();
 
 			// !!! TODO !!!:
-			// query the database and retrieve all user tickets
-			// 
+			// 1. query the database and retrieve all user tickets
+			// 2. query the database using the tickets flightID to get destination and departureTime
+
 			// for each ticket, call the postTicket() function-
 			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
+
+			for (int i = 0; i < 1000; i++) {
+				Ticket ticket;
+				Flight flight;
+				DBHandler handler;
+				System::String^ fID;
+				System::String^ sID;
+
+				//Query database here
+
+				fID = marshal_as<System::String^>(to_string(ticket.flightID));
+				sID = marshal_as<System::String^>(to_string(ticket.seatID));
+
+				//TODO uncomment when overload is written
+				//flight = handler.getFlight(fID);
+
+				System::String^ fID = marshal_as<System::String^>(to_string(ticket.flightID));
+				System::String^ sID = marshal_as<System::String^>(to_string(ticket.seatID));
+				if (ticket.flightID == -1) {
+					return;
+				}
+				else {
+					postTicket(fID, sID, flight.destination, flight.time.ToString());
+				}
+			}
 		}
 
-		//
 		// Flights Page
 		//
 		// user selects a flight
