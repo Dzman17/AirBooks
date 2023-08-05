@@ -1487,6 +1487,11 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 
 		// user enters account page
 		private: System::Void accountTab_Enter(System::Object^ sender, System::EventArgs^ e) {
+			// no user logged in GC
+			if (!user) {
+				return;
+			}
+
 			// wipes the list first
 			clearTickets();
 
