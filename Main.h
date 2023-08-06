@@ -157,6 +157,8 @@ private: System::Windows::Forms::Label^ ticketQuantityLabel;
 private: System::Windows::Forms::Label^ ticketPriceLabel;
 private: System::Windows::Forms::Label^ discountLabel;
 private: System::Windows::Forms::Label^ totalPriceLabel;
+private: System::Windows::Forms::TabControl^ manageTabBuffer;
+private: System::Windows::Forms::TabPage^ manageTab;
 
 
 
@@ -256,6 +258,8 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->logoutButton = (gcnew System::Windows::Forms::Button());
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
+			this->manageTabBuffer = (gcnew System::Windows::Forms::TabControl());
+			this->manageTab = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->loginPanel->SuspendLayout();
@@ -277,6 +281,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->tabControl->Appearance = System::Windows::Forms::TabAppearance::FlatButtons;
 			this->tabControl->Controls->Add(this->accountTab);
 			this->tabControl->Controls->Add(this->flightsTab);
+			this->tabControl->Controls->Add(this->manageTab);
 			this->tabControl->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tabControl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.125F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -1279,6 +1284,24 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->bottomBar->Size = System::Drawing::Size(2534, 100);
 			this->bottomBar->TabIndex = 8;
 			// 
+			// manageTabBuffer
+			// 
+			this->manageTabBuffer->Location = System::Drawing::Point(-100, -100);
+			this->manageTabBuffer->Name = L"manageTabBuffer";
+			this->manageTabBuffer->SelectedIndex = 0;
+			this->manageTabBuffer->Size = System::Drawing::Size(0, 0);
+			this->manageTabBuffer->TabIndex = 8;
+			this->manageTabBuffer->Visible = false;
+			// 
+			// manageTab
+			// 
+			this->manageTab->Location = System::Drawing::Point(4, 43);
+			this->manageTab->Name = L"manageTab";
+			this->manageTab->Size = System::Drawing::Size(2526, 1245);
+			this->manageTab->TabIndex = 2;
+			this->manageTab->Text = L"Manage";
+			this->manageTab->UseVisualStyleBackColor = true;
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -1286,6 +1309,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->ClientSize = System::Drawing::Size(2534, 1369);
 			this->Controls->Add(this->bottomBar);
 			this->Controls->Add(this->mainview);
+			this->Controls->Add(this->manageTabBuffer);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
@@ -1321,6 +1345,14 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 #pragma endregion
 		User^ user;
 		AirBooksDBHandler::DBHandler^ dbHandler;
+
+		public: System::Void closeManageTab() {
+			manageTab->Parent = manageTabBuffer;
+		}
+
+		private: System::Void openManageTab() {
+			manageTab->Parent = tabControl;
+		}
 
 
 		private: System::Void logout() {

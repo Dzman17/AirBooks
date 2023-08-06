@@ -48,3 +48,5 @@ Class User: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class AirBooks.Main: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    closeManageTab(): PrivateScope, Public, HideBySig

@@ -14,6 +14,7 @@ int main() {
 	Application::SetCompatibleTextRenderingDefault(false);
 
 	AirBooks::Main form;
+	form.closeManageTab();
 
 	Application::Run(% form);
 
