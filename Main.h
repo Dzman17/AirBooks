@@ -158,6 +158,11 @@ private: System::Windows::Forms::Label^ ticketQuantityLabel;
 private: System::Windows::Forms::Label^ ticketPriceLabel;
 private: System::Windows::Forms::Label^ discountLabel;
 private: System::Windows::Forms::Label^ totalPriceLabel;
+private: System::Windows::Forms::TabPage^ manageTab;
+private: System::Windows::Forms::TabControl^ manageTabBuffer;
+
+
+
 
 
 
@@ -253,10 +258,12 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->expDateField = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->cardNumberField = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->planeTable = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->manageTab = (gcnew System::Windows::Forms::TabPage());
 			this->companyLogo = (gcnew System::Windows::Forms::Label());
 			this->logoutButton = (gcnew System::Windows::Forms::Button());
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
+			this->manageTabBuffer = (gcnew System::Windows::Forms::TabControl());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->noAccount->SuspendLayout();
@@ -278,6 +285,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->tabControl->Appearance = System::Windows::Forms::TabAppearance::FlatButtons;
 			this->tabControl->Controls->Add(this->accountTab);
 			this->tabControl->Controls->Add(this->flightsTab);
+			this->tabControl->Controls->Add(this->manageTab);
 			this->tabControl->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tabControl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.125F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -291,6 +299,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// 
 			// accountTab
 			// 
+			this->accountTab->Controls->Add(this->noAccount);
 			this->accountTab->Controls->Add(this->loginPanel);
 			this->accountTab->Controls->Add(this->createAccountPanel);
 			this->accountTab->Controls->Add(this->accountPanel);
@@ -877,7 +886,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// 
 			// flightsTab
 			// 
-			this->flightsTab->Controls->Add(this->noAccount);
 			this->flightsTab->Controls->Add(this->flights);
 			this->flightsTab->Controls->Add(this->purchaseTicket);
 			this->flightsTab->Location = System::Drawing::Point(4, 43);
@@ -1231,6 +1239,15 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->planeTable->Size = System::Drawing::Size(683, 1211);
 			this->planeTable->TabIndex = 0;
 			// 
+			// manageTab
+			// 
+			this->manageTab->Location = System::Drawing::Point(4, 43);
+			this->manageTab->Name = L"manageTab";
+			this->manageTab->Size = System::Drawing::Size(2526, 1245);
+			this->manageTab->TabIndex = 2;
+			this->manageTab->Text = L"Manage";
+			this->manageTab->UseVisualStyleBackColor = true;
+			// 
 			// companyLogo
 			// 
 			this->companyLogo->BackColor = System::Drawing::SystemColors::HotTrack;
@@ -1280,6 +1297,15 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->bottomBar->Size = System::Drawing::Size(2534, 100);
 			this->bottomBar->TabIndex = 8;
 			// 
+			// manageTabBuffer
+			// 
+			this->manageTabBuffer->Location = System::Drawing::Point(-100, -100);
+			this->manageTabBuffer->Name = L"manageTabBuffer";
+			this->manageTabBuffer->SelectedIndex = 0;
+			this->manageTabBuffer->Size = System::Drawing::Size(0, 0);
+			this->manageTabBuffer->TabIndex = 2;
+			this->manageTabBuffer->Visible = false;
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -1287,6 +1313,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->ClientSize = System::Drawing::Size(2534, 1369);
 			this->Controls->Add(this->bottomBar);
 			this->Controls->Add(this->mainview);
+			this->Controls->Add(this->manageTabBuffer);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
@@ -1322,6 +1349,13 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 #pragma endregion
 		User^ user;
 
+		public: System::Void closeManageTab() {
+			manageTab->Parent = manageTabBuffer;
+		}
+
+		private: System::Void openManageTab() {
+			manageTab->Parent = tabControl;
+		}
 
 		private: System::Void logout() {
 			if (user) {
@@ -1498,6 +1532,34 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
+<<<<<<< Updated upstream
+=======
+
+			/*
+			AirBooksDBHandler::Ticket ticket;
+			AirBooksDBHandler::Flight flight;
+			System::String^ fID;
+			System::String^ sID;
+
+			// find all tickets for this user
+			for (int i = 0; i < 1000; i++) {
+				//Query database here
+
+				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+				sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+
+				//TODO uncomment when overload is written
+				//flight = handler.getFlight(fID);
+
+				System::String^ fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+				System::String^ sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+				if (ticket.flightID == -1) {
+					return;
+				}
+
+				postTicket(fID, sID, flight.destination, flight.time.ToString());
+			}*/
+>>>>>>> Stashed changes
 		}
 
 		//
@@ -1506,6 +1568,73 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 		// user selects a flight
 		private: System::Void selectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 
+<<<<<<< Updated upstream
+=======
+			AirBooksDBHandler::Ticket ticket;
+
+			int maxSize = flight.columns * flight.rows;
+			int* occupiedSeats = new int[maxSize];
+			int size = 0;
+
+			// layout rows and columns
+			planeTable->ColumnCount = flight.columns;
+			planeTable->RowCount = flight.rows;
+
+			TableLayoutColumnStyleCollection^ cols = planeTable->ColumnStyles;
+			bool skip = true;
+			for each (ColumnStyle^ col in cols) {
+				if (skip) {
+					skip = false;
+					continue;
+				}
+				col->SizeType = SizeType::Percent;
+				col->Width = 100.0 / (float)flight.columns;
+			}
+			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
+			skip = true;
+			for each (RowStyle ^ row in rows) {
+				if (skip) {
+					skip = false;
+					continue;
+				}
+				row->SizeType = SizeType::Percent;
+				row->Height = 100.0 / (float)flight.rows;
+			}
+
+			// find all tickets for this flight
+			for (int i = 0; i < 1000; i++) {
+				ticket = dbHandler->getTicket(flightId, i);
+
+				if (ticket.flightID == -1) {
+					continue;
+				}
+
+				occupiedSeats[size] = ticket.seatID;
+				size++;
+				if (size >= maxSize) {
+					break;
+				}
+			}
+
+			// O(n^2) n == max seating
+			// postSeat() for each seat on the flight
+			TableLayoutControlCollection^ controls = planeTable->Controls;
+			for (int c = 1; c < flight.columns; c++) {
+				for (int r = 1; r < flight.rows; r++) {
+					int cell = ((r - 1) * flight.columns) + c;
+
+					bool occupied = false;
+					for (int i = 0; i < size; i++) {
+						if (occupiedSeats[i] == cell) {
+							occupied = true;
+							break;
+						}
+					}
+
+					postSeat(c, r, occupied);
+				}
+			}
+>>>>>>> Stashed changes
 		}
 
 		private: System::Void postFlight(System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
@@ -1580,6 +1709,29 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// for use in the postFlight() function, here is how you would do so:
 			// System::String^ managed = marshal_as<System::String^>(unmanaged);
 			// where (unmanaged) is the std::string to be converted.
+<<<<<<< Updated upstream
+=======
+	
+			for (int i = 0; i < 1000; i++) {
+				AirBooksDBHandler::Ticket ticket;
+				AirBooksDBHandler::Flight flight;
+				AirBooksDBHandler::DBHandler handler;
+
+				//TODO Query database for flight here
+
+				//TODO Query database for number of tickets currently booked in flight
+
+				int booked = 0;
+				int seats = (flight.columns * flight.rows) - booked;
+
+				if (ticket.flightID == -1) {
+					return;
+				}
+				else {
+					postFlight(ticket.flightID, flight.destination, flight.time.ToString(), "0", float(flight.price));
+				}
+			}
+>>>>>>> Stashed changes
 		}
 
 		// user returns to login screen

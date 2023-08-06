@@ -1,0 +1,5 @@
+﻿  Main.cpp
+C:\Users\illus\Desktop\Development\C++\AirBooks\Main.h(1600,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\illus\Desktop\Development\C++\AirBooks\Main.h(1610,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  User.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  AirBooks.vcxproj -> C:\Users\illus\Desktop\Development\C++\AirBooks\x64\Debug\AirBooks.exe
