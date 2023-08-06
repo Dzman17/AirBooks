@@ -1489,6 +1489,9 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 
 		// user enters account page
 		private: System::Void accountTab_Enter(System::Object^ sender, System::EventArgs^ e) {
+			if (!user) {
+				return;
+			}
 			// for each ticket, call the postTicket() function-
 			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
 			// The order of these parameters is ticketId, seat, destination, departureTime
