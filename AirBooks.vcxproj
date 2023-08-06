@@ -144,20 +144,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Flight.cpp" />
     <ClCompile Include="User.cpp" />
-    <ClCompile Include="FlightManager.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AirBooksDBHandler">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\AirBooksDBHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlConnector">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\MySqlConnector.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data">
       <HintPath>System.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
       <HintPath>System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>..\AirBooksDBHandler\bin\Debug\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <HintPath>System.Windows.Forms.dll</HintPath>
@@ -167,9 +189,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Flight.h" />
     <ClInclude Include="User.h" />
-    <ClInclude Include="FlightManager.h" />
     <ClInclude Include="Main.h">
       <FileType>CppForm</FileType>
     </ClInclude>

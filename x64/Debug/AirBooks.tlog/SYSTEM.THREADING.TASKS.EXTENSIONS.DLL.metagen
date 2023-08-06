@@ -1,0 +1,90 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51: 
+	hash=SHA1, flags=PublicKey
+Assembly System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Threading.Tasks, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Struct System.Threading.Tasks.ValueTask`1[TResult]: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Type parameter: TResult
+  :System.ValueType
+    Void .ctor(TResult): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Threading.Tasks.Task`1[TResult]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IEquatable`1[System.Threading.Tasks.ValueTask`1[TResult]]
+  Properties:
+    Boolean IsCompleted 'get ' : 
+    Boolean IsCompletedSuccessfully 'get ' : 
+    Boolean IsFaulted 'get ' : 
+    Boolean IsCanceled 'get ' : 
+    TResult Result 'get ' : 
+  Methods:
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    Equals(ValueTask`1): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    op_Equality(ValueTask`1, ValueTask`1): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Inequality(ValueTask`1, ValueTask`1): PrivateScope, Public, Static, HideBySig, SpecialName
+    AsTask(): PrivateScope, Public, HideBySig
+    get_IsCompleted(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsCompletedSuccessfully(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsFaulted(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsCanceled(): PrivateScope, Public, HideBySig, SpecialName
+    get_Result(): PrivateScope, Public, HideBySig, SpecialName
+    GetAwaiter(): PrivateScope, Public, HideBySig
+    ConfigureAwait(Boolean): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    CreateAsyncMethodBuilder(): PrivateScope, Public, Static, HideBySig
+Class System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Attribute
+    Void .ctor(System.Type): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Type BuilderType 'get ' : 
+  Methods:
+    get_BuilderType(): PrivateScope, Public, HideBySig, SpecialName
+Struct System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder`1[TResult]: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Type parameter: TResult
+  :System.ValueType
+  Properties:
+    System.Threading.Tasks.ValueTask`1[TResult] Task 'get ' : 
+  Methods:
+    Create(): PrivateScope, Public, Static, HideBySig
+    Start(TStateMachine&): PrivateScope, Public, HideBySig
+    SetStateMachine(IAsyncStateMachine): PrivateScope, Public, HideBySig
+    SetResult(TResult): PrivateScope, Public, HideBySig
+    SetException(Exception): PrivateScope, Public, HideBySig
+    get_Task(): PrivateScope, Public, HideBySig, SpecialName
+    AwaitOnCompleted(TAwaiter&, TStateMachine&): PrivateScope, Public, HideBySig
+    AwaitUnsafeOnCompleted(TAwaiter&, TStateMachine&): PrivateScope, Public, HideBySig
+Struct System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1[TResult]: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Type parameter: TResult
+  :System.ValueType
+  Methods:
+    GetAwaiter(): PrivateScope, Public, HideBySig
+Struct System.Runtime.CompilerServices.ValueTaskAwaiter`1[TResult]: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  Type parameter: TResult
+  :System.ValueType
+  Interfaces:
+    System.Runtime.CompilerServices.ICriticalNotifyCompletion
+    System.Runtime.CompilerServices.INotifyCompletion
+  Properties:
+    Boolean IsCompleted 'get ' : 
+  Methods:
+    get_IsCompleted(): PrivateScope, Public, HideBySig, SpecialName
+    GetResult(): PrivateScope, Public, HideBySig
+    OnCompleted(Action): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    UnsafeOnCompleted(Action): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Struct System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1+ConfiguredValueTaskAwaiter[TResult]: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  Type parameter: TResult
+  :System.ValueType
+  Interfaces:
+    System.Runtime.CompilerServices.ICriticalNotifyCompletion
+    System.Runtime.CompilerServices.INotifyCompletion
+  Properties:
+    Boolean IsCompleted 'get ' : 
+  Methods:
+    get_IsCompleted(): PrivateScope, Public, HideBySig, SpecialName
+    GetResult(): PrivateScope, Public, HideBySig
+    OnCompleted(Action): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    UnsafeOnCompleted(Action): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
