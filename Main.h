@@ -134,8 +134,10 @@ private: System::Windows::Forms::Label^ t_idHeader;
 private: System::Windows::Forms::Label^ t_seatHeader;
 private: System::Windows::Forms::Label^ t_destinationHeader;
 private: System::Windows::Forms::Label^ t_departureHeader;
-private: System::Windows::Forms::Panel^ panel2;
-private: System::Windows::Forms::Panel^ panel1;
+private: System::Windows::Forms::Panel^ accountTickets;
+private: System::Windows::Forms::Panel^ accountOverview;
+
+
 private: System::Windows::Forms::Label^ h_divider;
 private: System::Windows::Forms::Panel^ purchaseTicket;
 
@@ -186,9 +188,46 @@ private: System::Windows::Forms::RadioButton^ employeeRadio;
 private: System::Windows::Forms::RadioButton^ customerRadio;
 private: System::Windows::Forms::RadioButton^ managerRadio;
 private: System::Windows::Forms::Label^ accountTypeLabel;
-private: System::Windows::Forms::Label^ label1;
-private: System::Windows::Forms::Panel^ panel3;
-private: System::Windows::Forms::TextBox^ manageDestination;
+private: System::Windows::Forms::Label^ h_divider3;
+
+private: System::Windows::Forms::Panel^ manageSearchFlights;
+
+
+private: System::Windows::Forms::Label^ label2;
+private: System::Windows::Forms::Label^ label3;
+private: System::Windows::Forms::Label^ label4;
+private: System::Windows::Forms::DateTimePicker^ manageMaxTime;
+
+private: System::Windows::Forms::Label^ label5;
+private: System::Windows::Forms::DateTimePicker^ manageMinTime;
+
+private: System::Windows::Forms::Label^ label6;
+private: System::Windows::Forms::Label^ label7;
+private: System::Windows::Forms::Label^ label8;
+private: System::Windows::Forms::Label^ label9;
+private: System::Windows::Forms::Label^ label10;
+private: System::Windows::Forms::Label^ label11;
+private: System::Windows::Forms::Label^ label12;
+private: System::Windows::Forms::Button^ manageSearchFlightsButton;
+
+private: System::Windows::Forms::ComboBox^ manageDestinationField;
+private: System::Windows::Forms::TableLayoutPanel^ manageFlightsList;
+
+
+private: System::Windows::Forms::Panel^ manageModifyFlight;
+private: System::Windows::Forms::Label^ modifyIdLabel;
+private: System::Windows::Forms::TextBox^ modifyDestinationField;
+private: System::Windows::Forms::Label^ modifyDestinationLabel;
+private: System::Windows::Forms::Label^ modifyIdField;
+private: System::Windows::Forms::Label^ h_divider4;
+private: System::Windows::Forms::DateTimePicker^ modifyDepartureField;
+
+private: System::Windows::Forms::Label^ modifyDepartureLabel;
+private: System::Windows::Forms::Button^ modifyDelete;
+
+
+private: System::Windows::Forms::Button^ modifyUpdate;
+
 
 
 
@@ -231,7 +270,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->ca_email = (gcnew System::Windows::Forms::Label());
 			this->ca_password = (gcnew System::Windows::Forms::Label());
 			this->accountPanel = (gcnew System::Windows::Forms::Panel());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->accountOverview = (gcnew System::Windows::Forms::Panel());
 			this->firstNameCurrent = (gcnew System::Windows::Forms::Label());
 			this->passwordCurrent = (gcnew System::Windows::Forms::Label());
 			this->passwordNew = (gcnew System::Windows::Forms::TextBox());
@@ -244,7 +283,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->firstNameUpdate = (gcnew System::Windows::Forms::Button());
 			this->lastNameUpdate = (gcnew System::Windows::Forms::Button());
 			this->passwordUpdate = (gcnew System::Windows::Forms::Button());
-			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->accountTickets = (gcnew System::Windows::Forms::Panel());
 			this->h_divider = (gcnew System::Windows::Forms::Label());
 			this->ticketsHeader = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->t_idHeader = (gcnew System::Windows::Forms::Label());
@@ -289,6 +328,9 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->planeTable = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->manageTab = (gcnew System::Windows::Forms::TabPage());
 			this->managerCreateAccount = (gcnew System::Windows::Forms::Panel());
+			this->h_divider3 = (gcnew System::Windows::Forms::Label());
+			this->accountTypeLabel = (gcnew System::Windows::Forms::Label());
+			this->managerRadio = (gcnew System::Windows::Forms::RadioButton());
 			this->employeeRadio = (gcnew System::Windows::Forms::RadioButton());
 			this->customerRadio = (gcnew System::Windows::Forms::RadioButton());
 			this->manageFirstField = (gcnew System::Windows::Forms::TextBox());
@@ -301,23 +343,45 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->manageLastField = (gcnew System::Windows::Forms::TextBox());
 			this->manageEmailLabel = (gcnew System::Windows::Forms::Label());
 			this->managePassLabel = (gcnew System::Windows::Forms::Label());
+			this->manageModifyFlight = (gcnew System::Windows::Forms::Panel());
+			this->modifyDelete = (gcnew System::Windows::Forms::Button());
+			this->modifyUpdate = (gcnew System::Windows::Forms::Button());
+			this->modifyDepartureField = (gcnew System::Windows::Forms::DateTimePicker());
+			this->modifyDepartureLabel = (gcnew System::Windows::Forms::Label());
+			this->h_divider4 = (gcnew System::Windows::Forms::Label());
+			this->modifyDestinationField = (gcnew System::Windows::Forms::TextBox());
+			this->modifyDestinationLabel = (gcnew System::Windows::Forms::Label());
+			this->modifyIdField = (gcnew System::Windows::Forms::Label());
+			this->modifyIdLabel = (gcnew System::Windows::Forms::Label());
+			this->manageSearchFlights = (gcnew System::Windows::Forms::Panel());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->manageMaxTime = (gcnew System::Windows::Forms::DateTimePicker());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->manageMinTime = (gcnew System::Windows::Forms::DateTimePicker());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->manageSearchFlightsButton = (gcnew System::Windows::Forms::Button());
+			this->manageDestinationField = (gcnew System::Windows::Forms::ComboBox());
+			this->manageFlightsList = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->companyLogo = (gcnew System::Windows::Forms::Label());
 			this->logoutButton = (gcnew System::Windows::Forms::Button());
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
 			this->manageTabBuffer = (gcnew System::Windows::Forms::TabControl());
-			this->managerRadio = (gcnew System::Windows::Forms::RadioButton());
-			this->accountTypeLabel = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->manageDestination = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->loginPanel->SuspendLayout();
 			this->createAccountPanel->SuspendLayout();
 			this->accountPanel->SuspendLayout();
-			this->panel1->SuspendLayout();
-			this->panel2->SuspendLayout();
+			this->accountOverview->SuspendLayout();
+			this->accountTickets->SuspendLayout();
 			this->ticketsHeader->SuspendLayout();
 			this->flightsTab->SuspendLayout();
 			this->noAccount->SuspendLayout();
@@ -325,9 +389,10 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->purchaseTicket->SuspendLayout();
 			this->manageTab->SuspendLayout();
 			this->managerCreateAccount->SuspendLayout();
+			this->manageModifyFlight->SuspendLayout();
+			this->manageSearchFlights->SuspendLayout();
 			this->mainview->SuspendLayout();
 			this->bottomBar->SuspendLayout();
-			this->panel3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl
@@ -594,8 +659,8 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// 
 			// accountPanel
 			// 
-			this->accountPanel->Controls->Add(this->panel1);
-			this->accountPanel->Controls->Add(this->panel2);
+			this->accountPanel->Controls->Add(this->accountOverview);
+			this->accountPanel->Controls->Add(this->accountTickets);
 			this->accountPanel->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->accountPanel->Location = System::Drawing::Point(0, 0);
 			this->accountPanel->Margin = System::Windows::Forms::Padding(0);
@@ -604,26 +669,26 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->accountPanel->TabIndex = 7;
 			this->accountPanel->Visible = false;
 			// 
-			// panel1
+			// accountOverview
 			// 
-			this->panel1->Controls->Add(this->firstNameCurrent);
-			this->panel1->Controls->Add(this->passwordCurrent);
-			this->panel1->Controls->Add(this->passwordNew);
-			this->panel1->Controls->Add(this->lastNameNew);
-			this->panel1->Controls->Add(this->emailNew);
-			this->panel1->Controls->Add(this->emailCurrent);
-			this->panel1->Controls->Add(this->lastNameCurrent);
-			this->panel1->Controls->Add(this->firstNameNew);
-			this->panel1->Controls->Add(this->emailUpdate);
-			this->panel1->Controls->Add(this->firstNameUpdate);
-			this->panel1->Controls->Add(this->lastNameUpdate);
-			this->panel1->Controls->Add(this->passwordUpdate);
-			this->panel1->Dock = System::Windows::Forms::DockStyle::Left;
-			this->panel1->Location = System::Drawing::Point(0, 0);
-			this->panel1->Margin = System::Windows::Forms::Padding(0);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(843, 1225);
-			this->panel1->TabIndex = 16;
+			this->accountOverview->Controls->Add(this->firstNameCurrent);
+			this->accountOverview->Controls->Add(this->passwordCurrent);
+			this->accountOverview->Controls->Add(this->passwordNew);
+			this->accountOverview->Controls->Add(this->lastNameNew);
+			this->accountOverview->Controls->Add(this->emailNew);
+			this->accountOverview->Controls->Add(this->emailCurrent);
+			this->accountOverview->Controls->Add(this->lastNameCurrent);
+			this->accountOverview->Controls->Add(this->firstNameNew);
+			this->accountOverview->Controls->Add(this->emailUpdate);
+			this->accountOverview->Controls->Add(this->firstNameUpdate);
+			this->accountOverview->Controls->Add(this->lastNameUpdate);
+			this->accountOverview->Controls->Add(this->passwordUpdate);
+			this->accountOverview->Dock = System::Windows::Forms::DockStyle::Left;
+			this->accountOverview->Location = System::Drawing::Point(0, 0);
+			this->accountOverview->Margin = System::Windows::Forms::Padding(0);
+			this->accountOverview->Name = L"accountOverview";
+			this->accountOverview->Size = System::Drawing::Size(843, 1225);
+			this->accountOverview->TabIndex = 16;
 			// 
 			// firstNameCurrent
 			// 
@@ -764,18 +829,18 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->passwordUpdate->UseVisualStyleBackColor = true;
 			this->passwordUpdate->Click += gcnew System::EventHandler(this, &Main::passwordUpdate_Click);
 			// 
-			// panel2
+			// accountTickets
 			// 
-			this->panel2->Controls->Add(this->h_divider);
-			this->panel2->Controls->Add(this->ticketsHeader);
-			this->panel2->Controls->Add(this->t_divider);
-			this->panel2->Controls->Add(this->ticketList);
-			this->panel2->Dock = System::Windows::Forms::DockStyle::Right;
-			this->panel2->Location = System::Drawing::Point(875, 0);
-			this->panel2->Margin = System::Windows::Forms::Padding(0);
-			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(1651, 1225);
-			this->panel2->TabIndex = 0;
+			this->accountTickets->Controls->Add(this->h_divider);
+			this->accountTickets->Controls->Add(this->ticketsHeader);
+			this->accountTickets->Controls->Add(this->t_divider);
+			this->accountTickets->Controls->Add(this->ticketList);
+			this->accountTickets->Dock = System::Windows::Forms::DockStyle::Right;
+			this->accountTickets->Location = System::Drawing::Point(875, 0);
+			this->accountTickets->Margin = System::Windows::Forms::Padding(0);
+			this->accountTickets->Name = L"accountTickets";
+			this->accountTickets->Size = System::Drawing::Size(1651, 1225);
+			this->accountTickets->TabIndex = 0;
 			// 
 			// h_divider
 			// 
@@ -1296,8 +1361,9 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// 
 			// manageTab
 			// 
-			this->manageTab->Controls->Add(this->panel3);
 			this->manageTab->Controls->Add(this->managerCreateAccount);
+			this->manageTab->Controls->Add(this->manageModifyFlight);
+			this->manageTab->Controls->Add(this->manageSearchFlights);
 			this->manageTab->Location = System::Drawing::Point(4, 43);
 			this->manageTab->Name = L"manageTab";
 			this->manageTab->Size = System::Drawing::Size(2526, 1245);
@@ -1307,7 +1373,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// 
 			// managerCreateAccount
 			// 
-			this->managerCreateAccount->Controls->Add(this->label1);
+			this->managerCreateAccount->Controls->Add(this->h_divider3);
 			this->managerCreateAccount->Controls->Add(this->accountTypeLabel);
 			this->managerCreateAccount->Controls->Add(this->managerRadio);
 			this->managerCreateAccount->Controls->Add(this->employeeRadio);
@@ -1327,8 +1393,38 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->managerCreateAccount->Margin = System::Windows::Forms::Padding(0);
 			this->managerCreateAccount->Name = L"managerCreateAccount";
 			this->managerCreateAccount->Padding = System::Windows::Forms::Padding(40, 38, 40, 38);
-			this->managerCreateAccount->Size = System::Drawing::Size(776, 1245);
+			this->managerCreateAccount->Size = System::Drawing::Size(781, 1245);
 			this->managerCreateAccount->TabIndex = 8;
+			// 
+			// h_divider3
+			// 
+			this->h_divider3->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->h_divider3->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->h_divider3->Location = System::Drawing::Point(776, -18);
+			this->h_divider3->Margin = System::Windows::Forms::Padding(0);
+			this->h_divider3->MaximumSize = System::Drawing::Size(2, 4000);
+			this->h_divider3->Name = L"h_divider3";
+			this->h_divider3->Size = System::Drawing::Size(2, 1240);
+			this->h_divider3->TabIndex = 21;
+			// 
+			// accountTypeLabel
+			// 
+			this->accountTypeLabel->Location = System::Drawing::Point(230, 48);
+			this->accountTypeLabel->Name = L"accountTypeLabel";
+			this->accountTypeLabel->Size = System::Drawing::Size(344, 40);
+			this->accountTypeLabel->TabIndex = 20;
+			this->accountTypeLabel->Text = L"Account Type";
+			this->accountTypeLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// managerRadio
+			// 
+			this->managerRadio->AutoSize = true;
+			this->managerRadio->Location = System::Drawing::Point(561, 117);
+			this->managerRadio->Name = L"managerRadio";
+			this->managerRadio->Size = System::Drawing::Size(151, 35);
+			this->managerRadio->TabIndex = 19;
+			this->managerRadio->Text = L"Manager";
+			this->managerRadio->UseVisualStyleBackColor = true;
 			// 
 			// employeeRadio
 			// 
@@ -1355,7 +1451,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageFirstField
 			// 
 			this->manageFirstField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageFirstField->Location = System::Drawing::Point(85, 511);
+			this->manageFirstField->Location = System::Drawing::Point(87, 511);
 			this->manageFirstField->Margin = System::Windows::Forms::Padding(4);
 			this->manageFirstField->Name = L"manageFirstField";
 			this->manageFirstField->Size = System::Drawing::Size(604, 38);
@@ -1364,7 +1460,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageFirstLabel
 			// 
 			this->manageFirstLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageFirstLabel->Location = System::Drawing::Point(85, 463);
+			this->manageFirstLabel->Location = System::Drawing::Point(87, 463);
 			this->manageFirstLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->manageFirstLabel->Name = L"manageFirstLabel";
 			this->manageFirstLabel->Size = System::Drawing::Size(604, 44);
@@ -1374,7 +1470,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageSubmitAccount
 			// 
 			this->manageSubmitAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageSubmitAccount->Location = System::Drawing::Point(227, 941);
+			this->manageSubmitAccount->Location = System::Drawing::Point(229, 941);
 			this->manageSubmitAccount->Margin = System::Windows::Forms::Padding(4);
 			this->manageSubmitAccount->Name = L"manageSubmitAccount";
 			this->manageSubmitAccount->Size = System::Drawing::Size(304, 54);
@@ -1385,7 +1481,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageEmailField
 			// 
 			this->manageEmailField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageEmailField->Location = System::Drawing::Point(85, 732);
+			this->manageEmailField->Location = System::Drawing::Point(87, 732);
 			this->manageEmailField->Margin = System::Windows::Forms::Padding(4);
 			this->manageEmailField->Name = L"manageEmailField";
 			this->manageEmailField->Size = System::Drawing::Size(604, 38);
@@ -1394,7 +1490,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// managePassField
 			// 
 			this->managePassField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->managePassField->Location = System::Drawing::Point(85, 842);
+			this->managePassField->Location = System::Drawing::Point(87, 842);
 			this->managePassField->Margin = System::Windows::Forms::Padding(4);
 			this->managePassField->Name = L"managePassField";
 			this->managePassField->PasswordChar = '*';
@@ -1406,7 +1502,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->manageCreateStatus->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->manageCreateStatus->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->manageCreateStatus->Location = System::Drawing::Point(85, 999);
+			this->manageCreateStatus->Location = System::Drawing::Point(87, 999);
 			this->manageCreateStatus->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->manageCreateStatus->Name = L"manageCreateStatus";
 			this->manageCreateStatus->Size = System::Drawing::Size(604, 98);
@@ -1416,7 +1512,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageLastLabel
 			// 
 			this->manageLastLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageLastLabel->Location = System::Drawing::Point(85, 572);
+			this->manageLastLabel->Location = System::Drawing::Point(87, 572);
 			this->manageLastLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
 			this->manageLastLabel->Name = L"manageLastLabel";
 			this->manageLastLabel->Size = System::Drawing::Size(604, 44);
@@ -1426,7 +1522,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageLastField
 			// 
 			this->manageLastField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageLastField->Location = System::Drawing::Point(85, 621);
+			this->manageLastField->Location = System::Drawing::Point(87, 621);
 			this->manageLastField->Margin = System::Windows::Forms::Padding(4);
 			this->manageLastField->Name = L"manageLastField";
 			this->manageLastField->Size = System::Drawing::Size(604, 38);
@@ -1435,7 +1531,7 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// manageEmailLabel
 			// 
 			this->manageEmailLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageEmailLabel->Location = System::Drawing::Point(85, 684);
+			this->manageEmailLabel->Location = System::Drawing::Point(87, 684);
 			this->manageEmailLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
 			this->manageEmailLabel->Name = L"manageEmailLabel";
 			this->manageEmailLabel->Size = System::Drawing::Size(214, 44);
@@ -1445,12 +1541,328 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			// managePassLabel
 			// 
 			this->managePassLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->managePassLabel->Location = System::Drawing::Point(85, 794);
+			this->managePassLabel->Location = System::Drawing::Point(87, 794);
 			this->managePassLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
 			this->managePassLabel->Name = L"managePassLabel";
 			this->managePassLabel->Size = System::Drawing::Size(214, 44);
 			this->managePassLabel->TabIndex = 10;
 			this->managePassLabel->Text = L"Password";
+			// 
+			// manageModifyFlight
+			// 
+			this->manageModifyFlight->Controls->Add(this->modifyDelete);
+			this->manageModifyFlight->Controls->Add(this->modifyUpdate);
+			this->manageModifyFlight->Controls->Add(this->modifyDepartureField);
+			this->manageModifyFlight->Controls->Add(this->modifyDepartureLabel);
+			this->manageModifyFlight->Controls->Add(this->h_divider4);
+			this->manageModifyFlight->Controls->Add(this->modifyDestinationField);
+			this->manageModifyFlight->Controls->Add(this->modifyDestinationLabel);
+			this->manageModifyFlight->Controls->Add(this->modifyIdField);
+			this->manageModifyFlight->Controls->Add(this->modifyIdLabel);
+			this->manageModifyFlight->Location = System::Drawing::Point(784, 3);
+			this->manageModifyFlight->Name = L"manageModifyFlight";
+			this->manageModifyFlight->Padding = System::Windows::Forms::Padding(0, 0, 10, 0);
+			this->manageModifyFlight->Size = System::Drawing::Size(445, 1246);
+			this->manageModifyFlight->TabIndex = 14;
+			// 
+			// modifyDelete
+			// 
+			this->modifyDelete->Location = System::Drawing::Point(124, 429);
+			this->modifyDelete->Name = L"modifyDelete";
+			this->modifyDelete->Size = System::Drawing::Size(211, 48);
+			this->modifyDelete->TabIndex = 26;
+			this->modifyDelete->Text = L"Delete";
+			this->modifyDelete->UseVisualStyleBackColor = true;
+			this->modifyDelete->Click += gcnew System::EventHandler(this, &Main::managerDeleteFlight_Click);
+			// 
+			// modifyUpdate
+			// 
+			this->modifyUpdate->Location = System::Drawing::Point(124, 350);
+			this->modifyUpdate->Name = L"modifyUpdate";
+			this->modifyUpdate->Size = System::Drawing::Size(211, 48);
+			this->modifyUpdate->TabIndex = 25;
+			this->modifyUpdate->Text = L"Update";
+			this->modifyUpdate->UseVisualStyleBackColor = true;
+			this->modifyUpdate->Click += gcnew System::EventHandler(this, &Main::managerUpdateFlight_Click);
+			// 
+			// modifyDepartureField
+			// 
+			this->modifyDepartureField->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->modifyDepartureField->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->modifyDepartureField->Location = System::Drawing::Point(190, 258);
+			this->modifyDepartureField->Margin = System::Windows::Forms::Padding(4);
+			this->modifyDepartureField->MinDate = System::DateTime(2020, 1, 1, 0, 0, 0, 0);
+			this->modifyDepartureField->Name = L"modifyDepartureField";
+			this->modifyDepartureField->Size = System::Drawing::Size(242, 38);
+			this->modifyDepartureField->TabIndex = 24;
+			// 
+			// modifyDepartureLabel
+			// 
+			this->modifyDepartureLabel->Location = System::Drawing::Point(10, 258);
+			this->modifyDepartureLabel->Margin = System::Windows::Forms::Padding(10, 20, 3, 0);
+			this->modifyDepartureLabel->Name = L"modifyDepartureLabel";
+			this->modifyDepartureLabel->Size = System::Drawing::Size(174, 37);
+			this->modifyDepartureLabel->TabIndex = 23;
+			this->modifyDepartureLabel->Text = L"Departure";
+			// 
+			// h_divider4
+			// 
+			this->h_divider4->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->h_divider4->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->h_divider4->Location = System::Drawing::Point(441, 3);
+			this->h_divider4->Margin = System::Windows::Forms::Padding(0);
+			this->h_divider4->MaximumSize = System::Drawing::Size(2, 4000);
+			this->h_divider4->Name = L"h_divider4";
+			this->h_divider4->Size = System::Drawing::Size(2, 1240);
+			this->h_divider4->TabIndex = 22;
+			// 
+			// modifyDestinationField
+			// 
+			this->modifyDestinationField->Location = System::Drawing::Point(190, 201);
+			this->modifyDestinationField->Name = L"modifyDestinationField";
+			this->modifyDestinationField->Size = System::Drawing::Size(242, 38);
+			this->modifyDestinationField->TabIndex = 3;
+			// 
+			// modifyDestinationLabel
+			// 
+			this->modifyDestinationLabel->Location = System::Drawing::Point(10, 201);
+			this->modifyDestinationLabel->Margin = System::Windows::Forms::Padding(10, 20, 3, 0);
+			this->modifyDestinationLabel->Name = L"modifyDestinationLabel";
+			this->modifyDestinationLabel->Size = System::Drawing::Size(174, 37);
+			this->modifyDestinationLabel->TabIndex = 2;
+			this->modifyDestinationLabel->Text = L"Destination";
+			// 
+			// modifyIdField
+			// 
+			this->modifyIdField->Location = System::Drawing::Point(197, 144);
+			this->modifyIdField->Margin = System::Windows::Forms::Padding(10, 0, 3, 0);
+			this->modifyIdField->Name = L"modifyIdField";
+			this->modifyIdField->Size = System::Drawing::Size(235, 37);
+			this->modifyIdField->TabIndex = 1;
+			this->modifyIdField->Text = L"0";
+			// 
+			// modifyIdLabel
+			// 
+			this->modifyIdLabel->Location = System::Drawing::Point(10, 144);
+			this->modifyIdLabel->Margin = System::Windows::Forms::Padding(10, 0, 3, 0);
+			this->modifyIdLabel->Name = L"modifyIdLabel";
+			this->modifyIdLabel->Size = System::Drawing::Size(174, 37);
+			this->modifyIdLabel->TabIndex = 0;
+			this->modifyIdLabel->Text = L"Flight ID";
+			// 
+			// manageSearchFlights
+			// 
+			this->manageSearchFlights->Controls->Add(this->label2);
+			this->manageSearchFlights->Controls->Add(this->label3);
+			this->manageSearchFlights->Controls->Add(this->label4);
+			this->manageSearchFlights->Controls->Add(this->manageMaxTime);
+			this->manageSearchFlights->Controls->Add(this->label5);
+			this->manageSearchFlights->Controls->Add(this->manageMinTime);
+			this->manageSearchFlights->Controls->Add(this->label6);
+			this->manageSearchFlights->Controls->Add(this->label7);
+			this->manageSearchFlights->Controls->Add(this->label8);
+			this->manageSearchFlights->Controls->Add(this->label9);
+			this->manageSearchFlights->Controls->Add(this->label10);
+			this->manageSearchFlights->Controls->Add(this->label11);
+			this->manageSearchFlights->Controls->Add(this->label12);
+			this->manageSearchFlights->Controls->Add(this->manageSearchFlightsButton);
+			this->manageSearchFlights->Controls->Add(this->manageDestinationField);
+			this->manageSearchFlights->Controls->Add(this->manageFlightsList);
+			this->manageSearchFlights->Dock = System::Windows::Forms::DockStyle::Right;
+			this->manageSearchFlights->Location = System::Drawing::Point(1221, 0);
+			this->manageSearchFlights->Name = L"manageSearchFlights";
+			this->manageSearchFlights->Size = System::Drawing::Size(1305, 1245);
+			this->manageSearchFlights->TabIndex = 13;
+			// 
+			// label2
+			// 
+			this->label2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->label2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->label2->Location = System::Drawing::Point(1273, 10);
+			this->label2->Margin = System::Windows::Forms::Padding(0);
+			this->label2->MaximumSize = System::Drawing::Size(2, 4000);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(2, 1222);
+			this->label2->TabIndex = 20;
+			// 
+			// label3
+			// 
+			this->label3->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label3->Location = System::Drawing::Point(147, 0);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(192, 37);
+			this->label3->TabIndex = 6;
+			this->label3->Text = L"Destination";
+			this->label3->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			// 
+			// label4
+			// 
+			this->label4->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label4->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->label4->Location = System::Drawing::Point(51, 191);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->MaximumSize = System::Drawing::Size(4000, 2);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(1200, 2);
+			this->label4->TabIndex = 11;
+			// 
+			// manageMaxTime
+			// 
+			this->manageMaxTime->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->manageMaxTime->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->manageMaxTime->Location = System::Drawing::Point(821, 87);
+			this->manageMaxTime->Margin = System::Windows::Forms::Padding(4);
+			this->manageMaxTime->MinDate = System::DateTime(2020, 1, 1, 0, 0, 0, 0);
+			this->manageMaxTime->Name = L"manageMaxTime";
+			this->manageMaxTime->Size = System::Drawing::Size(260, 38);
+			this->manageMaxTime->TabIndex = 1;
+			// 
+			// label5
+			// 
+			this->label5->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label5->Location = System::Drawing::Point(51, 144);
+			this->label5->Margin = System::Windows::Forms::Padding(0);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(184, 46);
+			this->label5->TabIndex = 0;
+			this->label5->Text = L"Flight ID";
+			// 
+			// manageMinTime
+			// 
+			this->manageMinTime->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->manageMinTime->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->manageMinTime->Location = System::Drawing::Point(517, 87);
+			this->manageMinTime->Margin = System::Windows::Forms::Padding(4);
+			this->manageMinTime->MinDate = System::DateTime(2020, 1, 1, 0, 0, 0, 0);
+			this->manageMinTime->Name = L"manageMinTime";
+			this->manageMinTime->Size = System::Drawing::Size(260, 38);
+			this->manageMinTime->TabIndex = 2;
+			// 
+			// label6
+			// 
+			this->label6->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label6->Location = System::Drawing::Point(643, 144);
+			this->label6->Margin = System::Windows::Forms::Padding(0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(236, 46);
+			this->label6->TabIndex = 2;
+			this->label6->Text = L"Departure Time";
+			// 
+			// label7
+			// 
+			this->label7->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label7->Location = System::Drawing::Point(517, 44);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(260, 37);
+			this->label7->TabIndex = 3;
+			this->label7->Text = L"Earliest Date:";
+			// 
+			// label8
+			// 
+			this->label8->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label8->Location = System::Drawing::Point(233, 144);
+			this->label8->Margin = System::Windows::Forms::Padding(0);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(410, 46);
+			this->label8->TabIndex = 1;
+			this->label8->Text = L"Destination";
+			// 
+			// label9
+			// 
+			this->label9->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label9->Location = System::Drawing::Point(821, 44);
+			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(260, 37);
+			this->label9->TabIndex = 4;
+			this->label9->Text = L"Latest Date:";
+			// 
+			// label10
+			// 
+			this->label10->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label10->Location = System::Drawing::Point(879, 144);
+			this->label10->Margin = System::Windows::Forms::Padding(0);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(152, 46);
+			this->label10->TabIndex = 3;
+			this->label10->Text = L"Occupancy";
+			// 
+			// label11
+			// 
+			this->label11->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label11->Location = System::Drawing::Point(627, 0);
+			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(368, 37);
+			this->label11->TabIndex = 5;
+			this->label11->Text = L"Departure Time Window";
+			this->label11->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			// 
+			// label12
+			// 
+			this->label12->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->label12->Location = System::Drawing::Point(1046, 144);
+			this->label12->Margin = System::Windows::Forms::Padding(0);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(147, 46);
+			this->label12->TabIndex = 4;
+			this->label12->Text = L"Price";
+			// 
+			// manageSearchFlightsButton
+			// 
+			this->manageSearchFlightsButton->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->manageSearchFlightsButton->Location = System::Drawing::Point(1119, 87);
+			this->manageSearchFlightsButton->Margin = System::Windows::Forms::Padding(4);
+			this->manageSearchFlightsButton->Name = L"manageSearchFlightsButton";
+			this->manageSearchFlightsButton->Size = System::Drawing::Size(132, 46);
+			this->manageSearchFlightsButton->TabIndex = 8;
+			this->manageSearchFlightsButton->Text = L"Search";
+			this->manageSearchFlightsButton->UseVisualStyleBackColor = true;
+			this->manageSearchFlightsButton->Click += gcnew System::EventHandler(this, &Main::managerSearchFlightsButton_Click);
+			// 
+			// manageDestinationField
+			// 
+			this->manageDestinationField->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->manageDestinationField->FormattingEnabled = true;
+			this->manageDestinationField->Items->AddRange(gcnew cli::array< System::Object^  >(21) {
+				L"New York City", L"Los Angeles",
+					L"Chicago", L"Houston", L"Phoenix", L"Philadelphia", L"San Diego", L"Dallas", L"Austin", L"Washington DC", L"Boston", L"Las Vegas",
+					L"Detroit", L"Baltimore", L"Kansas City", L"Atlanta", L"Miami", L"Milwaukee", L"Portland", L"Seattle", L"Indianapolis"
+			});
+			this->manageDestinationField->Location = System::Drawing::Point(51, 85);
+			this->manageDestinationField->Margin = System::Windows::Forms::Padding(4);
+			this->manageDestinationField->Name = L"manageDestinationField";
+			this->manageDestinationField->Size = System::Drawing::Size(394, 39);
+			this->manageDestinationField->TabIndex = 10;
+			// 
+			// manageFlightsList
+			// 
+			this->manageFlightsList->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->manageFlightsList->AutoScroll = true;
+			this->manageFlightsList->AutoSize = true;
+			this->manageFlightsList->ColumnCount = 6;
+			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				15)));
+			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				35)));
+			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				20)));
+			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				12.5F)));
+			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				5)));
+			this->manageFlightsList->Location = System::Drawing::Point(51, 197);
+			this->manageFlightsList->Margin = System::Windows::Forms::Padding(4);
+			this->manageFlightsList->MinimumSize = System::Drawing::Size(1200, 283);
+			this->manageFlightsList->Name = L"manageFlightsList";
+			this->manageFlightsList->RowCount = 1;
+			this->manageFlightsList->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->manageFlightsList->Size = System::Drawing::Size(1200, 1017);
+			this->manageFlightsList->TabIndex = 9;
 			// 
 			// companyLogo
 			// 
@@ -1510,52 +1922,6 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->manageTabBuffer->TabIndex = 8;
 			this->manageTabBuffer->Visible = false;
 			// 
-			// managerRadio
-			// 
-			this->managerRadio->AutoSize = true;
-			this->managerRadio->Location = System::Drawing::Point(561, 117);
-			this->managerRadio->Name = L"managerRadio";
-			this->managerRadio->Size = System::Drawing::Size(151, 35);
-			this->managerRadio->TabIndex = 19;
-			this->managerRadio->Text = L"Manager";
-			this->managerRadio->UseVisualStyleBackColor = true;
-			// 
-			// accountTypeLabel
-			// 
-			this->accountTypeLabel->Location = System::Drawing::Point(230, 48);
-			this->accountTypeLabel->Name = L"accountTypeLabel";
-			this->accountTypeLabel->Size = System::Drawing::Size(344, 40);
-			this->accountTypeLabel->TabIndex = 20;
-			this->accountTypeLabel->Text = L"Account Type";
-			this->accountTypeLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// label1
-			// 
-			this->label1->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->label1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->label1->Location = System::Drawing::Point(774, -18);
-			this->label1->Margin = System::Windows::Forms::Padding(0);
-			this->label1->MaximumSize = System::Drawing::Size(2, 4000);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(2, 1240);
-			this->label1->TabIndex = 21;
-			// 
-			// panel3
-			// 
-			this->panel3->Controls->Add(this->manageDestination);
-			this->panel3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel3->Location = System::Drawing::Point(776, 0);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(1750, 1245);
-			this->panel3->TabIndex = 9;
-			// 
-			// manageDestination
-			// 
-			this->manageDestination->Location = System::Drawing::Point(258, 232);
-			this->manageDestination->Name = L"manageDestination";
-			this->manageDestination->Size = System::Drawing::Size(330, 38);
-			this->manageDestination->TabIndex = 0;
-			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -1580,9 +1946,9 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->createAccountPanel->ResumeLayout(false);
 			this->createAccountPanel->PerformLayout();
 			this->accountPanel->ResumeLayout(false);
-			this->panel1->ResumeLayout(false);
-			this->panel1->PerformLayout();
-			this->panel2->ResumeLayout(false);
+			this->accountOverview->ResumeLayout(false);
+			this->accountOverview->PerformLayout();
+			this->accountTickets->ResumeLayout(false);
 			this->ticketsHeader->ResumeLayout(false);
 			this->ticketsHeader->PerformLayout();
 			this->flightsTab->ResumeLayout(false);
@@ -1594,10 +1960,12 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			this->manageTab->ResumeLayout(false);
 			this->managerCreateAccount->ResumeLayout(false);
 			this->managerCreateAccount->PerformLayout();
+			this->manageModifyFlight->ResumeLayout(false);
+			this->manageModifyFlight->PerformLayout();
+			this->manageSearchFlights->ResumeLayout(false);
+			this->manageSearchFlights->PerformLayout();
 			this->mainview->ResumeLayout(false);
 			this->bottomBar->ResumeLayout(false);
-			this->panel3->ResumeLayout(false);
-			this->panel3->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -1936,6 +2304,9 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			prLabel->Dock = DockStyle::Top;
 			selectButton->Dock = DockStyle::Top;
 
+			selectButton->Tag = flightId;
+			selectButton->Click += gcnew System::EventHandler(this, &Main::selectFlight_Click);
+
 			flightsList->RowCount++;
 			flightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
 			flightsList->Controls->Add(idLabel, 0, flightsList->RowCount - 1);
@@ -1944,9 +2315,6 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 			flightsList->Controls->Add(ocLabel, 3, flightsList->RowCount - 1);
 			flightsList->Controls->Add(prLabel, 4, flightsList->RowCount - 1);
 			flightsList->Controls->Add(selectButton, 5, flightsList->RowCount - 1);
-
-			selectButton->Tag = flightId;
-			selectButton->Click += gcnew System::EventHandler(this, &Main::selectFlight_Click);
 		}
 
 		private: System::Void clearFlights() {
@@ -2000,6 +2368,145 @@ private: System::Windows::Forms::TextBox^ manageDestination;
 		// user returns to login screen
 		private: System::Void f_returnToAccount_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 			logout();
+		}
+
+		//
+		// Manager Page
+		//
+		// manager updates flight
+		private: System::Void managerUpdateFlight_Click(System::Object^ sender, System::EventArgs^ e) {
+			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
+			int flightId = (int)button->Tag;
+			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+
+			flight.destination = modifyDestinationField->Text;
+			flight.time = modifyDepartureField->Value;
+
+			dbHandler->updateFlight(flight);
+
+			managerSearchFlightsButton_Click(sender, e);
+		}
+
+		// manager cancels a flight
+		private: System::Void managerDeleteFlight_Click(System::Object^ sender, System::EventArgs^ e) {
+			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
+			int flightId = (int)button->Tag;
+
+			dbHandler->cancelFlight(flightId);
+
+			modifyIdLabel->Text = "0";
+			modifyDestinationLabel->Text = "";
+			System::DateTime placeholderTime = new System::DateTime();
+			modifyDepartureField->Value = placeholderTime;
+
+			managerSearchFlightsButton_Click(sender, e);
+		}
+
+		// manager selects a flight
+		private: System::Void managerSelectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
+			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
+			int flightId = (int)button->Tag;
+			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+
+			modifyIdLabel->Text = marshal_as<System::String^>(std::to_string(flightId));
+			modifyDestinationLabel->Text = flight.destination;
+			modifyDepartureField->Value = flight.time;
+
+			modifyUpdate->Tag = flightId;
+			modifyDelete->Tag = flightId;
+		}
+		private: System::Void managerPostFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+			if (flightId == -1) {
+				return;
+			}
+
+			System::Windows::Forms::Label^ idLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ dpLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ ocLabel = gcnew System::Windows::Forms::Label();
+			System::Windows::Forms::Label^ prLabel = gcnew System::Windows::Forms::Label();
+
+			System::Windows::Forms::Button^ selectButton = gcnew System::Windows::Forms::Button();
+
+			std::stringstream stream;
+			stream.precision(4);
+			stream << price;
+
+			System::String^ flightIdString = marshal_as<System::String^>(std::to_string(flightId));
+
+			idLabel->Text = flightIdString;
+			dsLabel->Text = destination;
+			dpLabel->Text = departure;
+			ocLabel->Text = occupancy;
+			prLabel->Text = marshal_as<System::String^>('$' + stream.str());
+			selectButton->Text = "";
+
+			idLabel->Dock = DockStyle::Top;
+			dsLabel->Dock = DockStyle::Top;
+			dpLabel->Dock = DockStyle::Top;
+			ocLabel->Dock = DockStyle::Top;
+			prLabel->Dock = DockStyle::Top;
+			selectButton->Dock = DockStyle::Top;
+
+			selectButton->Tag = flightId;
+			selectButton->Click += gcnew System::EventHandler(this, &Main::managerSelectFlight_Click);
+
+			manageFlightsList->RowCount++;
+			manageFlightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
+			manageFlightsList->Controls->Add(idLabel, 0, manageFlightsList->RowCount - 1);
+			manageFlightsList->Controls->Add(dsLabel, 1, manageFlightsList->RowCount - 1);
+			manageFlightsList->Controls->Add(dpLabel, 2, manageFlightsList->RowCount - 1);
+			manageFlightsList->Controls->Add(ocLabel, 3, manageFlightsList->RowCount - 1);
+			manageFlightsList->Controls->Add(prLabel, 4, manageFlightsList->RowCount - 1);
+			manageFlightsList->Controls->Add(selectButton, 5, manageFlightsList->RowCount - 1);
+		}
+
+		private: System::Void managerClearFlights() {
+			manageFlightsList->Controls->Clear();
+			manageFlightsList->RowCount = 1;
+		}
+
+		// manager clicks search button
+		private: System::Void managerSearchFlightsButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			// wipes the list first
+			managerClearFlights();
+			TableLayoutRowStyleCollection^ rows = manageFlightsList->RowStyles;
+			for each (RowStyle ^ row in rows) {
+				row->Height = 0;
+			}
+
+			// user-defined search criteria
+			System::String^ destination = manageDestinationField->Text;
+			System::DateTime minDate = manageMinTime->Value;
+			System::DateTime maxDate = manageMaxTime->Value;
+
+			// for each flight, call the postFlight() function-
+			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one float as parameters.
+			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
+			// postFlight() will take these arguments and post a new flight entry on the flight list.
+
+			// in the event you need to convert an unmanaged string (std::string) into a managed string (System::String^)
+			// for use in the postFlight() function, here is how you would do so:
+			// System::String^ managed = marshal_as<System::String^>(unmanaged);
+			// where (unmanaged) is the std::string to be converted.
+
+			for (int i = 0; i < 1000; i++) {
+				AirBooksDBHandler::Flight flight;
+
+				//Query database for flight
+				flight = dbHandler->getFlight(destination, minDate, maxDate, i);
+
+				//Query database for number of tickets currently booked in flight
+				int booked = dbHandler->getOccupancy(flight.flightID);
+				int seats = (flight.columns * flight.rows) - booked;
+
+				if (flight.flightID == -1) {
+					return;
+				}
+				else {
+					managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), float(flight.price));
+				}
+			}
 		}
 };
 }
