@@ -2,6 +2,8 @@
 
 public ref class User {
 protected:
+	AirBooksDBHandler::Account^ account;
+	AirBooksDBHandler::DBHandler^ dbHandler;
 	System::String^ firstName;
 	System::String^ lastName;
 	System::String^ email;
