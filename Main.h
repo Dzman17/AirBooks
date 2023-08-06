@@ -1489,18 +1489,14 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 
 		// user enters account page
 		private: System::Void accountTab_Enter(System::Object^ sender, System::EventArgs^ e) {
-			// wipes the list first
-			clearTickets();
-
-			// !!! TODO !!!:
-			// query the database and retrieve all user tickets
-			// 
 			// for each ticket, call the postTicket() function-
 			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
 
-			/*
+			// wipes the list first
+			clearTickets();
+
 			AirBooksDBHandler::Ticket ticket;
 			AirBooksDBHandler::Flight flight;
 			System::String^ fID;
@@ -1508,22 +1504,20 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 
 			// find all tickets for this user
 			for (int i = 0; i < 1000; i++) {
-				//Query database here
+				//Query database
+				ticket = dbHandler->getTicket(user->getEmail(), i);
 
-				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
-				sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
-
-				//TODO uncomment when overload is written
-				//flight = handler.getFlight(fID);
-
-				System::String^ fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
-				System::String^ sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
 				if (ticket.flightID == -1) {
 					return;
 				}
 
+				flight = dbHandler->getFlight(ticket.flightID);
+
+				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+				sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+
 				postTicket(fID, sID, flight.destination, flight.time.ToString());
-			}*/
+			}
 		}
 		
 
@@ -1676,9 +1670,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			System::DateTime minDate = minTimeField->Value;
 			System::DateTime maxDate = maxTimeField->Value;
 
-			// !!! TODO !!!:
-			// use parameters declared above to query the database and retrieve all matching flights
-			// 
 			// for each flight, call the postFlight() function-
 			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one float as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
@@ -1690,22 +1681,20 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// where (unmanaged) is the std::string to be converted.
 	
 			for (int i = 0; i < 1000; i++) {
-				AirBooksDBHandler::Ticket ticket;
 				AirBooksDBHandler::Flight flight;
-				AirBooksDBHandler::DBHandler handler;
 
-				//TODO Query database for flight here
+				//Query database for flight
+				flight = dbHandler->getFlight(destination, minDate, maxDate, i);
 
-				//TODO Query database for number of tickets currently booked in flight
-
-				int booked = 0;
+				//Query database for number of tickets currently booked in flight
+				int booked = dbHandler->getOccupancy(flight.flightID);
 				int seats = (flight.columns * flight.rows) - booked;
 
-				if (ticket.flightID == -1) {
+				if (flight.flightID == -1) {
 					return;
 				}
 				else {
-					postFlight(ticket.flightID, flight.destination, flight.time.ToString(), "0", float(flight.price));
+					postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), float(flight.price));
 				}
 			}
 		}
