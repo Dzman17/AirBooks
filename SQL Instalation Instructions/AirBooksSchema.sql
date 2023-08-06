@@ -1,6 +1,6 @@
-CREATE SCHEMA test
+CREATE SCHEMA `air-books`;
 
-CREATE TABLE `account` (
+CREATE TABLE `air-books`.`account` (
   `email` varchar(60) NOT NULL DEFAULT 'email@email.com',
   `password` varchar(30) NOT NULL DEFAULT 'password',
   `firstName` varchar(20) NOT NULL DEFAULT 'John',
@@ -9,7 +9,7 @@ CREATE TABLE `account` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `flights` (
+CREATE TABLE `air-books`.`flights` (
   `flightID` int NOT NULL DEFAULT '0',
   `time` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `destination` varchar(40) NOT NULL DEFAULT 'Harrisburg',
@@ -21,7 +21,7 @@ CREATE TABLE `flights` (
   PRIMARY KEY (`flightID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `tickets` (
+CREATE TABLE `air-books`.`tickets` (
   `seatID` int NOT NULL DEFAULT '1',
   `flightID` int NOT NULL DEFAULT '0',
   `ownerEmail` varchar(60) NOT NULL DEFAULT 'email@email.com',
