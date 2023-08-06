@@ -1497,14 +1497,83 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
+
+			/*
+			AirBooksDBHandler::Ticket ticket;
+			AirBooksDBHandler::Flight flight;
+			AirBooksDBHandler::DBHandler handler;
+			System::String^ fID;
+			System::String^ sID;
+
+			// find all tickets for this user
+			for (int i = 0; i < 1000; i++) {
+				//Query database here
+
+				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+				sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+
+				//TODO uncomment when overload is written
+				//flight = handler.getFlight(fID);
+
+				System::String^ fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+				System::String^ sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+				if (ticket.flightID == -1) {
+					return;
+				}
+
+				postTicket(fID, sID, flight.destination, flight.time.ToString());
+			}*/
 		}
+		
 
 		//
 		// Flights Page
 		//
+		
+		private: System::Void postSeat(int col, int row, bool occupied) {
+
+		}
+		
 		// user selects a flight
 		private: System::Void selectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
+			AirBooksDBHandler::Ticket ticket;
+			AirBooksDBHandler::Flight flight;
+			
+			int maxSize = flight.columns * flight.rows;
+			int* occupiedSeats = new int[maxSize];
+			int size = 0;
 
+			// find all tickets for this flight
+			for (int i = 0; i < 1000; i++) {
+				if (ticket.flightID == -1) {
+					continue;
+				}
+
+				occupiedSeats[size] = ticket.seatID;
+				size++;
+				if (size >= maxSize) {
+					break;
+				}
+			}
+
+			// O(n^2)
+			// postSeat() for each seat on the flight
+			TableLayoutControlCollection^ controls = planeTable->Controls;
+			for each (Control^ control in controls) {
+				int col = planeTable->GetColumn(control);
+				int row = planeTable->GetRow(control);
+				int cell = ((row - 1) * flight.columns) + col;
+
+				bool occupied = false;
+				for (int i = 0; i < size; i++) {
+					if (occupiedSeats[i] == cell) {
+						occupied = true;
+						break;
+					}
+				}
+
+				postSeat(col, row, occupied);
+			}
 		}
 
 		private: System::Void postFlight(System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
@@ -1579,6 +1648,29 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// for use in the postFlight() function, here is how you would do so:
 			// System::String^ managed = marshal_as<System::String^>(unmanaged);
 			// where (unmanaged) is the std::string to be converted.
+	
+			for (int i = 0; i < 1000; i++) {
+				AirBooksDBHandler::Ticket ticket;
+				AirBooksDBHandler::Flight flight;
+				AirBooksDBHandler::DBHandler handler;
+				System::String^ fID;
+
+				//TODO Query database for flight here
+
+				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+
+				//TODO Query database for number of tickets currently booked in flight
+
+				int booked = 0;
+				int seats = (flight.columns * flight.rows) - booked;
+
+				if (ticket.flightID == -1) {
+					return;
+				}
+				else {
+					postFlight(fID, flight.destination, flight.time.ToString(), "0", float(flight.price));
+				}
+			}
 		}
 
 		// user returns to login screen

@@ -9,6 +9,8 @@ using namespace std;
 
 // Account constructor
 User::User(System::String^ first, System::String^ last, System::String^ email, System::String^ password) {
+	this->account = gcnew AirBooksDBHandler::Account(email, password, first, last);
+	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
 	this->firstName = first;
 	this->lastName = last;
 	this->email = email;
@@ -112,14 +114,5 @@ char User::getRole() {
 
 // Commits user fields to system
 void User::createUser() {
-	ofstream fout;
-	fout.open("credentials.txt", ios_base::app);
-	// helper vars for unstable marshal cast
-	System::String^ implicitEmail = this->email;
-	System::String^ implicitPass = this->password;
-	System::String^ implicitFirst = this->firstName;
-	System::String^ implicitLast = this->lastName;
-	// write to file as email,password,firstName,lastName
-	fout << marshal_as<std::string>(implicitEmail) << "," << marshal_as<std::string>(implicitPass) << "," << marshal_as<std::string>(implicitFirst) << "," << marshal_as<std::string>(implicitLast) << endl;
-	fout.close();
+	bool success = dbHandler->createAccount((AirBooksDBHandler::Account)account);
 }

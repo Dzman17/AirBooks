@@ -1,4 +1,4 @@
-CREATE SCHEMA `air-Books`;
+CREATE SCHEMA `air-books`;
 
 CREATE TABLE `air-books`.`account` (
   `email` varchar(60) NOT NULL DEFAULT 'email@email.com',
