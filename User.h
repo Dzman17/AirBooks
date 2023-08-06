@@ -22,8 +22,8 @@ public:
 	System::String^ getName(int mode);
 	System::String^ getEmail();
 	System::String^ getPassword();
+	AirBooksDBHandler::Account^ getAccount();
 	bool authenticate();
 	bool validateEmail();
-	char getRole();
 	void createUser();
 };

@@ -71,6 +71,11 @@ System::String^ User::getPassword() {
 	return password;
 }
 
+// account getter
+AirBooksDBHandler::Account^ User::getAccount() {
+	return account;
+}
+
 // Checks if user object fields match one in the system
 bool User::authenticate() {
 	ifstream fin("credentials.txt");
@@ -105,11 +110,6 @@ bool User::validateEmail() {
 		}
 	}
 	return true;
-}
-
-// user role getter (placeholder)
-char User::getRole() {
-	return 0;
 }
 
 // Commits user fields to system

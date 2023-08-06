@@ -1427,6 +1427,10 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			if (user->authenticate()) {
 				// success, login and switch to account view
 				dbHandler = gcnew AirBooksDBHandler::DBHandler();
+				AirBooksDBHandler::Account^ account = user->getAccount();
+				if (account->accountType == 'M') {
+					openManageTab();
+				}
 				firstNameCurrent->Text = "First Name: " + user->getName(1);
 				lastNameCurrent->Text = "Last Name: " + user->getName(2);
 				emailCurrent->Text = "Email: " + user->getEmail();
