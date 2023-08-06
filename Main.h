@@ -1500,9 +1500,9 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
 
+			/*
 			AirBooksDBHandler::Ticket ticket;
 			AirBooksDBHandler::Flight flight;
-			AirBooksDBHandler::DBHandler handler;
 			System::String^ fID;
 			System::String^ sID;
 
@@ -1523,7 +1523,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 				}
 
 				postTicket(fID, sID, flight.destination, flight.time.ToString());
-			}
+			}*/
 		}
 		
 
