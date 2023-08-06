@@ -41,9 +41,9 @@ Class User: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     getName(Int32): PrivateScope, Public, HideBySig
     getEmail(): PrivateScope, Public, HideBySig
     getPassword(): PrivateScope, Public, HideBySig
+    getAccount(): PrivateScope, Public, HideBySig
     authenticate(): PrivateScope, Public, HideBySig
     validateEmail(): PrivateScope, Public, HideBySig
-    getRole(): PrivateScope, Public, HideBySig
     createUser(): PrivateScope, Public, HideBySig
 Class AirBooks.Main: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form

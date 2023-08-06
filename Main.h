@@ -159,6 +159,39 @@ private: System::Windows::Forms::Label^ discountLabel;
 private: System::Windows::Forms::Label^ totalPriceLabel;
 private: System::Windows::Forms::TabControl^ manageTabBuffer;
 private: System::Windows::Forms::TabPage^ manageTab;
+private: System::Windows::Forms::Panel^ managerCreateAccount;
+private: System::Windows::Forms::TextBox^ manageFirstField;
+
+private: System::Windows::Forms::Label^ manageFirstLabel;
+private: System::Windows::Forms::Button^ manageSubmitAccount;
+
+
+
+private: System::Windows::Forms::TextBox^ manageEmailField;
+private: System::Windows::Forms::TextBox^ managePassField;
+private: System::Windows::Forms::Label^ manageCreateStatus;
+
+
+
+private: System::Windows::Forms::Label^ manageLastLabel;
+private: System::Windows::Forms::TextBox^ manageLastField;
+private: System::Windows::Forms::Label^ manageEmailLabel;
+private: System::Windows::Forms::Label^ managePassLabel;
+
+
+
+
+private: System::Windows::Forms::RadioButton^ employeeRadio;
+
+private: System::Windows::Forms::RadioButton^ customerRadio;
+private: System::Windows::Forms::RadioButton^ managerRadio;
+private: System::Windows::Forms::Label^ accountTypeLabel;
+private: System::Windows::Forms::Label^ label1;
+private: System::Windows::Forms::Panel^ panel3;
+private: System::Windows::Forms::TextBox^ manageDestination;
+
+
+
 
 
 
@@ -254,12 +287,30 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			this->expDateField = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->cardNumberField = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->planeTable = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->manageTab = (gcnew System::Windows::Forms::TabPage());
+			this->managerCreateAccount = (gcnew System::Windows::Forms::Panel());
+			this->employeeRadio = (gcnew System::Windows::Forms::RadioButton());
+			this->customerRadio = (gcnew System::Windows::Forms::RadioButton());
+			this->manageFirstField = (gcnew System::Windows::Forms::TextBox());
+			this->manageFirstLabel = (gcnew System::Windows::Forms::Label());
+			this->manageSubmitAccount = (gcnew System::Windows::Forms::Button());
+			this->manageEmailField = (gcnew System::Windows::Forms::TextBox());
+			this->managePassField = (gcnew System::Windows::Forms::TextBox());
+			this->manageCreateStatus = (gcnew System::Windows::Forms::Label());
+			this->manageLastLabel = (gcnew System::Windows::Forms::Label());
+			this->manageLastField = (gcnew System::Windows::Forms::TextBox());
+			this->manageEmailLabel = (gcnew System::Windows::Forms::Label());
+			this->managePassLabel = (gcnew System::Windows::Forms::Label());
 			this->companyLogo = (gcnew System::Windows::Forms::Label());
 			this->logoutButton = (gcnew System::Windows::Forms::Button());
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
 			this->manageTabBuffer = (gcnew System::Windows::Forms::TabControl());
-			this->manageTab = (gcnew System::Windows::Forms::TabPage());
+			this->managerRadio = (gcnew System::Windows::Forms::RadioButton());
+			this->accountTypeLabel = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->manageDestination = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->loginPanel->SuspendLayout();
@@ -272,8 +323,11 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			this->noAccount->SuspendLayout();
 			this->flights->SuspendLayout();
 			this->purchaseTicket->SuspendLayout();
+			this->manageTab->SuspendLayout();
+			this->managerCreateAccount->SuspendLayout();
 			this->mainview->SuspendLayout();
 			this->bottomBar->SuspendLayout();
+			this->panel3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl
@@ -1068,6 +1122,11 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			// 
 			this->destinationField->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->destinationField->FormattingEnabled = true;
+			this->destinationField->Items->AddRange(gcnew cli::array< System::Object^  >(21) {
+				L"New York City", L"Los Angeles", L"Chicago",
+					L"Houston", L"Phoenix", L"Philadelphia", L"San Diego", L"Dallas", L"Austin", L"Washington DC", L"Boston", L"Las Vegas", L"Detroit",
+					L"Baltimore", L"Kansas City", L"Atlanta", L"Miami", L"Milwaukee", L"Portland", L"Seattle", L"Indianapolis"
+			});
 			this->destinationField->Location = System::Drawing::Point(30, 85);
 			this->destinationField->Margin = System::Windows::Forms::Padding(4);
 			this->destinationField->Name = L"destinationField";
@@ -1235,6 +1294,164 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			this->planeTable->Size = System::Drawing::Size(683, 1211);
 			this->planeTable->TabIndex = 0;
 			// 
+			// manageTab
+			// 
+			this->manageTab->Controls->Add(this->panel3);
+			this->manageTab->Controls->Add(this->managerCreateAccount);
+			this->manageTab->Location = System::Drawing::Point(4, 43);
+			this->manageTab->Name = L"manageTab";
+			this->manageTab->Size = System::Drawing::Size(2526, 1245);
+			this->manageTab->TabIndex = 2;
+			this->manageTab->Text = L"Manage";
+			this->manageTab->UseVisualStyleBackColor = true;
+			// 
+			// managerCreateAccount
+			// 
+			this->managerCreateAccount->Controls->Add(this->label1);
+			this->managerCreateAccount->Controls->Add(this->accountTypeLabel);
+			this->managerCreateAccount->Controls->Add(this->managerRadio);
+			this->managerCreateAccount->Controls->Add(this->employeeRadio);
+			this->managerCreateAccount->Controls->Add(this->customerRadio);
+			this->managerCreateAccount->Controls->Add(this->manageFirstField);
+			this->managerCreateAccount->Controls->Add(this->manageFirstLabel);
+			this->managerCreateAccount->Controls->Add(this->manageSubmitAccount);
+			this->managerCreateAccount->Controls->Add(this->manageEmailField);
+			this->managerCreateAccount->Controls->Add(this->managePassField);
+			this->managerCreateAccount->Controls->Add(this->manageCreateStatus);
+			this->managerCreateAccount->Controls->Add(this->manageLastLabel);
+			this->managerCreateAccount->Controls->Add(this->manageLastField);
+			this->managerCreateAccount->Controls->Add(this->manageEmailLabel);
+			this->managerCreateAccount->Controls->Add(this->managePassLabel);
+			this->managerCreateAccount->Dock = System::Windows::Forms::DockStyle::Left;
+			this->managerCreateAccount->Location = System::Drawing::Point(0, 0);
+			this->managerCreateAccount->Margin = System::Windows::Forms::Padding(0);
+			this->managerCreateAccount->Name = L"managerCreateAccount";
+			this->managerCreateAccount->Padding = System::Windows::Forms::Padding(40, 38, 40, 38);
+			this->managerCreateAccount->Size = System::Drawing::Size(776, 1245);
+			this->managerCreateAccount->TabIndex = 8;
+			// 
+			// employeeRadio
+			// 
+			this->employeeRadio->AutoSize = true;
+			this->employeeRadio->Location = System::Drawing::Point(313, 117);
+			this->employeeRadio->Name = L"employeeRadio";
+			this->employeeRadio->Size = System::Drawing::Size(165, 35);
+			this->employeeRadio->TabIndex = 18;
+			this->employeeRadio->Text = L"Employee";
+			this->employeeRadio->UseVisualStyleBackColor = true;
+			// 
+			// customerRadio
+			// 
+			this->customerRadio->AutoSize = true;
+			this->customerRadio->Checked = true;
+			this->customerRadio->Location = System::Drawing::Point(75, 117);
+			this->customerRadio->Name = L"customerRadio";
+			this->customerRadio->Size = System::Drawing::Size(163, 35);
+			this->customerRadio->TabIndex = 17;
+			this->customerRadio->TabStop = true;
+			this->customerRadio->Text = L"Customer";
+			this->customerRadio->UseVisualStyleBackColor = true;
+			// 
+			// manageFirstField
+			// 
+			this->manageFirstField->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageFirstField->Location = System::Drawing::Point(85, 511);
+			this->manageFirstField->Margin = System::Windows::Forms::Padding(4);
+			this->manageFirstField->Name = L"manageFirstField";
+			this->manageFirstField->Size = System::Drawing::Size(604, 38);
+			this->manageFirstField->TabIndex = 12;
+			// 
+			// manageFirstLabel
+			// 
+			this->manageFirstLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageFirstLabel->Location = System::Drawing::Point(85, 463);
+			this->manageFirstLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->manageFirstLabel->Name = L"manageFirstLabel";
+			this->manageFirstLabel->Size = System::Drawing::Size(604, 44);
+			this->manageFirstLabel->TabIndex = 14;
+			this->manageFirstLabel->Text = L"First Name";
+			// 
+			// manageSubmitAccount
+			// 
+			this->manageSubmitAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageSubmitAccount->Location = System::Drawing::Point(227, 941);
+			this->manageSubmitAccount->Margin = System::Windows::Forms::Padding(4);
+			this->manageSubmitAccount->Name = L"manageSubmitAccount";
+			this->manageSubmitAccount->Size = System::Drawing::Size(304, 54);
+			this->manageSubmitAccount->TabIndex = 3;
+			this->manageSubmitAccount->Text = L"Create Account";
+			this->manageSubmitAccount->UseVisualStyleBackColor = true;
+			// 
+			// manageEmailField
+			// 
+			this->manageEmailField->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageEmailField->Location = System::Drawing::Point(85, 732);
+			this->manageEmailField->Margin = System::Windows::Forms::Padding(4);
+			this->manageEmailField->Name = L"manageEmailField";
+			this->manageEmailField->Size = System::Drawing::Size(604, 38);
+			this->manageEmailField->TabIndex = 7;
+			// 
+			// managePassField
+			// 
+			this->managePassField->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->managePassField->Location = System::Drawing::Point(85, 842);
+			this->managePassField->Margin = System::Windows::Forms::Padding(4);
+			this->managePassField->Name = L"managePassField";
+			this->managePassField->PasswordChar = '*';
+			this->managePassField->Size = System::Drawing::Size(604, 38);
+			this->managePassField->TabIndex = 8;
+			// 
+			// manageCreateStatus
+			// 
+			this->manageCreateStatus->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageCreateStatus->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->manageCreateStatus->Location = System::Drawing::Point(85, 999);
+			this->manageCreateStatus->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->manageCreateStatus->Name = L"manageCreateStatus";
+			this->manageCreateStatus->Size = System::Drawing::Size(604, 98);
+			this->manageCreateStatus->TabIndex = 11;
+			this->manageCreateStatus->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// manageLastLabel
+			// 
+			this->manageLastLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageLastLabel->Location = System::Drawing::Point(85, 572);
+			this->manageLastLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
+			this->manageLastLabel->Name = L"manageLastLabel";
+			this->manageLastLabel->Size = System::Drawing::Size(604, 44);
+			this->manageLastLabel->TabIndex = 15;
+			this->manageLastLabel->Text = L"Last Name";
+			// 
+			// manageLastField
+			// 
+			this->manageLastField->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageLastField->Location = System::Drawing::Point(85, 621);
+			this->manageLastField->Margin = System::Windows::Forms::Padding(4);
+			this->manageLastField->Name = L"manageLastField";
+			this->manageLastField->Size = System::Drawing::Size(604, 38);
+			this->manageLastField->TabIndex = 13;
+			// 
+			// manageEmailLabel
+			// 
+			this->manageEmailLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->manageEmailLabel->Location = System::Drawing::Point(85, 684);
+			this->manageEmailLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
+			this->manageEmailLabel->Name = L"manageEmailLabel";
+			this->manageEmailLabel->Size = System::Drawing::Size(214, 44);
+			this->manageEmailLabel->TabIndex = 9;
+			this->manageEmailLabel->Text = L"Email";
+			// 
+			// managePassLabel
+			// 
+			this->managePassLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->managePassLabel->Location = System::Drawing::Point(85, 794);
+			this->managePassLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
+			this->managePassLabel->Name = L"managePassLabel";
+			this->managePassLabel->Size = System::Drawing::Size(214, 44);
+			this->managePassLabel->TabIndex = 10;
+			this->managePassLabel->Text = L"Password";
+			// 
 			// companyLogo
 			// 
 			this->companyLogo->BackColor = System::Drawing::SystemColors::HotTrack;
@@ -1293,14 +1510,51 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			this->manageTabBuffer->TabIndex = 8;
 			this->manageTabBuffer->Visible = false;
 			// 
-			// manageTab
+			// managerRadio
 			// 
-			this->manageTab->Location = System::Drawing::Point(4, 43);
-			this->manageTab->Name = L"manageTab";
-			this->manageTab->Size = System::Drawing::Size(2526, 1245);
-			this->manageTab->TabIndex = 2;
-			this->manageTab->Text = L"Manage";
-			this->manageTab->UseVisualStyleBackColor = true;
+			this->managerRadio->AutoSize = true;
+			this->managerRadio->Location = System::Drawing::Point(561, 117);
+			this->managerRadio->Name = L"managerRadio";
+			this->managerRadio->Size = System::Drawing::Size(151, 35);
+			this->managerRadio->TabIndex = 19;
+			this->managerRadio->Text = L"Manager";
+			this->managerRadio->UseVisualStyleBackColor = true;
+			// 
+			// accountTypeLabel
+			// 
+			this->accountTypeLabel->Location = System::Drawing::Point(230, 48);
+			this->accountTypeLabel->Name = L"accountTypeLabel";
+			this->accountTypeLabel->Size = System::Drawing::Size(344, 40);
+			this->accountTypeLabel->TabIndex = 20;
+			this->accountTypeLabel->Text = L"Account Type";
+			this->accountTypeLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// label1
+			// 
+			this->label1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->label1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->label1->Location = System::Drawing::Point(774, -18);
+			this->label1->Margin = System::Windows::Forms::Padding(0);
+			this->label1->MaximumSize = System::Drawing::Size(2, 4000);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(2, 1240);
+			this->label1->TabIndex = 21;
+			// 
+			// panel3
+			// 
+			this->panel3->Controls->Add(this->manageDestination);
+			this->panel3->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->panel3->Location = System::Drawing::Point(776, 0);
+			this->panel3->Name = L"panel3";
+			this->panel3->Size = System::Drawing::Size(1750, 1245);
+			this->panel3->TabIndex = 9;
+			// 
+			// manageDestination
+			// 
+			this->manageDestination->Location = System::Drawing::Point(258, 232);
+			this->manageDestination->Name = L"manageDestination";
+			this->manageDestination->Size = System::Drawing::Size(330, 38);
+			this->manageDestination->TabIndex = 0;
 			// 
 			// Main
 			// 
@@ -1337,8 +1591,13 @@ private: System::Windows::Forms::TabPage^ manageTab;
 			this->flights->PerformLayout();
 			this->purchaseTicket->ResumeLayout(false);
 			this->purchaseTicket->PerformLayout();
+			this->manageTab->ResumeLayout(false);
+			this->managerCreateAccount->ResumeLayout(false);
+			this->managerCreateAccount->PerformLayout();
 			this->mainview->ResumeLayout(false);
 			this->bottomBar->ResumeLayout(false);
+			this->panel3->ResumeLayout(false);
+			this->panel3->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -1428,7 +1687,7 @@ private: System::Windows::Forms::TabPage^ manageTab;
 				// success, login and switch to account view
 				dbHandler = gcnew AirBooksDBHandler::DBHandler();
 				AirBooksDBHandler::Account^ account = user->getAccount();
-				if (account->accountType == 'M') {
+				if (true/*account->accountType == 'm'*/) {
 					openManageTab();
 				}
 				firstNameCurrent->Text = "First Name: " + user->getName(1);
