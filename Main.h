@@ -175,9 +175,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 		void InitializeComponent(void) {
 			this->tabControl = (gcnew System::Windows::Forms::TabControl());
 			this->accountTab = (gcnew System::Windows::Forms::TabPage());
-			this->noAccount = (gcnew System::Windows::Forms::Panel());
-			this->f_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
-			this->f_accountWarning = (gcnew System::Windows::Forms::Label());
 			this->loginPanel = (gcnew System::Windows::Forms::Panel());
 			this->ln_emailField = (gcnew System::Windows::Forms::TextBox());
 			this->switchToCreate = (gcnew System::Windows::Forms::LinkLabel());
@@ -222,6 +219,9 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->t_divider = (gcnew System::Windows::Forms::Label());
 			this->ticketList = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->flightsTab = (gcnew System::Windows::Forms::TabPage());
+			this->noAccount = (gcnew System::Windows::Forms::Panel());
+			this->f_returnToAccount = (gcnew System::Windows::Forms::LinkLabel());
+			this->f_accountWarning = (gcnew System::Windows::Forms::Label());
 			this->flights = (gcnew System::Windows::Forms::Panel());
 			this->h_divider2 = (gcnew System::Windows::Forms::Label());
 			this->destinationLabel = (gcnew System::Windows::Forms::Label());
@@ -258,7 +258,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
-			this->noAccount->SuspendLayout();
 			this->loginPanel->SuspendLayout();
 			this->createAccountPanel->SuspendLayout();
 			this->accountPanel->SuspendLayout();
@@ -266,6 +265,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->panel2->SuspendLayout();
 			this->ticketsHeader->SuspendLayout();
 			this->flightsTab->SuspendLayout();
+			this->noAccount->SuspendLayout();
 			this->flights->SuspendLayout();
 			this->purchaseTicket->SuspendLayout();
 			this->mainview->SuspendLayout();
@@ -302,46 +302,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->accountTab->Text = L"Account";
 			this->accountTab->UseVisualStyleBackColor = true;
 			this->accountTab->Enter += gcnew System::EventHandler(this, &Main::accountTab_Enter);
-			// 
-			// noAccount
-			// 
-			this->noAccount->Controls->Add(this->f_returnToAccount);
-			this->noAccount->Controls->Add(this->f_accountWarning);
-			this->noAccount->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->noAccount->Location = System::Drawing::Point(0, 0);
-			this->noAccount->Margin = System::Windows::Forms::Padding(0);
-			this->noAccount->Name = L"noAccount";
-			this->noAccount->Size = System::Drawing::Size(2526, 1225);
-			this->noAccount->TabIndex = 11;
-			// 
-			// f_returnToAccount
-			// 
-			this->f_returnToAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->f_returnToAccount->BackColor = System::Drawing::Color::Transparent;
-			this->f_returnToAccount->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->f_returnToAccount->Location = System::Drawing::Point(913, 646);
-			this->f_returnToAccount->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->f_returnToAccount->Name = L"f_returnToAccount";
-			this->f_returnToAccount->Size = System::Drawing::Size(692, 75);
-			this->f_returnToAccount->TabIndex = 1;
-			this->f_returnToAccount->TabStop = true;
-			this->f_returnToAccount->Text = L"Login";
-			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
-			// 
-			// f_accountWarning
-			// 
-			this->f_accountWarning->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->f_accountWarning->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->f_accountWarning->Location = System::Drawing::Point(0, 0);
-			this->f_accountWarning->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->f_accountWarning->Name = L"f_accountWarning";
-			this->f_accountWarning->Size = System::Drawing::Size(2526, 1225);
-			this->f_accountWarning->TabIndex = 0;
-			this->f_accountWarning->Text = L"You must login to view this page.";
-			this->f_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// loginPanel
 			// 
@@ -888,6 +848,46 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->flightsTab->Text = L"Flights";
 			this->flightsTab->UseVisualStyleBackColor = true;
 			// 
+			// noAccount
+			// 
+			this->noAccount->Controls->Add(this->f_returnToAccount);
+			this->noAccount->Controls->Add(this->f_accountWarning);
+			this->noAccount->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->noAccount->Location = System::Drawing::Point(0, 0);
+			this->noAccount->Margin = System::Windows::Forms::Padding(0);
+			this->noAccount->Name = L"noAccount";
+			this->noAccount->Size = System::Drawing::Size(2526, 1225);
+			this->noAccount->TabIndex = 11;
+			// 
+			// f_returnToAccount
+			// 
+			this->f_returnToAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->f_returnToAccount->BackColor = System::Drawing::Color::Transparent;
+			this->f_returnToAccount->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->f_returnToAccount->Location = System::Drawing::Point(913, 646);
+			this->f_returnToAccount->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->f_returnToAccount->Name = L"f_returnToAccount";
+			this->f_returnToAccount->Size = System::Drawing::Size(692, 75);
+			this->f_returnToAccount->TabIndex = 1;
+			this->f_returnToAccount->TabStop = true;
+			this->f_returnToAccount->Text = L"Login";
+			this->f_returnToAccount->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->f_returnToAccount->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Main::f_returnToAccount_LinkClicked);
+			// 
+			// f_accountWarning
+			// 
+			this->f_accountWarning->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->f_accountWarning->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->f_accountWarning->Location = System::Drawing::Point(0, 0);
+			this->f_accountWarning->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->f_accountWarning->Name = L"f_accountWarning";
+			this->f_accountWarning->Size = System::Drawing::Size(2526, 1225);
+			this->f_accountWarning->TabIndex = 0;
+			this->f_accountWarning->Text = L"You must login to view this page.";
+			this->f_accountWarning->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
 			// flights
 			// 
 			this->flights->Controls->Add(this->h_divider2);
@@ -1297,7 +1297,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->Text = L"Login";
 			this->tabControl->ResumeLayout(false);
 			this->accountTab->ResumeLayout(false);
-			this->noAccount->ResumeLayout(false);
 			this->loginPanel->ResumeLayout(false);
 			this->loginPanel->PerformLayout();
 			this->createAccountPanel->ResumeLayout(false);
@@ -1309,6 +1308,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			this->ticketsHeader->ResumeLayout(false);
 			this->ticketsHeader->PerformLayout();
 			this->flightsTab->ResumeLayout(false);
+			this->noAccount->ResumeLayout(false);
 			this->flights->ResumeLayout(false);
 			this->flights->PerformLayout();
 			this->purchaseTicket->ResumeLayout(false);
@@ -1320,6 +1320,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 		}
 #pragma endregion
 		User^ user;
+		AirBooksDBHandler::DBHandler^ dbHandler;
 
 
 		private: System::Void logout() {
@@ -1393,6 +1394,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			user = gcnew User(ln_emailField->Text, ln_passwordField->Text);
 			if (user->authenticate()) {
 				// success, login and switch to account view
+				dbHandler = gcnew AirBooksDBHandler::DBHandler();
 				firstNameCurrent->Text = "First Name: " + user->getName(1);
 				lastNameCurrent->Text = "Last Name: " + user->getName(2);
 				emailCurrent->Text = "Email: " + user->getEmail();
@@ -1498,7 +1500,6 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// The order of these parameters is ticketId, seat, destination, departureTime
 			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
 
-			/*
 			AirBooksDBHandler::Ticket ticket;
 			AirBooksDBHandler::Flight flight;
 			AirBooksDBHandler::DBHandler handler;
@@ -1522,7 +1523,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 				}
 
 				postTicket(fID, sID, flight.destination, flight.time.ToString());
-			}*/
+			}
 		}
 		
 
@@ -1531,20 +1532,54 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 		//
 		
 		private: System::Void postSeat(int col, int row, bool occupied) {
+			System::Windows::Forms::CheckBox^ checkBox = gcnew System::Windows::Forms::CheckBox();
 
+			planeTable->Controls->Add(checkBox, col, row);
+
+			checkBox->Enabled = !occupied;
 		}
 		
 		// user selects a flight
 		private: System::Void selectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
+			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
+			int flightId = (int)button->Tag;
+			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+
 			AirBooksDBHandler::Ticket ticket;
-			AirBooksDBHandler::Flight flight;
-			
+
 			int maxSize = flight.columns * flight.rows;
 			int* occupiedSeats = new int[maxSize];
 			int size = 0;
 
+			// layout rows and columns
+			planeTable->ColumnCount = flight.columns;
+			planeTable->RowCount = flight.rows;
+
+			TableLayoutColumnStyleCollection^ cols = planeTable->ColumnStyles;
+			bool skip = true;
+			for each (ColumnStyle^ col in cols) {
+				if (skip) {
+					skip = false;
+					continue;
+				}
+				col->SizeType = SizeType::Percent;
+				col->Width = 100 / flight.columns;
+			}
+			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
+			skip = true;
+			for each (RowStyle ^ row in rows) {
+				if (skip) {
+					skip = false;
+					continue;
+				}
+				row->SizeType = SizeType::Percent;
+				row->Height = 100 / flight.rows;
+			}
+
 			// find all tickets for this flight
 			for (int i = 0; i < 1000; i++) {
+				ticket = dbHandler->getTicket(flightId, i);
+
 				if (ticket.flightID == -1) {
 					continue;
 				}
@@ -1556,27 +1591,31 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 				}
 			}
 
-			// O(n^2)
+			// O(n^2) n == max seating
 			// postSeat() for each seat on the flight
 			TableLayoutControlCollection^ controls = planeTable->Controls;
-			for each (Control^ control in controls) {
-				int col = planeTable->GetColumn(control);
-				int row = planeTable->GetRow(control);
-				int cell = ((row - 1) * flight.columns) + col;
+			for (int c = 1; c < flight.columns; c++) {
+				for (int r = 1; r < flight.rows; r++) {
+					int cell = ((r - 1) * flight.columns) + c;
 
-				bool occupied = false;
-				for (int i = 0; i < size; i++) {
-					if (occupiedSeats[i] == cell) {
-						occupied = true;
-						break;
+					bool occupied = false;
+					for (int i = 0; i < size; i++) {
+						if (occupiedSeats[i] == cell) {
+							occupied = true;
+							break;
+						}
 					}
-				}
 
-				postSeat(col, row, occupied);
+					postSeat(c, r, occupied);
+				}
 			}
 		}
 
-		private: System::Void postFlight(System::String^ flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+		private: System::Void postFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+			if (flightId == -1) {
+				return;
+			}
+
 			System::Windows::Forms::Label^ idLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dpLabel = gcnew System::Windows::Forms::Label();
@@ -1589,7 +1628,9 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			stream.precision(4);
 			stream << price;
 
-			idLabel->Text = flightId;
+			System::String^ flightIdString = marshal_as<System::String^>(std::to_string(flightId));
+
+			idLabel->Text = flightIdString;
 			dsLabel->Text = destination;
 			dpLabel->Text = departure;
 			ocLabel->Text = occupancy;
@@ -1612,8 +1653,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			flightsList->Controls->Add(prLabel, 4, flightsList->RowCount - 1);
 			flightsList->Controls->Add(selectButton, 5, flightsList->RowCount - 1);
 
-			// assign the tag of the button to a structure containing the data necessary to reconstruct the flight object
-			//selectButton->Tag = ;
+			selectButton->Tag = flightId;
 			selectButton->Click += gcnew System::EventHandler(this, &Main::selectFlight_Click);
 		}
 
@@ -1640,7 +1680,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 			// use parameters declared above to query the database and retrieve all matching flights
 			// 
 			// for each flight, call the postFlight() function-
-			// postFlight() returns nothing and takes in four managed strings (System::String^), and one float as parameters.
+			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one float as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
 
@@ -1653,11 +1693,8 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 				AirBooksDBHandler::Ticket ticket;
 				AirBooksDBHandler::Flight flight;
 				AirBooksDBHandler::DBHandler handler;
-				System::String^ fID;
 
 				//TODO Query database for flight here
-
-				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
 
 				//TODO Query database for number of tickets currently booked in flight
 
@@ -1668,7 +1705,7 @@ private: System::Windows::Forms::Label^ totalPriceLabel;
 					return;
 				}
 				else {
-					postFlight(fID, flight.destination, flight.time.ToString(), "0", float(flight.price));
+					postFlight(ticket.flightID, flight.destination, flight.time.ToString(), "0", float(flight.price));
 				}
 			}
 		}
