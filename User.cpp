@@ -90,11 +90,5 @@ bool User::validateEmail() {
 
 // Commits user fields to system
 bool User::createUser() {
-	System::Console::WriteLine(account->email);
-	System::Console::WriteLine(account->password);
-	System::Console::WriteLine(account->firstName);
-	System::Console::WriteLine(account->lastName);
-	System::Console::WriteLine(account->accountType);
-	System::Console::WriteLine(dbHandler->createAccount((AirBooksDBHandler::Account)account));
-	return false;
+	return dbHandler->createAccount((AirBooksDBHandler::Account)account);
 }
