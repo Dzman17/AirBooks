@@ -76,7 +76,8 @@ namespace AirBooksDBHandler
     public class DBHandler
     {
         //these values will be used by multiple various operations, and should be, for the most part, constant
-        const string conString = "server=127.0.0.1;uid=AirBooksDBHandler;pwd=a1r-0-dYnam!cs;database=air-books";
+        const string server = "127.0.0.1", uid = "AirBooksDBHandler", pwd = "a1r-0-dYnam!cs", db = "air-books";
+        const string conString = "server=" + server + ";uid=" + uid + ";pwd=" + pwd + ";database=" + db;
         const string numQuery = "select count(*) ", getQuery = "select * ",
             insertQuery = "insert into ", deleteQuery = "delete from ";
         MySqlConnection con = new MySqlConnection(conString);
@@ -100,7 +101,7 @@ namespace AirBooksDBHandler
 
         public bool createAccount(Account account) {
             try {
-                string query = "account values('" + account.email + "', '" + account.password + "', '" +
+                string query = "`" + db + "`.`account` values('" + account.email + "', '" + account.password + "', '" +
                        account.firstName + "', '" + account.lastName + "', '" + account.accountType + "')";
                 MySqlCommand command = new MySqlCommand(insertQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -116,7 +117,7 @@ namespace AirBooksDBHandler
          */
         public bool deleteAccount(Account account) {
             try {
-                string query = "account where `email`='" + account.email + "' and `password`='" + account.password + "'";
+                string query = "`" + db + "`.`account` where `email`='" + account.email + "' and `password`='" + account.password + "'";
                 MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Close();
@@ -128,9 +129,10 @@ namespace AirBooksDBHandler
         /* Returns an Account from the DataBase
          */
         public Account getAccountInfo(string email, string password) {
+            
             try {
                 Account user;
-                string query = "from account where `email`='" + email + "' and `password`='" + password + "'";
+                string query = "from `" + db + "`.`account` where `email`='" + email + "' and `password`='" + password + "'";
                 MySqlCommand command = new MySqlCommand(getQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Read();
@@ -148,7 +150,7 @@ namespace AirBooksDBHandler
 
         public bool checkEmail(string email) {
             try {
-                string query = "from account where `email`='" + email + "'";
+                string query = "from `" + db + "`.`account` where `email`='" + email + "'";
                 MySqlCommand command = new MySqlCommand(numQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Read();
@@ -171,7 +173,7 @@ namespace AirBooksDBHandler
         public Flight getFlight(string destination, DateTime start, DateTime end, int position) {
             string earliest = formatTime(start);
             string latest = formatTime(end);
-            string query = ("from flights where `destination`>='" + destination + "' and '" + earliest +
+            string query = ("from `" + db + "`.`flights` where `destination`>='" + destination + "' and '" + earliest +
                         "'<=`time` and `time`<='" + latest + "'");
             Flight flight = searchFlight(query, position);
             return flight;
@@ -181,13 +183,13 @@ namespace AirBooksDBHandler
          * Used for tickets
          */
         public Flight getFlight(int flightID) {
-            string query = ("from flights where `flightID`=" + flightID);
+            string query = ("from `" + db + "`.`flights` where `flightID`=" + flightID);
             Flight flight =  searchFlight(query);
             return flight;
         }
 
         public Flight getAnyFlight(int position) {
-            return searchFlight("from flights", position);
+            return searchFlight("from `" + db + "`.`flights`", position);
         }
 
         /* Searches the DB for a specific flight
@@ -211,7 +213,7 @@ namespace AirBooksDBHandler
 
         public int findNewFlightID() {
             try {
-                string query = "from flights where `flightID`=";
+                string query = "from `" + db + "`.`flights` where `flightID`=";
                 int flightID = 0;
                 bool empty = false;
                 MySqlCommand command;
@@ -237,9 +239,9 @@ namespace AirBooksDBHandler
          */
         public bool addFlight(Flight flight) {
             try {
-                string query = "flights values(" + flight.flightID + ", '" + formatTime(flight.time) + "', '" + flight.destination + "', " +
-                        flight.rows + ", " + flight.columns + ", " + flight.price + ", " + flight.luggageMax + ", " +
-                        flight.currentLuggage + ")";
+                string query = "`" + db + "`.`flights` values(" + flight.flightID + ", '" + formatTime(flight.time) + 
+                    "', '" + flight.destination + "', " + flight.rows + ", " + flight.columns + ", " + flight.price + 
+                    ", " + flight.luggageMax + ", " + flight.currentLuggage + ")";
                 MySqlCommand command = new MySqlCommand(insertQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Close();
@@ -252,7 +254,7 @@ namespace AirBooksDBHandler
          */
         public bool cancelFlight(int flightID) {
             try {
-                string query = "flights where `flightID`=" + flightID;
+                string query = "`" + db + "`.`flights` where `flightID`=" + flightID;
                 MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Close();
@@ -267,7 +269,7 @@ namespace AirBooksDBHandler
         public int getOccupancy(int flightID) {
             try
             {
-                string query = "tickets where `flightID`=" + flightID;
+                string query = "`" + db + "`.`tickets` where `flightID`=" + flightID;
                 MySqlCommand command = new MySqlCommand(numQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Close();
@@ -283,7 +285,7 @@ namespace AirBooksDBHandler
          * Searches using email as a key
          */
         public Ticket getTicket(string ownerEmail, int position) {
-            string query = ("from tickets where `ownerEmail`='" + ownerEmail + "'");
+            string query = "from `" + db + "`.`tickets` where `ownerEmail`='" + ownerEmail + "'";
             Ticket ticket = searchTicket(query, position);
             return ticket;
         }
@@ -294,7 +296,7 @@ namespace AirBooksDBHandler
          * Searches using flightID as a key
          */
         public Ticket getTicket(int flightID, int position) {
-            string query = ("from tickets where `flightID`=" + flightID);
+            string query = "from `" + db + "`.`tickets` where `flightID`=" + flightID;
             Ticket ticket = searchTicket(query, position);
             return ticket;
         }
@@ -322,7 +324,7 @@ namespace AirBooksDBHandler
          */
         public bool addTicket(Ticket ticket) {
             try {
-                string query = "tickets values(" + ticket.seatID + ", " + ticket.flightID +
+                string query = "`" + db + "`.`tickets` values(" + ticket.seatID + ", " + ticket.flightID +
                         ", '" + ticket.ownerEmail + "')";
                 MySqlCommand command = new MySqlCommand(insertQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -336,7 +338,7 @@ namespace AirBooksDBHandler
          */
         public bool cancelTicket(Ticket ticket) {
             try {
-                string query = "tickets where `seatID`=" + ticket.seatID + " and `flightID`=" + ticket.flightID +
+                string query = "`" + db + "`.`tickets` where `seatID`=" + ticket.seatID + " and `flightID`=" + ticket.flightID +
                         " and `ownerEmail`='" + ticket.ownerEmail + "'";
                 MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -350,7 +352,7 @@ namespace AirBooksDBHandler
 
         private bool cancelAllTickets(int flightID) {
             try {
-                string query = "tickets where `flightID`=" + flightID;
+                string query = "`" + db + "`.`tickets` where `flightID`=" + flightID;
                 MySqlCommand command = new MySqlCommand(deleteQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Close();
