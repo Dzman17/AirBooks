@@ -6,6 +6,7 @@
 
 using namespace msclr::interop;
 using namespace std;
+using namespace AirBooksDBHandler;
 
 // Account constructor
 User::User(System::String^ first, System::String^ last, System::String^ email, System::String^ password, char type) {
