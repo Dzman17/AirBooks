@@ -1477,6 +1477,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			this->manageSubmitAccount->TabIndex = 3;
 			this->manageSubmitAccount->Text = L"Create Account";
 			this->manageSubmitAccount->UseVisualStyleBackColor = true;
+			this->manageSubmitAccount->Click += gcnew System::EventHandler(this, &Main::manageSubmitAccount_Click);
 			// 
 			// manageEmailField
 			// 
@@ -2506,6 +2507,18 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 				else {
 					managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), float(flight.price));
 				}
+			}
+		}
+
+		// manager creates new account
+		private: System::Void manageSubmitAccount_Click(System::Object^ sender, System::EventArgs^ e) {
+			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
+			if (user->validateEmail()) {
+				user->createUser();
+				createAccountStatus->Text = "Success";
+			}
+			else {
+				createAccountStatus->Text = "Error";
 			}
 		}
 };
