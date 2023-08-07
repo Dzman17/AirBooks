@@ -227,6 +227,13 @@ private: System::Windows::Forms::Button^ modifyDelete;
 
 
 private: System::Windows::Forms::Button^ modifyUpdate;
+private: System::Windows::Forms::Button^ modifyCreate;
+private: System::Windows::Forms::TextBox^ modifyColumnsField;
+private: System::Windows::Forms::TextBox^ modifyRowsField;
+private: System::Windows::Forms::Label^ modifyColumnsLabel;
+private: System::Windows::Forms::Label^ modifyRowsLabel;
+private: System::Windows::Forms::TextBox^ modifyPriceField;
+private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 
 
@@ -344,6 +351,11 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			this->manageEmailLabel = (gcnew System::Windows::Forms::Label());
 			this->managePassLabel = (gcnew System::Windows::Forms::Label());
 			this->manageModifyFlight = (gcnew System::Windows::Forms::Panel());
+			this->modifyColumnsField = (gcnew System::Windows::Forms::TextBox());
+			this->modifyRowsField = (gcnew System::Windows::Forms::TextBox());
+			this->modifyColumnsLabel = (gcnew System::Windows::Forms::Label());
+			this->modifyRowsLabel = (gcnew System::Windows::Forms::Label());
+			this->modifyCreate = (gcnew System::Windows::Forms::Button());
 			this->modifyDelete = (gcnew System::Windows::Forms::Button());
 			this->modifyUpdate = (gcnew System::Windows::Forms::Button());
 			this->modifyDepartureField = (gcnew System::Windows::Forms::DateTimePicker());
@@ -375,6 +387,8 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
 			this->manageTabBuffer = (gcnew System::Windows::Forms::TabControl());
+			this->modifyPriceLabel = (gcnew System::Windows::Forms::Label());
+			this->modifyPriceField = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->loginPanel->SuspendLayout();
@@ -1551,6 +1565,13 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			// 
 			// manageModifyFlight
 			// 
+			this->manageModifyFlight->Controls->Add(this->modifyPriceField);
+			this->manageModifyFlight->Controls->Add(this->modifyPriceLabel);
+			this->manageModifyFlight->Controls->Add(this->modifyColumnsField);
+			this->manageModifyFlight->Controls->Add(this->modifyRowsField);
+			this->manageModifyFlight->Controls->Add(this->modifyColumnsLabel);
+			this->manageModifyFlight->Controls->Add(this->modifyRowsLabel);
+			this->manageModifyFlight->Controls->Add(this->modifyCreate);
 			this->manageModifyFlight->Controls->Add(this->modifyDelete);
 			this->manageModifyFlight->Controls->Add(this->modifyUpdate);
 			this->manageModifyFlight->Controls->Add(this->modifyDepartureField);
@@ -1566,9 +1587,51 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			this->manageModifyFlight->Size = System::Drawing::Size(445, 1246);
 			this->manageModifyFlight->TabIndex = 14;
 			// 
+			// modifyColumnsField
+			// 
+			this->modifyColumnsField->Location = System::Drawing::Point(279, 358);
+			this->modifyColumnsField->Name = L"modifyColumnsField";
+			this->modifyColumnsField->Size = System::Drawing::Size(67, 38);
+			this->modifyColumnsField->TabIndex = 31;
+			// 
+			// modifyRowsField
+			// 
+			this->modifyRowsField->Location = System::Drawing::Point(96, 358);
+			this->modifyRowsField->Name = L"modifyRowsField";
+			this->modifyRowsField->Size = System::Drawing::Size(67, 38);
+			this->modifyRowsField->TabIndex = 30;
+			// 
+			// modifyColumnsLabel
+			// 
+			this->modifyColumnsLabel->Location = System::Drawing::Point(241, 314);
+			this->modifyColumnsLabel->Name = L"modifyColumnsLabel";
+			this->modifyColumnsLabel->Size = System::Drawing::Size(146, 41);
+			this->modifyColumnsLabel->TabIndex = 29;
+			this->modifyColumnsLabel->Text = L"Columns";
+			this->modifyColumnsLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// modifyRowsLabel
+			// 
+			this->modifyRowsLabel->Location = System::Drawing::Point(77, 314);
+			this->modifyRowsLabel->Name = L"modifyRowsLabel";
+			this->modifyRowsLabel->Size = System::Drawing::Size(107, 41);
+			this->modifyRowsLabel->TabIndex = 28;
+			this->modifyRowsLabel->Text = L"Rows";
+			this->modifyRowsLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// modifyCreate
+			// 
+			this->modifyCreate->Location = System::Drawing::Point(117, 508);
+			this->modifyCreate->Name = L"modifyCreate";
+			this->modifyCreate->Size = System::Drawing::Size(211, 48);
+			this->modifyCreate->TabIndex = 27;
+			this->modifyCreate->Text = L"Create";
+			this->modifyCreate->UseVisualStyleBackColor = true;
+			this->modifyCreate->Click += gcnew System::EventHandler(this, &Main::modifyCreate_Click);
+			// 
 			// modifyDelete
 			// 
-			this->modifyDelete->Location = System::Drawing::Point(124, 429);
+			this->modifyDelete->Location = System::Drawing::Point(117, 663);
 			this->modifyDelete->Name = L"modifyDelete";
 			this->modifyDelete->Size = System::Drawing::Size(211, 48);
 			this->modifyDelete->TabIndex = 26;
@@ -1578,7 +1641,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			// 
 			// modifyUpdate
 			// 
-			this->modifyUpdate->Location = System::Drawing::Point(124, 350);
+			this->modifyUpdate->Location = System::Drawing::Point(117, 584);
 			this->modifyUpdate->Name = L"modifyUpdate";
 			this->modifyUpdate->Size = System::Drawing::Size(211, 48);
 			this->modifyUpdate->TabIndex = 25;
@@ -1923,6 +1986,22 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			this->manageTabBuffer->TabIndex = 8;
 			this->manageTabBuffer->Visible = false;
 			// 
+			// modifyPriceLabel
+			// 
+			this->modifyPriceLabel->Location = System::Drawing::Point(10, 419);
+			this->modifyPriceLabel->Margin = System::Windows::Forms::Padding(10, 20, 3, 0);
+			this->modifyPriceLabel->Name = L"modifyPriceLabel";
+			this->modifyPriceLabel->Size = System::Drawing::Size(174, 37);
+			this->modifyPriceLabel->TabIndex = 32;
+			this->modifyPriceLabel->Text = L"Price          $";
+			// 
+			// modifyPriceField
+			// 
+			this->modifyPriceField->Location = System::Drawing::Point(190, 419);
+			this->modifyPriceField->Name = L"modifyPriceField";
+			this->modifyPriceField->Size = System::Drawing::Size(242, 38);
+			this->modifyPriceField->TabIndex = 33;
+			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -1973,6 +2052,8 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 #pragma endregion
 		User^ user;
 		AirBooksDBHandler::DBHandler^ dbHandler;
+		AirBooksDBHandler::Account^ account;
+		double discount = 0.0;
 
 		public: System::Void closeManageTab() {
 			manageTab->Parent = manageTabBuffer;
@@ -2055,8 +2136,19 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			if (user->authenticate()) {
 				// success, login and switch to account view
 				dbHandler = gcnew AirBooksDBHandler::DBHandler();
-				AirBooksDBHandler::Account^ account = user->getAccount();
-				if (true/*account->accountType == 'm'*/) {
+				account = user->getAccount();
+
+				if (account->accountType == 'c') {
+					discount = 0.0;
+				}
+				else if (account->accountType == 'e') {
+					discount = 0.1;
+				}
+				else if (account->accountType == 'm') {
+					discount = 0.15;
+				}
+
+				if (account->accountType == 'm') {
 					openManageTab();
 				}
 				firstNameCurrent->Text = "First Name: " + user->getName(1);
@@ -2191,20 +2283,48 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 		//
 		// Flights Page
 		//
-		
+		int currentSeatsSelected = 0;
+		// user selects a seat
+		private: System::Void selectSeat_Click(System::Object^ sender, System::EventArgs^ e) {
+			System::Windows::Forms::CheckBox^ checkBox = (System::Windows::Forms::CheckBox^)sender;
+			if (checkBox->Checked) {
+				currentSeatsSelected++;
+			}
+			else {
+				currentSeatsSelected--;
+				if (currentSeatsSelected < 0) {
+					currentSeatsSelected = 0;
+				}
+			}
+
+			double price = (double)marshal_as<std::string>(ticketPriceLabel->Text);
+			double total = price * currentSeatsSelected;
+			total -= (total * discount);
+
+			totalPriceLabel->Text = marshal_as<System::String^>(std::to_string(total));
+			ticketQuantityLabel->Text = marshal_as<System::String^>(std::to_string(currentSeatsSelected));
+		}
+
 		private: System::Void postSeat(int col, int row, bool occupied) {
 			System::Windows::Forms::CheckBox^ checkBox = gcnew System::Windows::Forms::CheckBox();
 
-			planeTable->Controls->Add(checkBox, col, row);
-
 			checkBox->Enabled = !occupied;
+			checkBox->Click += gcnew System::EventHandler(this, &Main::selectSeat_Click);
+
+			planeTable->Controls->Add(checkBox, col, row);
 		}
 		
 		// user selects a flight
 		private: System::Void selectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
+			clearSeats();
+
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)button->Tag;
 			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+
+			ticketQuantityLabel->Text = "0";
+			ticketPriceLabel->Text = (double)marshal_as<std:string>(flight.price);
+			discountLabel->Text = marshal_as<System::String^>(std::to_string((int)(100 * discount)) + "%")
 
 			AirBooksDBHandler::Ticket ticket;
 
@@ -2271,8 +2391,12 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 				}
 			}
 		}
+		
+		private: System::Void clearSeats() {
+			planeTable->Controls->Clear();
+		}
 
-		private: System::Void postFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+		private: System::Void postFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, double price) {
 			if (flightId == -1) {
 				return;
 			}
@@ -2338,7 +2462,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			System::DateTime maxDate = maxTimeField->Value;
 
 			// for each flight, call the postFlight() function-
-			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one float as parameters.
+			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one double as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
 
@@ -2361,7 +2485,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 					return;
 				}
 				else {
-					postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), float(flight.price));
+					postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
 				}
 			}
 		}
@@ -2374,6 +2498,19 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 		//
 		// Manager Page
 		//
+		// manager creates new flight
+		private: System::Void modifyCreate_Click(System::Object^ sender, System::EventArgs^ e) {
+			int flightId = dbHandler->findNewFlightID();
+			System::DateTime time = modifyDepartureField->Value;
+			System::String^ destination = modifyDestinationField->Text;
+			int rows = (int)marshal_as<std::string>(modifyRowsField->Text);
+			int cols = (int)marshal_as<std::string>(modifyColumnsField->Text);
+			double price = (double)marshal_as<std::string>(modifyPriceField->Text);
+			AirBooksDBHandler::Flight^ flight = gcnew AirBooksDBHandler::Flight(flightId, time, destination, rows, cols, price, 0.0, 0.0);
+
+			dbHandler->addFlight(flight);
+		}
+
 		// manager updates flight
 		private: System::Void managerUpdateFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
@@ -2382,6 +2519,9 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 
 			flight.destination = modifyDestinationField->Text;
 			flight.time = modifyDepartureField->Value;
+			flight.rows = (int)marshal_as<std::string>(modifyRowsField->Text);
+			flight.columns = (int)marshal_as<std::string>(modifyColumnsField->Text);
+			flight.price = (double)marshal_as<std::string>(modifyPriceField->Text);
 
 			dbHandler->updateFlight(flight);
 
@@ -2416,7 +2556,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			modifyUpdate->Tag = flightId;
 			modifyDelete->Tag = flightId;
 		}
-		private: System::Void managerPostFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, float price) {
+		private: System::Void managerPostFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, double price) {
 			if (flightId == -1) {
 				return;
 			}
@@ -2482,7 +2622,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			System::DateTime maxDate = manageMaxTime->Value;
 
 			// for each flight, call the postFlight() function-
-			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one float as parameters.
+			// postFlight() returns nothing and takes in one int, three managed strings (System::String^), and one double as parameters.
 			// The order of these parameters is flightId, destination, departureDate, availableSeating, pricePerTicket
 			// postFlight() will take these arguments and post a new flight entry on the flight list.
 
@@ -2505,13 +2645,24 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 					return;
 				}
 				else {
-					managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), float(flight.price));
+					managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
 				}
 			}
 		}
 
 		// manager creates new account
 		private: System::Void manageSubmitAccount_Click(System::Object^ sender, System::EventArgs^ e) {
+			char accType;
+			if (customerRadio->Checked) {
+				accType = 'c';
+			}
+			else if (employeeRadio->Checked) {
+				accType = 'e';
+			}
+			else if (managerRadio->Checked) {
+				accType = 'm';
+			}
+
 			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
 			if (user->validateEmail()) {
 				user->createUser();
@@ -2521,5 +2672,6 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 				createAccountStatus->Text = "Error";
 			}
 		}
+
 };
 }
