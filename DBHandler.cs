@@ -209,6 +209,30 @@ namespace AirBooksDBHandler
             catch (Exception ex) { return new Flight(-1, new DateTime(), "none", 0, 0, 0, 0, 0); }
         }
 
+        public int findNewFlightID() {
+            try {
+                string query = "from flights where `flightID`=";
+                int flightID = 0;
+                bool empty = false;
+                MySqlCommand command;
+                MySqlDataReader reader;
+
+                do {
+                    command = new MySqlCommand(numQuery + query + flightID, con);
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    if (reader.GetInt32(0) == 0)
+                        empty = true;
+                    else
+                        flightID++;
+                    reader.Close();
+                } while (!empty);
+
+                return flightID;
+            }
+            catch (Exception ex) { return -1; }
+        }
+
         /* Adds a flight to the database
          */
         public bool addFlight(Flight flight) {
