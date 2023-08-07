@@ -2397,7 +2397,7 @@ private: System::Windows::Forms::Button^ modifyUpdate;
 			modifyIdLabel->Text = "0";
 			modifyDestinationLabel->Text = "";
 			System::DateTime placeholderTime = new System::DateTime();
-			modifyDepartureField->Value = placeholderTime;
+			modifyDepartureField->Value = placeholderTime.Now;
 
 			managerSearchFlightsButton_Click(sender, e);
 		}
