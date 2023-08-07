@@ -30,10 +30,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="credentials.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="flightList.txt" />
-  </ItemGroup>
 </Project>

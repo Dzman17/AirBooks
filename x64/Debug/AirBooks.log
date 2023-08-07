@@ -1,8 +1,2 @@
-﻿  User.cpp
-  Main.cpp
-C:\Users\illus\Desktop\Development\C++\AirBooks\Main.h(2226,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\illus\Desktop\Development\C++\AirBooks\Main.h(2236,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\illus\Desktop\Development\C++\AirBooks\Main.h(2399,1): error C3255: 'System::DateTime': cannot dynamically allocate this value type object on native heap
-C:\Users\illus\Desktop\Development\C++\AirBooks\Main.h(2399,1): message : only simple value types are allowed
-  .NETFramework,Version=4.7.2.AssemblyAttributes.cpp
-  Generating Code...
+﻿  User.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  AirBooks.vcxproj -> C:\Users\illus\Desktop\Development\C++\AirBooks\x64\Debug\AirBooks.exe

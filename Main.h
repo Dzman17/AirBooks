@@ -351,6 +351,8 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageEmailLabel = (gcnew System::Windows::Forms::Label());
 			this->managePassLabel = (gcnew System::Windows::Forms::Label());
 			this->manageModifyFlight = (gcnew System::Windows::Forms::Panel());
+			this->modifyPriceField = (gcnew System::Windows::Forms::TextBox());
+			this->modifyPriceLabel = (gcnew System::Windows::Forms::Label());
 			this->modifyColumnsField = (gcnew System::Windows::Forms::TextBox());
 			this->modifyRowsField = (gcnew System::Windows::Forms::TextBox());
 			this->modifyColumnsLabel = (gcnew System::Windows::Forms::Label());
@@ -387,8 +389,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->mainview = (gcnew System::Windows::Forms::Panel());
 			this->bottomBar = (gcnew System::Windows::Forms::Panel());
 			this->manageTabBuffer = (gcnew System::Windows::Forms::TabControl());
-			this->modifyPriceLabel = (gcnew System::Windows::Forms::Label());
-			this->modifyPriceField = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl->SuspendLayout();
 			this->accountTab->SuspendLayout();
 			this->loginPanel->SuspendLayout();
@@ -564,7 +564,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->ca_firstNameField->Margin = System::Windows::Forms::Padding(4);
 			this->ca_firstNameField->Name = L"ca_firstNameField";
 			this->ca_firstNameField->Size = System::Drawing::Size(604, 38);
-			this->ca_firstNameField->TabIndex = 12;
+			this->ca_firstNameField->TabIndex = 5;
 			// 
 			// switchToLogin
 			// 
@@ -573,7 +573,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->switchToLogin->Margin = System::Windows::Forms::Padding(4, 0, 4, 19);
 			this->switchToLogin->Name = L"switchToLogin";
 			this->switchToLogin->Size = System::Drawing::Size(604, 37);
-			this->switchToLogin->TabIndex = 16;
+			this->switchToLogin->TabIndex = 10;
 			this->switchToLogin->TabStop = true;
 			this->switchToLogin->Text = L"I already have an account";
 			this->switchToLogin->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -596,7 +596,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->createAccountButton->Margin = System::Windows::Forms::Padding(4);
 			this->createAccountButton->Name = L"createAccountButton";
 			this->createAccountButton->Size = System::Drawing::Size(304, 54);
-			this->createAccountButton->TabIndex = 3;
+			this->createAccountButton->TabIndex = 9;
 			this->createAccountButton->Text = L"Create Account";
 			this->createAccountButton->UseVisualStyleBackColor = true;
 			this->createAccountButton->Click += gcnew System::EventHandler(this, &Main::createAccountButton_Click);
@@ -649,7 +649,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->ca_lastNameField->Margin = System::Windows::Forms::Padding(4);
 			this->ca_lastNameField->Name = L"ca_lastNameField";
 			this->ca_lastNameField->Size = System::Drawing::Size(604, 38);
-			this->ca_lastNameField->TabIndex = 13;
+			this->ca_lastNameField->TabIndex = 6;
 			// 
 			// ca_email
 			// 
@@ -1587,6 +1587,22 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageModifyFlight->Size = System::Drawing::Size(445, 1246);
 			this->manageModifyFlight->TabIndex = 14;
 			// 
+			// modifyPriceField
+			// 
+			this->modifyPriceField->Location = System::Drawing::Point(190, 419);
+			this->modifyPriceField->Name = L"modifyPriceField";
+			this->modifyPriceField->Size = System::Drawing::Size(242, 38);
+			this->modifyPriceField->TabIndex = 33;
+			// 
+			// modifyPriceLabel
+			// 
+			this->modifyPriceLabel->Location = System::Drawing::Point(10, 419);
+			this->modifyPriceLabel->Margin = System::Windows::Forms::Padding(10, 20, 3, 0);
+			this->modifyPriceLabel->Name = L"modifyPriceLabel";
+			this->modifyPriceLabel->Size = System::Drawing::Size(174, 37);
+			this->modifyPriceLabel->TabIndex = 32;
+			this->modifyPriceLabel->Text = L"Price          $";
+			// 
 			// modifyColumnsField
 			// 
 			this->modifyColumnsField->Location = System::Drawing::Point(279, 358);
@@ -1986,22 +2002,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageTabBuffer->TabIndex = 8;
 			this->manageTabBuffer->Visible = false;
 			// 
-			// modifyPriceLabel
-			// 
-			this->modifyPriceLabel->Location = System::Drawing::Point(10, 419);
-			this->modifyPriceLabel->Margin = System::Windows::Forms::Padding(10, 20, 3, 0);
-			this->modifyPriceLabel->Name = L"modifyPriceLabel";
-			this->modifyPriceLabel->Size = System::Drawing::Size(174, 37);
-			this->modifyPriceLabel->TabIndex = 32;
-			this->modifyPriceLabel->Text = L"Price          $";
-			// 
-			// modifyPriceField
-			// 
-			this->modifyPriceField->Location = System::Drawing::Point(190, 419);
-			this->modifyPriceField->Name = L"modifyPriceField";
-			this->modifyPriceField->Size = System::Drawing::Size(242, 38);
-			this->modifyPriceField->TabIndex = 33;
-			// 
 			// Main
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
@@ -2173,14 +2173,19 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		//
 		// user clicks create account button
 		private: System::Void createAccountButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
+			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text, 'c');
 			if (user->validateEmail()) {
-				user->createUser();
-				showLogin();
+				if (user->createUser()) {
+					showLogin();
+				}
+				else {
+					createAccountStatus->Text = "Error";
+				}
 			}
 			else {
-				createAccountStatus->Text = "Error";
+				createAccountStatus->Text = "Email in use";
 			}
+			
 		}
 		// user clicks login link
 		private: System::Void switchToLogin_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
@@ -2297,7 +2302,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				}
 			}
 
-			double price = (double)marshal_as<std::string>(ticketPriceLabel->Text);
+			double price = std::stod(marshal_as<std::string>(ticketPriceLabel->Text));
 			double total = price * currentSeatsSelected;
 			total -= (total * discount);
 
@@ -2323,8 +2328,8 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
 
 			ticketQuantityLabel->Text = "0";
-			ticketPriceLabel->Text = (double)marshal_as<std:string>(flight.price);
-			discountLabel->Text = marshal_as<System::String^>(std::to_string((int)(100 * discount)) + "%")
+			ticketPriceLabel->Text = marshal_as<System::String^>(std::to_string(flight.price));
+			discountLabel->Text = marshal_as<System::String^>(std::to_string((int)(100 * discount)) + "%");
 
 			AirBooksDBHandler::Ticket ticket;
 
@@ -2344,7 +2349,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 					continue;
 				}
 				col->SizeType = SizeType::Percent;
-				col->Width = 100 / flight.columns;
+				col->Width = 100.0 / (double)flight.columns;
 			}
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
 			skip = true;
@@ -2354,7 +2359,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 					continue;
 				}
 				row->SizeType = SizeType::Percent;
-				row->Height = 100 / flight.rows;
+				row->Height = 100.0 / (double)flight.rows;
 			}
 
 			// find all tickets for this flight
@@ -2471,7 +2476,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// System::String^ managed = marshal_as<System::String^>(unmanaged);
 			// where (unmanaged) is the std::string to be converted.
 	
-			for (int i = 0; i < 1000; i++) {
+			for (int i = 0; i < 10; i++) {
 				AirBooksDBHandler::Flight flight;
 
 				//Query database for flight
@@ -2503,12 +2508,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			int flightId = dbHandler->findNewFlightID();
 			System::DateTime time = modifyDepartureField->Value;
 			System::String^ destination = modifyDestinationField->Text;
-			int rows = (int)marshal_as<std::string>(modifyRowsField->Text);
-			int cols = (int)marshal_as<std::string>(modifyColumnsField->Text);
-			double price = (double)marshal_as<std::string>(modifyPriceField->Text);
+			int rows = std::stoi(marshal_as<std::string>(modifyRowsField->Text));
+			int cols = std::stoi(marshal_as<std::string>(modifyColumnsField->Text));
+			double price = std::stod(marshal_as<std::string>(modifyPriceField->Text));
 			AirBooksDBHandler::Flight^ flight = gcnew AirBooksDBHandler::Flight(flightId, time, destination, rows, cols, price, 0.0, 0.0);
 
-			dbHandler->addFlight(flight);
+			dbHandler->addFlight((AirBooksDBHandler::Flight)flight);
 		}
 
 		// manager updates flight
@@ -2519,11 +2524,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			flight.destination = modifyDestinationField->Text;
 			flight.time = modifyDepartureField->Value;
-			flight.rows = (int)marshal_as<std::string>(modifyRowsField->Text);
-			flight.columns = (int)marshal_as<std::string>(modifyColumnsField->Text);
-			flight.price = (double)marshal_as<std::string>(modifyPriceField->Text);
+			flight.rows = std::stoi(marshal_as<std::string>(modifyRowsField->Text));
+			flight.columns = std::stoi(marshal_as<std::string>(modifyColumnsField->Text));
+			flight.price = std::stod(marshal_as<std::string>(modifyPriceField->Text));
 
-			dbHandler->updateFlight(flight);
+			dbHandler->cancelFlight(flightId);
+			dbHandler->addFlight(flight);
 
 			managerSearchFlightsButton_Click(sender, e);
 		}
@@ -2537,8 +2543,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			modifyIdLabel->Text = "0";
 			modifyDestinationLabel->Text = "";
-			System::DateTime placeholderTime = new System::DateTime();
-			modifyDepartureField->Value = placeholderTime.Now;
 
 			managerSearchFlightsButton_Click(sender, e);
 		}
@@ -2663,7 +2667,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				accType = 'm';
 			}
 
-			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text);
+			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text, accType);
 			if (user->validateEmail()) {
 				user->createUser();
 				createAccountStatus->Text = "Success";

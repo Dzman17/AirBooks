@@ -8,67 +8,61 @@ using namespace msclr::interop;
 using namespace std;
 
 // Account constructor
-User::User(System::String^ first, System::String^ last, System::String^ email, System::String^ password) {
-	this->account = gcnew AirBooksDBHandler::Account(email, password, first, last);
+User::User(System::String^ first, System::String^ last, System::String^ email, System::String^ password, char type) {
+	this->account = gcnew AirBooksDBHandler::Account(email, password, first, last, type);
 	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
-	this->firstName = first;
-	this->lastName = last;
-	this->email = email;
-	this->password = password;
 }
 
 // Account constructor (email and password only)
 User::User(System::String^ email, System::String^ password) {
-	firstName = "";
-	lastName = "";
-	this->email = email;
-	this->password = password;
+	this->account = gcnew AirBooksDBHandler::Account(email, password, "", "", 'c');
+	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
 }
 
 // TODO: COMMIT SETTERS TO DATABASE
 // firstName setter
 void User::setFirstName(System::String^ name) {
-	firstName = name;
+	account->firstName = name;
 }
 
 // lastName setter
 void User::setLastName(System::String^ name) {
-	lastName = name;
+	account->lastName = name;
 }
 
 // email setter
 void User::setEmail(System::String^ newEmail) {
-	email = newEmail;
+	account->email = newEmail;
 }
 
 // password setter
 void User::setPassword(System::String^ newPassword) {
-	password = newPassword;
+	account->password = newPassword;
 }
 
 // name getter (0 whole, 1 first, 2 last)
 System::String^ User::getName(int mode) {
 	switch (mode) {
 	case 0:
-		return firstName + " " + lastName;
+		return account->firstName + " " + account->lastName;
 	case 1:
-		return firstName;
+		return account->firstName;
 	case 2:
-		return lastName;
+		return account->lastName;
 	default:
-		return firstName + " " + lastName;
+		return account->firstName + " " + account->lastName;
 	}
-	
+
 }
 
 // email getter
 System::String^ User::getEmail() {
-	return email;
+	return account->email;
 }
 
 // password getter
 System::String^ User::getPassword() {
-	return password;
+	return account->password;
 }
 
 // account getter
@@ -78,41 +72,29 @@ AirBooksDBHandler::Account^ User::getAccount() {
 
 // Checks if user object fields match one in the system
 bool User::authenticate() {
-	ifstream fin("credentials.txt");
-	string ffirst, flast, femail, fpassword;
-
-	while (fin) {
-		getline(fin, femail, ',');
-		getline(fin, fpassword, ',');
-		getline(fin, ffirst, ',');
-		getline(fin, flast);
-		if (marshal_as<System::String^>(femail) == email && marshal_as<System::String^>(fpassword) == password) {
-			firstName = marshal_as<System::String^>(ffirst);
-			lastName = marshal_as<System::String^>(flast);
-			return true;
-		}
-	}
-	return false;
+	User^ temp = gcnew User(getEmail(), getPassword());
+	temp->account = dbHandler->getAccountInfo(account->email, account->password);
+	if (temp->account->email == "none")
+		return false;
+	else
+		account->firstName = temp->account->firstName;
+		account->lastName = temp->account->lastName;
+		account->accountType = temp->account->accountType;
+		return true;
 }
 
 // Checks if the email is already in use
 bool User::validateEmail() {
-	ifstream fin("credentials.txt");
-	string ffirst, flast, femail, fpassword;
-
-	while (fin) {
-		getline(fin, femail, ',');
-		getline(fin, fpassword, ',');
-		getline(fin, ffirst, ',');
-		getline(fin, flast);
-		if (marshal_as<System::String^>(femail) == email) {
-			return false;
-		}
-	}
-	return true;
+	return !dbHandler->checkEmail(account->email);
 }
 
 // Commits user fields to system
-void User::createUser() {
-	bool success = dbHandler->createAccount((AirBooksDBHandler::Account)account);
+bool User::createUser() {
+	System::Console::WriteLine(account->email);
+	System::Console::WriteLine(account->password);
+	System::Console::WriteLine(account->firstName);
+	System::Console::WriteLine(account->lastName);
+	System::Console::WriteLine(account->accountType);
+	System::Console::WriteLine(dbHandler->createAccount((AirBooksDBHandler::Account)account));
+	return false;
 }
