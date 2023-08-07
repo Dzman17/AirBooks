@@ -39,7 +39,7 @@ namespace AirBooksDBHandler
 
     public struct Flight {
         public Flight(int flightID, DateTime time, string destination, int rows, int columns, 
-                    int price, double luggageMax, double currentLuggage) { 
+                    double price, double luggageMax, double currentLuggage) { 
             this.flightID = flightID;
             this.time = time;
             this.destination = destination;
@@ -55,7 +55,7 @@ namespace AirBooksDBHandler
         public string destination;
         public int rows;
         public int columns;
-        public int price;
+        public double price;
         public double luggageMax;
         public double currentLuggage;
     }
@@ -201,7 +201,7 @@ namespace AirBooksDBHandler
                     reader.Read();
 
                 Flight flight = new Flight(reader.GetInt32(0), reader.GetDateTime(1), reader.GetString(2),
-                                        reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5),
+                                        reader.GetInt32(3), reader.GetInt32(4), reader.GetDouble(5),
                                         reader.GetDouble(6), reader.GetDouble(7));
                 reader.Close();
                 return flight;
