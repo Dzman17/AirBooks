@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\illus\Desktop\Development\C++\AirBooks\x64\Debug\AirBooks.exe</FullPath>
+      <FullPath>C:\Users\wdeas\source\repos\AirBooks\x64\Debug\AirBooks.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\illus\Desktop\Development\C++\AirBooks\x64\Debug\AirBooks.exe.config</FullPath>
+      <FullPath>C:\Users\wdeas\source\repos\AirBooks\x64\Debug\AirBooks.exe.config</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

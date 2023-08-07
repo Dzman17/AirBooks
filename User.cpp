@@ -19,16 +19,21 @@ User::User(System::String^ first, System::String^ last, System::String^ email, S
 
 // Account constructor (email and password only)
 User::User(System::String^ email, System::String^ password) {
+	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
 	firstName = "";
 	lastName = "";
 	this->email = email;
 	this->password = password;
+	this->account = gcnew AirBooksDBHandler::Account(email, password, firstName, lastName);
 }
 
 // TODO: COMMIT SETTERS TO DATABASE
 // firstName setter
 void User::setFirstName(System::String^ name) {
 	firstName = name;
+	this->account = gcnew AirBooksDBHandler::Account(email, password, firstName, lastName);
+	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
+	dbHandler->updateAccountInfo(AirBooksDBHandler::Account());
 }
 
 // lastName setter
@@ -78,21 +83,13 @@ AirBooksDBHandler::Account^ User::getAccount() {
 
 // Checks if user object fields match one in the system
 bool User::authenticate() {
-	ifstream fin("credentials.txt");
-	string ffirst, flast, femail, fpassword;
-
-	while (fin) {
-		getline(fin, femail, ',');
-		getline(fin, fpassword, ',');
-		getline(fin, ffirst, ',');
-		getline(fin, flast);
-		if (marshal_as<System::String^>(femail) == email && marshal_as<System::String^>(fpassword) == password) {
-			firstName = marshal_as<System::String^>(ffirst);
-			lastName = marshal_as<System::String^>(flast);
-			return true;
-		}
-	}
-	return false;
+	User^ temp = gcnew User(getEmail(), getPassword());
+	temp->account = dbHandler->getAccountInfo(email, password);
+	System::Console::WriteLine(temp->account->email);
+	if (temp->account->email == "none")
+		return false;
+	else
+		return true;
 }
 
 // Checks if the email is already in use

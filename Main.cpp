@@ -17,6 +17,7 @@ int main() {
 	form.closeManageTab();
 
 	Application::Run(% form);
+	
 
 	testDBH();
 }
