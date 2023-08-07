@@ -11,13 +11,11 @@ using namespace AirBooksDBHandler;
 // Account constructor
 User::User(System::String^ first, System::String^ last, System::String^ email, System::String^ password, char type) {
 	this->account = gcnew AirBooksDBHandler::Account(email, password, first, last, type);
-	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
 }
 
 // Account constructor (email and password only)
 User::User(System::String^ email, System::String^ password) {
 	this->account = gcnew AirBooksDBHandler::Account(email, password, "", "", 'c');
-	this->dbHandler = gcnew AirBooksDBHandler::DBHandler();
 }
 
 // TODO: COMMIT SETTERS TO DATABASE
@@ -74,7 +72,7 @@ AirBooksDBHandler::Account^ User::getAccount() {
 // Checks if user object fields match one in the system
 bool User::authenticate() {
 	User^ temp = gcnew User(getEmail(), getPassword());
-	temp->account = dbHandler->getAccountInfo(account->email, account->password);
+	temp->account = dbHandler.getAccountInfo(account->email, account->password);
 	if (temp->account->email == "none")
 		return false;
 	else
@@ -86,10 +84,10 @@ bool User::authenticate() {
 
 // Checks if the email is already in use
 bool User::validateEmail() {
-	return !dbHandler->checkEmail(account->email);
+	return !dbHandler.checkEmail(account->email);
 }
 
 // Commits user fields to system
 bool User::createUser() {
-	return dbHandler->createAccount((AirBooksDBHandler::Account)account);
+	return dbHandler.createAccount((AirBooksDBHandler::Account)account);
 }

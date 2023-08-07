@@ -2051,7 +2051,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		}
 #pragma endregion
 		User^ user;
-		AirBooksDBHandler::DBHandler^ dbHandler;
+		AirBooksDBHandler::DBHandler dbHandler;
 		AirBooksDBHandler::Account^ account;
 		double discount = 0.0;
 
@@ -2135,7 +2135,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			user = gcnew User(ln_emailField->Text, ln_passwordField->Text);
 			if (user->authenticate()) {
 				// success, login and switch to account view
-				dbHandler = gcnew AirBooksDBHandler::DBHandler();
 				account = user->getAccount();
 
 				if (account->accountType == 'c') {
@@ -2269,13 +2268,13 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// find all tickets for this user
 			for (int i = 0; i < 1000; i++) {
 				//Query database
-				ticket = dbHandler->getTicket(user->getEmail(), i);
+				ticket = dbHandler.getTicket(user->getEmail(), i);
 
 				if (ticket.flightID == -1) {
 					return;
 				}
 
-				flight = dbHandler->getFlight(ticket.flightID);
+				flight = dbHandler.getFlight(ticket.flightID);
 
 				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
 				sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
@@ -2325,7 +2324,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)button->Tag;
-			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			ticketQuantityLabel->Text = "0";
 			ticketPriceLabel->Text = marshal_as<System::String^>(std::to_string(flight.price));
@@ -2364,7 +2363,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			// find all tickets for this flight
 			for (int i = 0; i < 1000; i++) {
-				ticket = dbHandler->getTicket(flightId, i);
+				ticket = dbHandler.getTicket(flightId, i);
 
 				if (ticket.flightID == -1) {
 					continue;
@@ -2455,11 +2454,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		// user clicks search button
 		private: System::Void searchFlightsButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			// wipes the list first
-			clearFlights();
+			/*clearFlights();
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
 			for each (RowStyle^ row in rows) {
 				row->Height = 0;
-			}
+			}*/
 
 			// user-defined search criteria
 			System::String^ destination = destinationField->Text;
@@ -2476,22 +2475,20 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// System::String^ managed = marshal_as<System::String^>(unmanaged);
 			// where (unmanaged) is the std::string to be converted.
 	
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 1000; i++) {
 				AirBooksDBHandler::Flight flight;
 
 				//Query database for flight
-				flight = dbHandler->getFlight(destination, minDate, maxDate, i);
-
-				//Query database for number of tickets currently booked in flight
-				int booked = dbHandler->getOccupancy(flight.flightID);
-				int seats = (flight.columns * flight.rows) - booked;
-
+				flight = dbHandler.getFlight(destination, minDate, maxDate, i);
 				if (flight.flightID == -1) {
 					return;
 				}
-				else {
-					postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
-				}
+
+				//Query database for number of tickets currently booked in flight
+				int booked = dbHandler.getOccupancy(flight.flightID);
+				int seats = (flight.columns * flight.rows) - booked;
+				
+				postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
 			}
 		}
 
@@ -2505,7 +2502,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		//
 		// manager creates new flight
 		private: System::Void modifyCreate_Click(System::Object^ sender, System::EventArgs^ e) {
-			int flightId = dbHandler->findNewFlightID();
+			int flightId = dbHandler.findNewFlightID();
 			System::DateTime time = modifyDepartureField->Value;
 			System::String^ destination = modifyDestinationField->Text;
 			int rows = std::stoi(marshal_as<std::string>(modifyRowsField->Text));
@@ -2513,14 +2510,14 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			double price = std::stod(marshal_as<std::string>(modifyPriceField->Text));
 			AirBooksDBHandler::Flight^ flight = gcnew AirBooksDBHandler::Flight(flightId, time, destination, rows, cols, price, 0.0, 0.0);
 
-			dbHandler->addFlight((AirBooksDBHandler::Flight)flight);
+			dbHandler.addFlight((AirBooksDBHandler::Flight)flight);
 		}
 
 		// manager updates flight
 		private: System::Void managerUpdateFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)button->Tag;
-			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			flight.destination = modifyDestinationField->Text;
 			flight.time = modifyDepartureField->Value;
@@ -2528,8 +2525,8 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			flight.columns = std::stoi(marshal_as<std::string>(modifyColumnsField->Text));
 			flight.price = std::stod(marshal_as<std::string>(modifyPriceField->Text));
 
-			dbHandler->cancelFlight(flightId);
-			dbHandler->addFlight(flight);
+			dbHandler.cancelFlight(flightId);
+			dbHandler.addFlight(flight);
 
 			managerSearchFlightsButton_Click(sender, e);
 		}
@@ -2539,7 +2536,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)button->Tag;
 
-			dbHandler->cancelFlight(flightId);
+			dbHandler.cancelFlight(flightId);
 
 			modifyIdLabel->Text = "0";
 			modifyDestinationLabel->Text = "";
@@ -2551,7 +2548,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		private: System::Void managerSelectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)button->Tag;
-			AirBooksDBHandler::Flight flight = dbHandler->getFlight(flightId);
+			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			modifyIdLabel->Text = marshal_as<System::String^>(std::to_string(flightId));
 			modifyDestinationLabel->Text = flight.destination;
@@ -2639,10 +2636,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				AirBooksDBHandler::Flight flight;
 
 				//Query database for flight
-				flight = dbHandler->getFlight(destination, minDate, maxDate, i);
+				flight = dbHandler.getFlight(destination, minDate, maxDate, i);
 
 				//Query database for number of tickets currently booked in flight
-				int booked = dbHandler->getOccupancy(flight.flightID);
+				int booked = dbHandler.getOccupancy(flight.flightID);
 				int seats = (flight.columns * flight.rows) - booked;
 
 				if (flight.flightID == -1) {
