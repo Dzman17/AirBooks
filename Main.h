@@ -1226,12 +1226,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 5)));
 			this->flightsList->Location = System::Drawing::Point(30, 197);
 			this->flightsList->Margin = System::Windows::Forms::Padding(4);
-			this->flightsList->MaximumSize = System::Drawing::Size(1200, 1017);
+			this->flightsList->MaximumSize = System::Drawing::Size(1200, 1000);
 			this->flightsList->MinimumSize = System::Drawing::Size(1200, 283);
 			this->flightsList->Name = L"flightsList";
 			this->flightsList->RowCount = 1;
 			this->flightsList->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->flightsList->Size = System::Drawing::Size(1200, 1017);
+			this->flightsList->Size = System::Drawing::Size(1200, 1000);
 			this->flightsList->TabIndex = 9;
 			// 
 			// purchaseTicket
@@ -1925,12 +1925,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				5)));
 			this->manageFlightsList->Location = System::Drawing::Point(51, 197);
 			this->manageFlightsList->Margin = System::Windows::Forms::Padding(4);
-			this->manageFlightsList->MaximumSize = System::Drawing::Size(1200, 1017);
+			this->manageFlightsList->MaximumSize = System::Drawing::Size(1200, 1000);
 			this->manageFlightsList->MinimumSize = System::Drawing::Size(1200, 283);
 			this->manageFlightsList->Name = L"manageFlightsList";
 			this->manageFlightsList->RowCount = 1;
 			this->manageFlightsList->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->manageFlightsList->Size = System::Drawing::Size(1200, 1017);
+			this->manageFlightsList->Size = System::Drawing::Size(1200, 1000);
 			this->manageFlightsList->TabIndex = 9;
 			// 
 			// companyLogo
@@ -2335,7 +2335,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			checkBox->Enabled = !occupied;
 			checkBox->Click += gcnew System::EventHandler(this, &Main::selectSeat_Click);
-			checkBox->Dock = DockStyle::Fill;
+			checkBox->Dock = DockStyle::Top;
 
 			planeTable->Controls->Add(checkBox, col, row);
 		}
