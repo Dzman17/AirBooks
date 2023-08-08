@@ -3,7 +3,6 @@
 public ref class User {
 protected:
 	AirBooksDBHandler::Account^ account;
-	AirBooksDBHandler::DBHandler dbHandler;
 	int CCNumber;
 	bool valid;
 public:

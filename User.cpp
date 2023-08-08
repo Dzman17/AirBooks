@@ -21,21 +21,25 @@ User::User(System::String^ email, System::String^ password) {
 // TODO: COMMIT SETTERS TO DATABASE
 // firstName setter
 void User::setFirstName(System::String^ name) {
+	AirBooksDBHandler::DBHandler dbHandler;
 	account->firstName = name;
 }
 
 // lastName setter
 void User::setLastName(System::String^ name) {
+	AirBooksDBHandler::DBHandler dbHandler;
 	account->lastName = name;
 }
 
 // email setter
 void User::setEmail(System::String^ newEmail) {
+	AirBooksDBHandler::DBHandler dbHandler;
 	account->email = newEmail;
 }
 
 // password setter
 void User::setPassword(System::String^ newPassword) {
+	AirBooksDBHandler::DBHandler dbHandler;
 	account->password = newPassword;
 }
 
@@ -71,6 +75,7 @@ AirBooksDBHandler::Account^ User::getAccount() {
 
 // Checks if user object fields match one in the system
 bool User::authenticate() {
+	AirBooksDBHandler::DBHandler dbHandler;
 	User^ temp = gcnew User(getEmail(), getPassword());
 	temp->account = dbHandler.getAccountInfo(account->email, account->password);
 	if (temp->account->email == "none")
@@ -84,10 +89,12 @@ bool User::authenticate() {
 
 // Checks if the email is already in use
 bool User::validateEmail() {
+	AirBooksDBHandler::DBHandler dbHandler;
 	return !dbHandler.checkEmail(account->email);
 }
 
 // Commits user fields to system
 bool User::createUser() {
+	AirBooksDBHandler::DBHandler dbHandler;
 	return dbHandler.createAccount((AirBooksDBHandler::Account)account);
 }
