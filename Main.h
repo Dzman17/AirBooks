@@ -1162,7 +1162,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->f_occupancyHeader->Name = L"f_occupancyHeader";
 			this->f_occupancyHeader->Size = System::Drawing::Size(175, 46);
 			this->f_occupancyHeader->TabIndex = 3;
-			this->f_occupancyHeader->Text = L"Occupancy";
+			this->f_occupancyHeader->Text = L"Availability";
 			// 
 			// departureTimeLabel
 			// 
@@ -1855,7 +1855,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(179, 46);
 			this->label10->TabIndex = 3;
-			this->label10->Text = L"Occupancy";
+			this->label10->Text = L"Availability";
 			// 
 			// label11
 			// 
@@ -2147,6 +2147,36 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				showAccount();
 				// unhide flights and tickets pages
 				noAccount->Hide();
+
+				// for each ticket, call the postTicket() function-
+			// postTicket() returns nothing and takes in four managed strings (System::String^) as parameters.
+			// The order of these parameters is ticketId, seat, destination, departureTime
+			// postTicket() will take these arguments and post a new ticket entry on the ticket list.
+
+			// wipes the list first
+				clearTickets();
+
+				AirBooksDBHandler::Ticket ticket;
+				AirBooksDBHandler::Flight flight;
+				System::String^ fID;
+				System::String^ sID;
+
+				// find all tickets for this user
+				for (int i = 0; i < 1000; i++) {
+					//Query database
+					ticket = dbHandler.getTicket(user->getEmail(), i);
+
+					if (ticket.flightID == -1) {
+						return;
+					}
+
+					flight = dbHandler.getFlight(ticket.flightID);
+
+					fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
+					sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+
+					postTicket(fID, sID, flight.destination, flight.time.ToString());
+				}
 			}
 			else {
 				loginStatus->Text = "Error";
@@ -2478,7 +2508,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				}
 
 				//Query database for number of tickets currently booked in flight
-				int booked = dbHandler.getOccupancy(flight.flightID);
+				int booked = dbHandler.getAvailability(flight.flightID);
 				int seats = (flight.columns * flight.rows) - booked;
 				
 				postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
@@ -2660,7 +2690,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				}
 
 				//Query database for number of tickets currently booked in flight
-				int booked = dbHandler.getOccupancy(flight.flightID);
+				int booked = dbHandler.getAvailability(flight.flightID);
 				int seats = (flight.columns * flight.rows) - booked;
 			
 				managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
