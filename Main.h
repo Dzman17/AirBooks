@@ -2459,11 +2459,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		// user clicks search button
 		private: System::Void searchFlightsButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			// wipes the list first
-			/*clearFlights();
+			clearFlights();
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
 			for each (RowStyle^ row in rows) {
 				row->Height = 0;
-			}*/
+			}
 
 			// user-defined search criteria
 			System::String^ destination = destinationField->Text;
@@ -2515,7 +2515,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			double price = std::stod(marshal_as<std::string>(modifyPriceField->Text));
 			AirBooksDBHandler::Flight^ flight = gcnew AirBooksDBHandler::Flight(flightId, time, destination, rows, cols, price, 0.0, 0.0);
 
-			dbHandler.addFlight((AirBooksDBHandler::Flight)flight);
+			if (dbHandler.addFlight((AirBooksDBHandler::Flight)flight)) {
+				modifyIdField->Text = marshal_as<System::String^>(std::to_string(flightId));
+			}
+			else {
+				modifyIdField->Text = "ERROR";
+			}
 		}
 
 		// manager updates flight
@@ -2637,22 +2642,22 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// System::String^ managed = marshal_as<System::String^>(unmanaged);
 			// where (unmanaged) is the std::string to be converted.
 
-			for (int i = 0; i < 1000; i++) {
+			for (int i = 0; i < 10; i++) {
 				AirBooksDBHandler::Flight flight;
 
 				//Query database for flight
 				flight = dbHandler.getFlight(destination, minDate, maxDate, i);
 
+				if (flight.flightID == -1) {
+					System::Console::WriteLine("End of list");
+					return;
+				}
+
 				//Query database for number of tickets currently booked in flight
 				int booked = dbHandler.getOccupancy(flight.flightID);
 				int seats = (flight.columns * flight.rows) - booked;
-
-				if (flight.flightID == -1) {
-					return;
-				}
-				else {
-					managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
-				}
+			
+				managerPostFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
 			}
 		}
 
