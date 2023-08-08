@@ -2005,7 +2005,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->MinimumSize = System::Drawing::Size(2560, 1440);
 			this->Name = L"Main";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->Text = L"Login";
+			this->Text = L"Air-Books";
 			this->tabControl->ResumeLayout(false);
 			this->accountTab->ResumeLayout(false);
 			this->loginPanel->ResumeLayout(false);
