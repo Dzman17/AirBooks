@@ -2220,14 +2220,17 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		// user clicks update firstName
 		private: System::Void firstNameUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
 			user->setFirstName(firstNameNew->Text);
+			firstNameCurrent->Text = "First Name: " + firstNameNew->Text;
 		}
 		// user clicks update lastName
 		private: System::Void lastNameUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
 			user->setLastName(lastNameNew->Text);
+			lastNameCurrent->Text = "Last Name: " + lastNameNew->Text;
 		}
 		// user clicks update email
 		private: System::Void emailUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
 			user->setEmail(emailNew->Text);
+			emailCurrent->Text = "Email: " + emailNew->Text;
 		}
 		// user clicks update password
 		private: System::Void passwordUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
