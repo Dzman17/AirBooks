@@ -172,12 +172,7 @@ namespace AirBooksDBHandler
          * using position as an itorator starting at 0
          */
         public Flight getFlight(string destination, DateTime start, DateTime end, int position) {
-            /*
-            string query = ("from `" + db + "`.`flights` where `destination`>='" + destination + "' and '" + earliest +
-                        "'<=`time` and `time`<='" + latest + "'");
-            Flight flight = searchFlight(query, position);
-            return flight;
-            */if (flights == null) {
+            if (flights == null) {
                 string earliest = formatTime(start);
                 string latest = formatTime(end);
                 string query = ("from `" + db + "`.`flights` where `destination`>='" + destination + "' and '" + earliest +
@@ -227,25 +222,7 @@ namespace AirBooksDBHandler
          * Used internally to reduce redundancy
          */
         private void searchFlights(string query) {
-            /*try {
-                MySqlCommand command = new MySqlCommand(getQuery + query, con);
-                MySqlDataReader reader = command.ExecuteReader();
-                for (int i = -1; i < position; i++)
-                    reader.Read();
-
-                Flight flight = new Flight(reader.GetInt32(0), reader.GetDateTime(1), reader.GetString(2),
-                                        reader.GetInt32(3), reader.GetInt32(4), reader.GetDouble(5),
-                                        reader.GetDouble(6), reader.GetDouble(7));
-                if (flight.Equals(oldFlight))
-                    throw new Exception();
-                else
-                    oldFlight = flight;
-
-                reader.Close();
-                return flight;
-            }
-            catch (Exception ex) { oldFlight = new Flight(-1, new DateTime(), "none", 0, 0, 0, 0, 0); return oldFlight; }
-            */try {
+            //try {
                 using (MySqlCommand command = new MySqlCommand(numQuery + query, con)) {
                     using (MySqlDataReader reader = command.ExecuteReader()) {
                         reader.Read();
@@ -255,7 +232,7 @@ namespace AirBooksDBHandler
                 using (MySqlCommand command = new MySqlCommand(getQuery + query, con)) {
                     using (MySqlDataReader reader = command.ExecuteReader()) {
                         int i = 0;
-                        while (reader.Read() && i < tickets.Length) {
+                        while (reader.Read() && i < flights.Length) {
                             flights[i] = new Flight(reader.GetInt32(0), reader.GetDateTime(1), reader.GetString(2),
                                          reader.GetInt32(3), reader.GetInt32(4), reader.GetDouble(5),
                                          reader.GetDouble(6), reader.GetDouble(7));
@@ -263,8 +240,8 @@ namespace AirBooksDBHandler
                         }
                     }
                 }
-            }
-            catch (Exception ex) { Console.WriteLine("Error in searchFlights"); }
+            //}
+            //catch (Exception ex) { Console.WriteLine("Error in searchFlights"); }
         }
 
         public int findNewFlightID() {
@@ -323,18 +300,18 @@ namespace AirBooksDBHandler
 
         /* Returns how many seats have filled on a given flight
          */
-        public int getOccupancy(int flightID) {
-            try
-            {
-                string query = "`" + db + "`.`tickets` where `flightID`=" + flightID;
-                int occupancy;
+        public int getAvailability(int flightID) {
+            try {
+                string query = "from `" + db + "`.`tickets` where `flightID`=" + flightID;
+                int filledOccupancy;
                 using (MySqlCommand command = new MySqlCommand(numQuery + query, con)) {
                     using (MySqlDataReader reader = command.ExecuteReader()) {
                         reader.Read();
-                        occupancy = reader.GetInt32(0);
+                        filledOccupancy = reader.GetInt32(0);
                     }
                 }
-                return occupancy;
+                Flight flight = getFlight(flightID);
+                return (flight.rows * flight.columns) - filledOccupancy;
             }
             catch (Exception ex) { return -1; }
         }
