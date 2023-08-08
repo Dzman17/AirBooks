@@ -1720,7 +1720,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->modifyIdField->Name = L"modifyIdField";
 			this->modifyIdField->Size = System::Drawing::Size(235, 37);
 			this->modifyIdField->TabIndex = 1;
-			this->modifyIdField->Text = L"0";
 			// 
 			// modifyIdLabel
 			// 
@@ -2498,9 +2497,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		//
 		// Manager Page
 		//
+		int currentFlightId = -1;
 		// manager creates new flight
 		private: System::Void modifyCreate_Click(System::Object^ sender, System::EventArgs^ e) {
 			int flightId = dbHandler.findNewFlightID();
+			System::Console::WriteLine(flightId);
 			System::DateTime time = modifyDepartureField->Value;
 			System::String^ destination = modifyDestinationField->Text;
 			int rows = std::stoi(marshal_as<std::string>(modifyRowsField->Text));
@@ -2509,6 +2510,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			AirBooksDBHandler::Flight^ flight = gcnew AirBooksDBHandler::Flight(flightId, time, destination, rows, cols, price, 0.0, 0.0);
 
 			if (dbHandler.addFlight((AirBooksDBHandler::Flight)flight)) {
+				currentFlightId = flightId;
 				modifyIdField->Text = marshal_as<System::String^>(std::to_string(flightId));
 			}
 			else {
@@ -2518,8 +2520,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 		// manager updates flight
 		private: System::Void managerUpdateFlight_Click(System::Object^ sender, System::EventArgs^ e) {
-			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
-			int flightId = (int)button->Tag;
+			if (currentFlightId == -1) {
+				return;
+			}
+
+			int flightId = currentFlightId;
 			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			flight.destination = modifyDestinationField->Text;
@@ -2536,13 +2541,19 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 		// manager cancels a flight
 		private: System::Void managerDeleteFlight_Click(System::Object^ sender, System::EventArgs^ e) {
-			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
-			int flightId = (int)button->Tag;
+			if (currentFlightId == -1) {
+				return;
+			}
 
+			int flightId = currentFlightId;
 			dbHandler.cancelFlight(flightId);
 
-			modifyIdLabel->Text = "0";
-			modifyDestinationLabel->Text = "";
+			modifyIdField->Text = "";
+			modifyDestinationField->Text = "";
+			modifyRowsField->Text = "";
+			modifyColumnsField->Text = "";
+
+			currentFlightId = -1;
 
 			managerSearchFlightsButton_Click(sender, e);
 		}
@@ -2551,6 +2562,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		private: System::Void managerSelectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)button->Tag;
+			currentFlightId = flightId;
 			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			modifyIdLabel->Text = marshal_as<System::String^>(std::to_string(flightId));
