@@ -193,7 +193,7 @@ private: System::Windows::Forms::Label^ h_divider3;
 private: System::Windows::Forms::Panel^ manageSearchFlights;
 
 
-private: System::Windows::Forms::Label^ label2;
+
 private: System::Windows::Forms::Label^ label3;
 private: System::Windows::Forms::Label^ label4;
 private: System::Windows::Forms::DateTimePicker^ manageMaxTime;
@@ -234,6 +234,7 @@ private: System::Windows::Forms::Label^ modifyColumnsLabel;
 private: System::Windows::Forms::Label^ modifyRowsLabel;
 private: System::Windows::Forms::TextBox^ modifyPriceField;
 private: System::Windows::Forms::Label^ modifyPriceLabel;
+
 
 
 
@@ -368,7 +369,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->modifyIdField = (gcnew System::Windows::Forms::Label());
 			this->modifyIdLabel = (gcnew System::Windows::Forms::Label());
 			this->manageSearchFlights = (gcnew System::Windows::Forms::Panel());
-			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->manageMaxTime = (gcnew System::Windows::Forms::DateTimePicker());
@@ -1217,6 +1217,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->flightsList->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->flightsList->AutoScroll = true;
 			this->flightsList->AutoSize = true;
+			this->flightsList->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			this->flightsList->ColumnCount = 6;
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 35)));
@@ -1732,7 +1733,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// 
 			// manageSearchFlights
 			// 
-			this->manageSearchFlights->Controls->Add(this->label2);
 			this->manageSearchFlights->Controls->Add(this->label3);
 			this->manageSearchFlights->Controls->Add(this->label4);
 			this->manageSearchFlights->Controls->Add(this->manageMaxTime);
@@ -1753,17 +1753,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageSearchFlights->Name = L"manageSearchFlights";
 			this->manageSearchFlights->Size = System::Drawing::Size(1305, 1245);
 			this->manageSearchFlights->TabIndex = 13;
-			// 
-			// label2
-			// 
-			this->label2->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->label2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->label2->Location = System::Drawing::Point(1273, 10);
-			this->label2->Margin = System::Windows::Forms::Padding(0);
-			this->label2->MaximumSize = System::Drawing::Size(2, 4000);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(2, 1222);
-			this->label2->TabIndex = 20;
 			// 
 			// label3
 			// 
@@ -1906,10 +1895,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// 
 			this->manageDestinationField->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->manageDestinationField->FormattingEnabled = true;
-			this->manageDestinationField->Items->AddRange(gcnew cli::array< System::Object^  >(21) {
+			this->manageDestinationField->Items->AddRange(gcnew cli::array< System::Object^  >(22) {
 				L"New York City", L"Los Angeles",
-					L"Chicago", L"Houston", L"Phoenix", L"Philadelphia", L"San Diego", L"Dallas", L"Austin", L"Washington DC", L"Boston", L"Las Vegas",
-					L"Detroit", L"Baltimore", L"Kansas City", L"Atlanta", L"Miami", L"Milwaukee", L"Portland", L"Seattle", L"Indianapolis"
+					L"Chicago", L"Houston", L"Phoenix", L"Philadelphia", L"San Diego", L"Dallas", L"Austin", L"Erie", L"Washington DC", L"Boston",
+					L"Las Vegas", L"Detroit", L"Baltimore", L"Kansas City", L"Atlanta", L"Miami", L"Milwaukee", L"Portland", L"Seattle", L"Indianapolis"
 			});
 			this->manageDestinationField->Location = System::Drawing::Point(51, 85);
 			this->manageDestinationField->Margin = System::Windows::Forms::Padding(4);
@@ -1922,6 +1911,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageFlightsList->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->manageFlightsList->AutoScroll = true;
 			this->manageFlightsList->AutoSize = true;
+			this->manageFlightsList->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			this->manageFlightsList->ColumnCount = 6;
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				15)));
@@ -2424,13 +2414,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			System::String^ flightIdString = marshal_as<System::String^>(std::to_string(flightId));
 
-			idLabel->Text = flightIdString;
-			dsLabel->Text = destination;
-			dpLabel->Text = departure;
-			ocLabel->Text = occupancy;
-			prLabel->Text = marshal_as<System::String^>('$' + stream.str());
-			selectButton->Text = "";
-
 			idLabel->Dock = DockStyle::Top;
 			dsLabel->Dock = DockStyle::Top;
 			dpLabel->Dock = DockStyle::Top;
@@ -2438,11 +2421,24 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			prLabel->Dock = DockStyle::Top;
 			selectButton->Dock = DockStyle::Top;
 
+			idLabel->Text = flightIdString;
+			dsLabel->Text = destination;
+			dpLabel->Text = departure;
+			ocLabel->Text = occupancy;
+			prLabel->Text = marshal_as<System::String^>('$' + stream.str());
+			selectButton->Text = "";
+
+			idLabel->AutoEllipsis = true;
+			dsLabel->AutoEllipsis = true;
+			dpLabel->AutoEllipsis = true;
+			ocLabel->AutoEllipsis = true;
+			prLabel->AutoEllipsis = true;
+
 			selectButton->Tag = flightId;
 			selectButton->Click += gcnew System::EventHandler(this, &Main::selectFlight_Click);
 
 			flightsList->RowCount++;
-			flightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
+			flightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 28.0));
 			flightsList->Controls->Add(idLabel, 0, flightsList->RowCount - 1);
 			flightsList->Controls->Add(dsLabel, 1, flightsList->RowCount - 1);
 			flightsList->Controls->Add(dpLabel, 2, flightsList->RowCount - 1);
@@ -2585,6 +2581,13 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			stream << price;
 
 			System::String^ flightIdString = marshal_as<System::String^>(std::to_string(flightId));
+			/*
+			idLabel->Dock = DockStyle::Top;
+			dsLabel->Dock = DockStyle::Top;
+			dpLabel->Dock = DockStyle::Top;
+			ocLabel->Dock = DockStyle::Top;
+			prLabel->Dock = DockStyle::Top;
+			selectButton->Dock = DockStyle::Top;*/
 
 			idLabel->Text = flightIdString;
 			dsLabel->Text = destination;
@@ -2593,18 +2596,17 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			prLabel->Text = marshal_as<System::String^>('$' + stream.str());
 			selectButton->Text = "";
 
-			idLabel->Dock = DockStyle::Top;
-			dsLabel->Dock = DockStyle::Top;
-			dpLabel->Dock = DockStyle::Top;
-			ocLabel->Dock = DockStyle::Top;
-			prLabel->Dock = DockStyle::Top;
-			selectButton->Dock = DockStyle::Top;
+			idLabel->AutoEllipsis = true;
+			dsLabel->AutoEllipsis = true;
+			dpLabel->AutoEllipsis = true;
+			ocLabel->AutoEllipsis = true;
+			prLabel->AutoEllipsis = true;
 
 			selectButton->Tag = flightId;
 			selectButton->Click += gcnew System::EventHandler(this, &Main::managerSelectFlight_Click);
 
 			manageFlightsList->RowCount++;
-			manageFlightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 30.0));
+			manageFlightsList->RowStyles->Add(gcnew RowStyle(SizeType::Absolute, 28.0));
 			manageFlightsList->Controls->Add(idLabel, 0, manageFlightsList->RowCount - 1);
 			manageFlightsList->Controls->Add(dsLabel, 1, manageFlightsList->RowCount - 1);
 			manageFlightsList->Controls->Add(dpLabel, 2, manageFlightsList->RowCount - 1);
