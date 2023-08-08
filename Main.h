@@ -1358,19 +1358,20 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// 
 			this->planeTable->AutoScroll = true;
 			this->planeTable->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
-			this->planeTable->ColumnCount = 7;
-			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 30)));
+			this->planeTable->ColumnCount = 6;
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
+			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 20)));
+			this->planeTable->GrowStyle = System::Windows::Forms::TableLayoutPanelGrowStyle::FixedSize;
 			this->planeTable->Location = System::Drawing::Point(6, 3);
+			this->planeTable->MaximumSize = System::Drawing::Size(683, 1211);
 			this->planeTable->Name = L"planeTable";
-			this->planeTable->RowCount = 2;
+			this->planeTable->RowCount = 1;
 			this->planeTable->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 30)));
-			this->planeTable->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->planeTable->Size = System::Drawing::Size(683, 1211);
 			this->planeTable->TabIndex = 0;
 			// 
@@ -2292,12 +2293,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				}
 			}
 
-			double price = std::stod(marshal_as<std::string>(ticketPriceLabel->Text));
+			double price = (double)ticketPriceLabel->Tag;
 			double total = price * currentSeatsSelected;
 			total -= (total * discount);
 
-			totalPriceLabel->Text = marshal_as<System::String^>(std::to_string(total));
-			ticketQuantityLabel->Text = marshal_as<System::String^>(std::to_string(currentSeatsSelected));
+			totalPriceLabel->Text = "Total Price: $" + marshal_as<System::String^>(std::to_string(total));
+			ticketQuantityLabel->Text = "Tickets: " + marshal_as<System::String^>(std::to_string(currentSeatsSelected));
 		}
 
 		private: System::Void postSeat(int col, int row, bool occupied) {
@@ -2305,6 +2306,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			checkBox->Enabled = !occupied;
 			checkBox->Click += gcnew System::EventHandler(this, &Main::selectSeat_Click);
+			checkBox->Dock = DockStyle::Fill;
 
 			planeTable->Controls->Add(checkBox, col, row);
 		}
@@ -2314,12 +2316,13 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			clearSeats();
 
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
-			int flightId = (int)button->Tag;
-			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
+			int flightId = (int)(button->Tag);
+			AirBooksDBHandler::Flight flight = AirBooksDBHandler::Flight(3, minTimeField->Value, "", 8, 6, 43.21, 0.0, 0.0);//dbHandler.getFlight(flightId);
 
-			ticketQuantityLabel->Text = "0";
-			ticketPriceLabel->Text = marshal_as<System::String^>(std::to_string(flight.price));
-			discountLabel->Text = marshal_as<System::String^>(std::to_string((int)(100 * discount)) + "%");
+			ticketQuantityLabel->Text = "Tickets: 0";
+			ticketPriceLabel->Text = "Ticket Price: $" + marshal_as<System::String^>(std::to_string(flight.price));
+			ticketPriceLabel->Tag = flight.price;
+			discountLabel->Text = "Discount: " + marshal_as<System::String^>(std::to_string((int)(100 * discount))) + "%";
 
 			AirBooksDBHandler::Ticket ticket;
 
@@ -2332,28 +2335,18 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			planeTable->RowCount = flight.rows;
 
 			TableLayoutColumnStyleCollection^ cols = planeTable->ColumnStyles;
-			bool skip = true;
 			for each (ColumnStyle^ col in cols) {
-				if (skip) {
-					skip = false;
-					continue;
-				}
 				col->SizeType = SizeType::Percent;
 				col->Width = 100.0 / (double)flight.columns;
 			}
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
-			skip = true;
 			for each (RowStyle ^ row in rows) {
-				if (skip) {
-					skip = false;
-					continue;
-				}
-				row->SizeType = SizeType::Percent;
-				row->Height = 100.0 / (double)flight.rows;
+				row->SizeType = SizeType::Absolute;
+				row->Height = 30;
 			}
 
 			// find all tickets for this flight
-			for (int i = 0; i < 1000; i++) {
+			for (int i = 0; i < 100; i++) {
 				ticket = dbHandler.getTicket(flightId, i);
 
 				if (ticket.flightID == -1) {
@@ -2561,16 +2554,16 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		// manager selects a flight
 		private: System::Void managerSelectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
-			int flightId = (int)button->Tag;
+			int flightId = (int)(button->Tag);
 			currentFlightId = flightId;
 			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
-			modifyIdLabel->Text = marshal_as<System::String^>(std::to_string(flightId));
-			modifyDestinationLabel->Text = flight.destination;
-			modifyDepartureField->Value = flight.time;
-
-			modifyUpdate->Tag = flightId;
-			modifyDelete->Tag = flightId;
+			modifyIdField->Text = marshal_as<System::String^>(std::to_string(flightId));
+			modifyDestinationField->Text = flight.destination;
+			//modifyDepartureField->Value = flight.time;
+			modifyRowsField->Text = marshal_as<System::String^>(std::to_string(flight.rows));
+			modifyColumnsField->Text = marshal_as<System::String^>(std::to_string(flight.columns));
+			modifyPriceField->Text = marshal_as<System::String^>(std::to_string(flight.price));
 		}
 		private: System::Void managerPostFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, double price) {
 			if (flightId == -1) {
