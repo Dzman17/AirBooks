@@ -82,6 +82,7 @@ namespace AirBooksDBHandler
             insertQuery = "insert into ", deleteQuery = "delete from ";
         MySqlConnection con = new MySqlConnection(conString);
 
+
         //constructor for the database handler, opens a connection to the database
         public DBHandler() {
             try { con.Open(); }
@@ -200,7 +201,7 @@ namespace AirBooksDBHandler
                 MySqlCommand command = new MySqlCommand(getQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 for (int i = -1; i < position; i++)
-                    reader.Read();
+                    reader.NextResult();
 
                 Flight flight = new Flight(reader.GetInt32(0), reader.GetDateTime(1), reader.GetString(2),
                                         reader.GetInt32(3), reader.GetInt32(4), reader.GetDouble(5),
@@ -311,7 +312,7 @@ namespace AirBooksDBHandler
                 MySqlCommand command = new MySqlCommand(getQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 for (int i = -1; i < position; i++)
-                    reader.Read();
+                    reader.NextResult();
 
                 Ticket ticket = new Ticket(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2));
                 reader.Close();
