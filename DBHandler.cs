@@ -175,7 +175,7 @@ namespace AirBooksDBHandler
             if (flights == null) {
                 string earliest = formatTime(start);
                 string latest = formatTime(end);
-                string query = ("from `" + db + "`.`flights` where `destination`>='" + destination + "' and '" + earliest +
+                string query = ("from `" + db + "`.`flights` where `destination`='" + destination + "' and '" + earliest +
                         "'<=`time` and `time`<='" + latest + "'");
                 searchFlights(query);
             }
