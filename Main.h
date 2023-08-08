@@ -2349,7 +2349,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)(button->Tag);
-			AirBooksDBHandler::Flight flight = AirBooksDBHandler::Flight(3, minTimeField->Value, "", 8, 6, 43.21, 0.0, 0.0);//dbHandler.getFlight(flightId);
+			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			ticketQuantityLabel->Text = "Tickets: 0";
 			ticketPriceLabel->Text = "Ticket Price: $" + marshal_as<System::String^>(std::to_string(flight.price));
