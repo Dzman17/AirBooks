@@ -1299,6 +1299,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->submitPayment->TabIndex = 7;
 			this->submitPayment->Text = L"Pay Now";
 			this->submitPayment->UseVisualStyleBackColor = true;
+			this->submitPayment->Click += gcnew System::EventHandler(this, &Main::submitPayment_Click);
 			// 
 			// cvvLabel
 			// 
@@ -2156,6 +2157,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			// wipes the list first
 				clearTickets();
+				TableLayoutRowStyleCollection^ trows = ticketList->RowStyles;
+				for each (RowStyle ^ trow in trows) {
+					trow->Height = 0;
+				}
 
 				AirBooksDBHandler::Ticket ticket;
 				AirBooksDBHandler::Flight flight;
@@ -2247,12 +2252,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			System::Windows::Forms::Label^ dsLabel = gcnew System::Windows::Forms::Label();
 			System::Windows::Forms::Label^ dpLabel = gcnew System::Windows::Forms::Label();
 
-
 			idLabel->Text = ticketId;
 			stLabel->Text = seat;
 			dsLabel->Text = destination;
 			dpLabel->Text = departure;
-
 
 			idLabel->Dock = DockStyle::Top;
 			stLabel->Dock = DockStyle::Top;
@@ -2284,6 +2287,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			// wipes the list first
 			clearTickets();
+			TableLayoutRowStyleCollection^ trows = ticketList->RowStyles;
+			for each (RowStyle ^ trow in trows) {
+				trow->Height = 0;
+			}
 
 			AirBooksDBHandler::Ticket ticket;
 			AirBooksDBHandler::Flight flight;
@@ -2334,9 +2341,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			ticketQuantityLabel->Text = "Tickets: " + marshal_as<System::String^>(std::to_string(currentSeatsSelected));
 		}
 
-		private: System::Void postSeat(int col, int row, bool occupied) {
+		private: System::Void postSeat(int cell, int col, int row, bool occupied) {
 			System::Windows::Forms::CheckBox^ checkBox = gcnew System::Windows::Forms::CheckBox();
 
+			checkBox->Tag = cell;
 			checkBox->Enabled = !occupied;
 			checkBox->Click += gcnew System::EventHandler(this, &Main::selectSeat_Click);
 
@@ -2357,6 +2365,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)(button->Tag);
+			currentFlightId = flightId;
 			AirBooksDBHandler::Flight flight = dbHandler.getFlight(flightId);
 
 			ticketQuantityLabel->Text = "Tickets: 0";
@@ -2419,7 +2428,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 						}
 					}
 
-					postSeat(c, r, occupied);
+					postSeat(cell, c, r, occupied);
 				}
 			}
 			planeTable->HorizontalScroll->Enabled = false;
@@ -2528,6 +2537,22 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				
 				postFlight(flight.flightID, flight.destination, flight.time.ToString(), booked.ToString(), double(flight.price));
 			}
+		}
+
+		// user purchases tickets
+		private: System::Void submitPayment_Click(System::Object^ sender, System::EventArgs^ e) {
+			TableLayoutControlCollection^ controls = planeTable->Controls;
+			for each (System::Windows::Forms::Control^ control in controls) {
+				System::Windows::Forms::CheckBox^ box = (System::Windows::Forms::CheckBox^)control;
+				if (box->Checked) {
+					int seatId = (int)box->Tag;
+					dbHandler.addTicket(AirBooksDBHandler::Ticket(seatId, currentFlightId, user->getEmail()));
+				}
+			}
+			currentSeatsSelected = 0;
+			System::Windows::Forms::Button^ button = gcnew System::Windows::Forms::Button();
+			button->Tag = currentFlightId;
+			selectFlight_Click(button, e);
 		}
 
 		// user returns to login screen
@@ -2738,6 +2763,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				manageCreateStatus->Text = "Email in use";
 			}
 		}
+
 
 };
 }
