@@ -2179,7 +2179,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 					flight = dbHandler.getFlight(ticket.flightID);
 
 					fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
-					sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+					sID = marshal_as<System::String^>(std::to_string(ticket.seatID+7));
 
 					postTicket(fID, sID, flight.destination, flight.time.ToString());
 				}
@@ -2309,7 +2309,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				flight = dbHandler.getFlight(ticket.flightID);
 
 				fID = marshal_as<System::String^>(std::to_string(ticket.flightID));
-				sID = marshal_as<System::String^>(std::to_string(ticket.seatID));
+				sID = marshal_as<System::String^>(std::to_string(ticket.seatID+7));
 
 				postTicket(fID, sID, flight.destination, flight.time.ToString());
 			}
