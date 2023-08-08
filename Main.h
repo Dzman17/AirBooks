@@ -1,5 +1,7 @@
 #pragma once
 #include "User.h"
+#include <algorithm>
+#include <limits>
 #include <sstream>
 #include <msclr\marshal_cppstd.h>
 
@@ -1366,11 +1368,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->GrowStyle = System::Windows::Forms::TableLayoutPanelGrowStyle::FixedSize;
 			this->planeTable->Location = System::Drawing::Point(6, 3);
-			this->planeTable->MaximumSize = System::Drawing::Size(683, 1211);
+			this->planeTable->MaximumSize = System::Drawing::Size(683, 900);
 			this->planeTable->Name = L"planeTable";
 			this->planeTable->RowCount = 1;
 			this->planeTable->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->planeTable->Size = System::Drawing::Size(683, 1211);
+			this->planeTable->Size = System::Drawing::Size(683, 900);
 			this->planeTable->TabIndex = 0;
 			// 
 			// manageTab
@@ -2334,7 +2336,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			checkBox->Enabled = !occupied;
 			checkBox->Click += gcnew System::EventHandler(this, &Main::selectSeat_Click);
-			checkBox->Dock = DockStyle::Top;
 
 			planeTable->Controls->Add(checkBox, col, row);
 		}
@@ -2345,6 +2346,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			TableLayoutRowStyleCollection^ mrows = planeTable->RowStyles;
 			for each (RowStyle ^ mrow in mrows) {
 				mrow->Height = 0;
+			}
+			TableLayoutColumnStyleCollection^ mcols = planeTable->ColumnStyles;
+			for each (ColumnStyle ^ mcol in mcols) {
+				mcol->Width = 0;
 			}
 
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
@@ -2366,15 +2371,16 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			planeTable->ColumnCount = flight.columns;
 			planeTable->RowCount = flight.rows;
 
+#undef min
 			TableLayoutColumnStyleCollection^ cols = planeTable->ColumnStyles;
 			for each (ColumnStyle^ col in cols) {
-				col->SizeType = SizeType::Percent;
-				col->Width = 100.0 / (double)flight.columns;
+				col->SizeType = SizeType::Absolute;
+				col->Width = (int)(planeTable->Size.Width / std::min(flight.columns, 6)) - 4;
 			}
 			TableLayoutRowStyleCollection^ rows = flightsList->RowStyles;
 			for each (RowStyle ^ row in rows) {
 				row->SizeType = SizeType::Absolute;
-				row->Height = 30;
+				row->Height = 24;
 			}
 
 			// find all tickets for this flight
@@ -2395,8 +2401,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// O(n^2) n == max seating
 			// postSeat() for each seat on the flight
 			TableLayoutControlCollection^ controls = planeTable->Controls;
-			for (int c = 1; c < flight.columns; c++) {
-				for (int r = 1; r < flight.rows; r++) {
+			for (int c = 0; c < flight.columns; c++) {
+				if (c > 5) {
+					break;
+				}
+				for (int r = 0; r < flight.rows; r++) {
 					int cell = ((r - 1) * flight.columns) + c;
 
 					bool occupied = false;
@@ -2410,10 +2419,14 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 					postSeat(c, r, occupied);
 				}
 			}
+			planeTable->HorizontalScroll->Enabled = false;
 		}
 		
 		private: System::Void clearSeats() {
+			planeTable->HorizontalScroll->Enabled = false;
 			planeTable->Controls->Clear();
+			planeTable->RowCount = 1;
+			planeTable->ColumnCount = 1;
 		}
 
 		private: System::Void postFlight(int flightId, System::String^ destination, System::String^ departure, System::String^ occupancy, double price) {
