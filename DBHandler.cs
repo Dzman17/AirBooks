@@ -81,6 +81,8 @@ namespace AirBooksDBHandler
         const string numQuery = "select count(*) ", getQuery = "select * ",
             insertQuery = "insert into ", deleteQuery = "delete from ";
         MySqlConnection con = new MySqlConnection(conString);
+        Flight oldFlight = new Flight(-1, new DateTime(), "none", 0, 0, 0, 0, 0);
+        Ticket oldTicket = new Ticket(-1, -1, "");
 
 
         //constructor for the database handler, opens a connection to the database
@@ -201,15 +203,20 @@ namespace AirBooksDBHandler
                 MySqlCommand command = new MySqlCommand(getQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 for (int i = -1; i < position; i++)
-                    reader.NextResult();
+                    reader.Read();
 
                 Flight flight = new Flight(reader.GetInt32(0), reader.GetDateTime(1), reader.GetString(2),
                                         reader.GetInt32(3), reader.GetInt32(4), reader.GetDouble(5),
                                         reader.GetDouble(6), reader.GetDouble(7));
+                if (flight.Equals(oldFlight))
+                    throw new Exception();
+                else
+                    oldFlight = flight;
+
                 reader.Close();
                 return flight;
             }
-            catch (Exception ex) { return new Flight(-1, new DateTime(), "none", 0, 0, 0, 0, 0); }
+            catch (Exception ex) { oldFlight = new Flight(-1, new DateTime(), "none", 0, 0, 0, 0, 0); return oldFlight; }
         }
 
         public int findNewFlightID() {
@@ -312,13 +319,18 @@ namespace AirBooksDBHandler
                 MySqlCommand command = new MySqlCommand(getQuery + query, con);
                 MySqlDataReader reader = command.ExecuteReader();
                 for (int i = -1; i < position; i++)
-                    reader.NextResult();
+                    reader.Read();
 
                 Ticket ticket = new Ticket(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2));
+                if (ticket.Equals(oldTicket))
+                    throw new Exception();
+                else
+                    oldTicket = ticket;
+
                 reader.Close();
                 return ticket;
             }
-            catch (Exception ex) { return new Ticket(-1, -1, ""); }
+            catch (Exception ex) { oldTicket = new Ticket(-1, -1, ""); return oldTicket; }
         }
 
         /* Adds a ticket to the database
