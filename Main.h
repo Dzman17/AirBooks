@@ -2287,10 +2287,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 
 			// wipes the list first
 			clearTickets();
-			TableLayoutRowStyleCollection^ trows = ticketList->RowStyles;
+			/*TableLayoutRowStyleCollection^ trows = ticketList->RowStyles;
 			for each (RowStyle ^ trow in trows) {
 				trow->Height = 0;
-			}
+			}*/
 
 			AirBooksDBHandler::Ticket ticket;
 			AirBooksDBHandler::Flight flight;
