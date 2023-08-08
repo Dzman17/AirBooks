@@ -2132,6 +2132,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		// 
 		// user clicks login button
 		private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (ln_emailField->Text == "") {
+				loginStatus->Text = "Error";
+				return;
+			}
 			user = gcnew User(ln_emailField->Text, ln_passwordField->Text);
 			if (user->authenticate()) {
 				// success, login and switch to account view
