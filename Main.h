@@ -1117,7 +1117,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// f_departureHeader
 			// 
 			this->f_departureHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->f_departureHeader->Location = System::Drawing::Point(507, 144);
+			this->f_departureHeader->Location = System::Drawing::Point(450, 144);
 			this->f_departureHeader->Margin = System::Windows::Forms::Padding(0);
 			this->f_departureHeader->Name = L"f_departureHeader";
 			this->f_departureHeader->Size = System::Drawing::Size(236, 46);
@@ -1201,10 +1201,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// 
 			this->destinationField->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->destinationField->FormattingEnabled = true;
-			this->destinationField->Items->AddRange(gcnew cli::array< System::Object^  >(21) {
+			this->destinationField->Items->AddRange(gcnew cli::array< System::Object^  >(22) {
 				L"New York City", L"Los Angeles", L"Chicago",
-					L"Houston", L"Phoenix", L"Philadelphia", L"San Diego", L"Dallas", L"Austin", L"Washington DC", L"Boston", L"Las Vegas", L"Detroit",
-					L"Baltimore", L"Kansas City", L"Atlanta", L"Miami", L"Milwaukee", L"Portland", L"Seattle", L"Indianapolis"
+					L"Houston", L"Phoenix", L"Philadelphia", L"San Diego", L"Dallas", L"Austin", L"Erie", L"Washington DC", L"Boston", L"Las Vegas",
+					L"Detroit", L"Baltimore", L"Kansas City", L"Atlanta", L"Miami", L"Milwaukee", L"Portland", L"Seattle", L"Indianapolis"
 			});
 			this->destinationField->Location = System::Drawing::Point(30, 85);
 			this->destinationField->Margin = System::Windows::Forms::Padding(4);
@@ -1219,8 +1219,8 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->flightsList->AutoSize = true;
 			this->flightsList->ColumnCount = 6;
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15)));
-			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
-			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 30)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 35)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 5)));
@@ -1811,7 +1811,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// label6
 			// 
 			this->label6->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->label6->Location = System::Drawing::Point(527, 144);
+			this->label6->Location = System::Drawing::Point(473, 144);
 			this->label6->Margin = System::Windows::Forms::Padding(0);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(236, 46);
@@ -1851,10 +1851,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// label10
 			// 
 			this->label10->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->label10->Location = System::Drawing::Point(879, 144);
+			this->label10->Location = System::Drawing::Point(875, 144);
 			this->label10->Margin = System::Windows::Forms::Padding(0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(152, 46);
+			this->label10->Size = System::Drawing::Size(179, 46);
 			this->label10->TabIndex = 3;
 			this->label10->Text = L"Occupancy";
 			// 
@@ -1872,7 +1872,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// label12
 			// 
 			this->label12->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->label12->Location = System::Drawing::Point(1046, 144);
+			this->label12->Location = System::Drawing::Point(1054, 144);
 			this->label12->Margin = System::Windows::Forms::Padding(0);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(147, 46);
@@ -1915,9 +1915,9 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				15)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				25)));
+				20)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				30)));
+				35)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				12.5F)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
