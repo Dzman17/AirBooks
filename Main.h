@@ -1117,7 +1117,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// f_departureHeader
 			// 
 			this->f_departureHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->f_departureHeader->Location = System::Drawing::Point(622, 144);
+			this->f_departureHeader->Location = System::Drawing::Point(507, 144);
 			this->f_departureHeader->Margin = System::Windows::Forms::Padding(0);
 			this->f_departureHeader->Name = L"f_departureHeader";
 			this->f_departureHeader->Size = System::Drawing::Size(236, 46);
@@ -1217,16 +1217,16 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->flightsList->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->flightsList->AutoScroll = true;
 			this->flightsList->AutoSize = true;
-			this->flightsList->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			this->flightsList->ColumnCount = 6;
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15)));
-			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 35)));
-			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
+			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 30)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->flightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 5)));
 			this->flightsList->Location = System::Drawing::Point(30, 197);
 			this->flightsList->Margin = System::Windows::Forms::Padding(4);
+			this->flightsList->MaximumSize = System::Drawing::Size(1200, 1017);
 			this->flightsList->MinimumSize = System::Drawing::Size(1200, 283);
 			this->flightsList->Name = L"flightsList";
 			this->flightsList->RowCount = 1;
@@ -1811,7 +1811,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// label6
 			// 
 			this->label6->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->label6->Location = System::Drawing::Point(643, 144);
+			this->label6->Location = System::Drawing::Point(527, 144);
 			this->label6->Margin = System::Windows::Forms::Padding(0);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(236, 46);
@@ -1911,14 +1911,13 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageFlightsList->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->manageFlightsList->AutoScroll = true;
 			this->manageFlightsList->AutoSize = true;
-			this->manageFlightsList->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			this->manageFlightsList->ColumnCount = 6;
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				15)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				35)));
+				25)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				20)));
+				30)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				12.5F)));
 			this->manageFlightsList->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
@@ -1927,6 +1926,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				5)));
 			this->manageFlightsList->Location = System::Drawing::Point(51, 197);
 			this->manageFlightsList->Margin = System::Windows::Forms::Padding(4);
+			this->manageFlightsList->MaximumSize = System::Drawing::Size(1200, 1017);
 			this->manageFlightsList->MinimumSize = System::Drawing::Size(1200, 283);
 			this->manageFlightsList->Name = L"manageFlightsList";
 			this->manageFlightsList->RowCount = 1;
@@ -2648,7 +2648,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				flight = dbHandler.getFlight(destination, minDate, maxDate, i);
 
 				if (flight.flightID == -1) {
-					System::Console::WriteLine("End of list");
 					return;
 				}
 
