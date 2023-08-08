@@ -1160,7 +1160,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->f_occupancyHeader->Location = System::Drawing::Point(858, 144);
 			this->f_occupancyHeader->Margin = System::Windows::Forms::Padding(0);
 			this->f_occupancyHeader->Name = L"f_occupancyHeader";
-			this->f_occupancyHeader->Size = System::Drawing::Size(152, 46);
+			this->f_occupancyHeader->Size = System::Drawing::Size(175, 46);
 			this->f_occupancyHeader->TabIndex = 3;
 			this->f_occupancyHeader->Text = L"Occupancy";
 			// 
@@ -1178,10 +1178,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// f_priceHeader
 			// 
 			this->f_priceHeader->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			this->f_priceHeader->Location = System::Drawing::Point(1025, 144);
+			this->f_priceHeader->Location = System::Drawing::Point(1033, 144);
 			this->f_priceHeader->Margin = System::Windows::Forms::Padding(0);
 			this->f_priceHeader->Name = L"f_priceHeader";
-			this->f_priceHeader->Size = System::Drawing::Size(147, 46);
+			this->f_priceHeader->Size = System::Drawing::Size(139, 46);
 			this->f_priceHeader->TabIndex = 4;
 			this->f_priceHeader->Text = L"Price";
 			// 
@@ -1465,16 +1465,16 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// manageFirstField
 			// 
 			this->manageFirstField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageFirstField->Location = System::Drawing::Point(87, 511);
+			this->manageFirstField->Location = System::Drawing::Point(87, 428);
 			this->manageFirstField->Margin = System::Windows::Forms::Padding(4);
 			this->manageFirstField->Name = L"manageFirstField";
 			this->manageFirstField->Size = System::Drawing::Size(604, 38);
-			this->manageFirstField->TabIndex = 12;
+			this->manageFirstField->TabIndex = 5;
 			// 
 			// manageFirstLabel
 			// 
 			this->manageFirstLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageFirstLabel->Location = System::Drawing::Point(87, 463);
+			this->manageFirstLabel->Location = System::Drawing::Point(87, 380);
 			this->manageFirstLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->manageFirstLabel->Name = L"manageFirstLabel";
 			this->manageFirstLabel->Size = System::Drawing::Size(604, 44);
@@ -1484,11 +1484,11 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// manageSubmitAccount
 			// 
 			this->manageSubmitAccount->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageSubmitAccount->Location = System::Drawing::Point(229, 941);
+			this->manageSubmitAccount->Location = System::Drawing::Point(229, 858);
 			this->manageSubmitAccount->Margin = System::Windows::Forms::Padding(4);
 			this->manageSubmitAccount->Name = L"manageSubmitAccount";
 			this->manageSubmitAccount->Size = System::Drawing::Size(304, 54);
-			this->manageSubmitAccount->TabIndex = 3;
+			this->manageSubmitAccount->TabIndex = 9;
 			this->manageSubmitAccount->Text = L"Create Account";
 			this->manageSubmitAccount->UseVisualStyleBackColor = true;
 			this->manageSubmitAccount->Click += gcnew System::EventHandler(this, &Main::manageSubmitAccount_Click);
@@ -1496,7 +1496,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// manageEmailField
 			// 
 			this->manageEmailField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageEmailField->Location = System::Drawing::Point(87, 732);
+			this->manageEmailField->Location = System::Drawing::Point(87, 649);
 			this->manageEmailField->Margin = System::Windows::Forms::Padding(4);
 			this->manageEmailField->Name = L"manageEmailField";
 			this->manageEmailField->Size = System::Drawing::Size(604, 38);
@@ -1505,7 +1505,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// managePassField
 			// 
 			this->managePassField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->managePassField->Location = System::Drawing::Point(87, 842);
+			this->managePassField->Location = System::Drawing::Point(87, 759);
 			this->managePassField->Margin = System::Windows::Forms::Padding(4);
 			this->managePassField->Name = L"managePassField";
 			this->managePassField->PasswordChar = '*';
@@ -1517,7 +1517,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->manageCreateStatus->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->manageCreateStatus->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->manageCreateStatus->Location = System::Drawing::Point(87, 999);
+			this->manageCreateStatus->Location = System::Drawing::Point(87, 916);
 			this->manageCreateStatus->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->manageCreateStatus->Name = L"manageCreateStatus";
 			this->manageCreateStatus->Size = System::Drawing::Size(604, 98);
@@ -1527,7 +1527,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// manageLastLabel
 			// 
 			this->manageLastLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageLastLabel->Location = System::Drawing::Point(87, 572);
+			this->manageLastLabel->Location = System::Drawing::Point(87, 489);
 			this->manageLastLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
 			this->manageLastLabel->Name = L"manageLastLabel";
 			this->manageLastLabel->Size = System::Drawing::Size(604, 44);
@@ -1537,16 +1537,16 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// manageLastField
 			// 
 			this->manageLastField->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageLastField->Location = System::Drawing::Point(87, 621);
+			this->manageLastField->Location = System::Drawing::Point(87, 538);
 			this->manageLastField->Margin = System::Windows::Forms::Padding(4);
 			this->manageLastField->Name = L"manageLastField";
 			this->manageLastField->Size = System::Drawing::Size(604, 38);
-			this->manageLastField->TabIndex = 13;
+			this->manageLastField->TabIndex = 6;
 			// 
 			// manageEmailLabel
 			// 
 			this->manageEmailLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->manageEmailLabel->Location = System::Drawing::Point(87, 684);
+			this->manageEmailLabel->Location = System::Drawing::Point(87, 601);
 			this->manageEmailLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
 			this->manageEmailLabel->Name = L"manageEmailLabel";
 			this->manageEmailLabel->Size = System::Drawing::Size(214, 44);
@@ -1556,7 +1556,7 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// managePassLabel
 			// 
 			this->managePassLabel->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->managePassLabel->Location = System::Drawing::Point(87, 794);
+			this->managePassLabel->Location = System::Drawing::Point(87, 711);
 			this->managePassLabel->Margin = System::Windows::Forms::Padding(4, 19, 4, 0);
 			this->managePassLabel->Name = L"managePassLabel";
 			this->managePassLabel->Size = System::Drawing::Size(214, 44);
@@ -2070,8 +2070,9 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			}
 			showLogin();
 			tabControl->SelectTab("accountTab");
-			// hide flights and ticket pages
+			// hide flights and manage pages
 			noAccount->Show();
+			closeManageTab();
 			// clear data
 			destinationField->Text = "";
 			minTimeField->Value = DateTime::Now;
@@ -2668,13 +2669,17 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 				accType = 'm';
 			}
 
-			user = gcnew User(ca_firstNameField->Text, ca_lastNameField->Text, ca_emailField->Text, ca_passwordField->Text, accType);
-			if (user->validateEmail()) {
-				user->createUser();
-				createAccountStatus->Text = "Success";
+			User^ newUser = gcnew User(manageFirstField->Text, manageLastField->Text, manageEmailField->Text, managePassField->Text, accType);
+			if (newUser->validateEmail()) {
+				if (newUser->createUser()) {
+					manageCreateStatus->Text = "Success";
+				}
+				else {
+					manageCreateStatus->Text = "Error";
+				}				
 			}
 			else {
-				createAccountStatus->Text = "Error";
+				manageCreateStatus->Text = "Email in use";
 			}
 		}
 
