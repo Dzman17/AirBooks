@@ -1365,13 +1365,12 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
-			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 20)));
 			this->planeTable->GrowStyle = System::Windows::Forms::TableLayoutPanelGrowStyle::FixedSize;
 			this->planeTable->Location = System::Drawing::Point(6, 3);
 			this->planeTable->MaximumSize = System::Drawing::Size(683, 1211);
 			this->planeTable->Name = L"planeTable";
 			this->planeTable->RowCount = 1;
-			this->planeTable->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 30)));
+			this->planeTable->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->planeTable->Size = System::Drawing::Size(683, 1211);
 			this->planeTable->TabIndex = 0;
 			// 
@@ -2314,6 +2313,10 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 		// user selects a flight
 		private: System::Void selectFlight_Click(System::Object^ sender, System::EventArgs^ e) {
 			clearSeats();
+			TableLayoutRowStyleCollection^ mrows = planeTable->RowStyles;
+			for each (RowStyle ^ mrow in mrows) {
+				mrow->Height = 0;
+			}
 
 			System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
 			int flightId = (int)(button->Tag);
