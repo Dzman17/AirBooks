@@ -1357,7 +1357,6 @@ private: System::Windows::Forms::Label^ modifyPriceLabel;
 			// planeTable
 			// 
 			this->planeTable->AutoScroll = true;
-			this->planeTable->CellBorderStyle = System::Windows::Forms::TableLayoutPanelCellBorderStyle::Single;
 			this->planeTable->ColumnCount = 6;
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
 			this->planeTable->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
