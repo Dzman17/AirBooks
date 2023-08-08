@@ -22,25 +22,57 @@ User::User(System::String^ email, System::String^ password) {
 // firstName setter
 void User::setFirstName(System::String^ name) {
 	AirBooksDBHandler::DBHandler dbHandler;
+
+	//Delete Account in db
+	dbHandler.deleteAccount((AirBooksDBHandler::Account)account);
+
+	//Set first name
 	account->firstName = name;
+
+	//Create Account in db
+	dbHandler.createAccount((AirBooksDBHandler::Account)account);
 }
 
 // lastName setter
 void User::setLastName(System::String^ name) {
 	AirBooksDBHandler::DBHandler dbHandler;
+
+	//Delete Account in db
+	dbHandler.deleteAccount((AirBooksDBHandler::Account)account);
+
+	//Set last name
 	account->lastName = name;
+
+	//Create Account in db
+	dbHandler.createAccount((AirBooksDBHandler::Account)account);
 }
 
 // email setter
 void User::setEmail(System::String^ newEmail) {
 	AirBooksDBHandler::DBHandler dbHandler;
+
+	//Delete Account in db
+	dbHandler.deleteAccount((AirBooksDBHandler::Account)account);
+
+	//Set new email
 	account->email = newEmail;
+
+	//Create Account in db
+	dbHandler.createAccount((AirBooksDBHandler::Account)account);
 }
 
 // password setter
 void User::setPassword(System::String^ newPassword) {
 	AirBooksDBHandler::DBHandler dbHandler;
+
+	//Delete Account in db
+	dbHandler.deleteAccount((AirBooksDBHandler::Account)account);
+
+	//Set new password
 	account->password = newPassword;
+
+	//Create Account in db
+	dbHandler.createAccount((AirBooksDBHandler::Account)account);
 }
 
 // name getter (0 whole, 1 first, 2 last)
